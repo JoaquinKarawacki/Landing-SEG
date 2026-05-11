@@ -1,3 +1,6 @@
+import Image from "next/image";
+import logoSEG from "@/img/seg ingenieria logo.png";
+
 /* ─── Ícono LinkedIn ───────────────────────────────────────────────────────── */
 function IconoLinkedIn() {
   return (
@@ -239,10 +242,7 @@ export default function Footer() {
           {/* ── Barra inferior: logo + derechos + créditos ─────────────────── */}
           <div className="border-t border-gray-700/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              {/* Logo SEG placeholder */}
-              <span className="bg-[#ca3517] text-white font-black text-base px-2.5 py-0.5 rounded tracking-wider">
-                SEG
-              </span>
+              <Image src={logoSEG} alt="SEG Ingeniería" height={32} className="object-contain" />
               <span className="text-xs text-gray-500">
                 Todos los derechos reservados ® 2012 SEG INGENIERÍA
               </span>

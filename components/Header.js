@@ -2,7 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import logoSEG from "@/img/seg ingenieria logo.png";
 
 /* ─── Estructura del menú de navegación ──────────────────────────────────────── */
 const ITEMS_MENU = [
@@ -67,13 +69,8 @@ function IconoChevron({ abierto }) {
 /* ─── Logo SEG ─────────────────────────────────────────────────────────────── */
 function LogoSEG() {
   return (
-    <Link href="/" className="flex items-center gap-2 flex-shrink-0">
-      <span className="bg-[#ca3517] text-white font-black text-xl px-3 py-1 rounded tracking-wider">
-        SEG
-      </span>
-      <span className="hidden sm:block text-white text-xs font-light leading-none">
-        INGENIERÍA
-      </span>
+    <Link href="/" className="flex items-center flex-shrink-0">
+      <Image src={logoSEG} alt="SEG Ingeniería" height={40} className="object-contain" />
     </Link>
   );
 }
@@ -176,7 +173,10 @@ export default function Header() {
     <header className={`sticky top-0 z-50 transition-shadow duration-300 ${conSombra ? "shadow-xl" : ""}`}>
       {/* ── Barra superior roja ────────────────────────────────────────────── */}
       <div className="bg-[#ca3517] text-white text-center py-2 px-4 text-xs sm:text-sm">
-        SEG Ingeniería promueve un entorno energéticamente eficiente, sustentable y renovable
+        <span className="hidden sm:inline">
+          SEG Ingeniería promueve un entorno energéticamente eficiente, sustentable y renovable
+        </span>
+        <span className="sm:hidden">SEG · Energía eficiente y renovable</span>
       </div>
 
       {/* ── Barra de navegación negra ──────────────────────────────────────── */}
