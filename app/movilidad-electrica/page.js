@@ -165,7 +165,7 @@ function NavegacionInterna() {
       aria-label="Secciones de la página"
     >
       <div className="max-w-7xl mx-auto px-4">
-        <ul className="flex overflow-x-auto gap-0 -mb-px">
+        <ul className="flex overflow-x-auto gap-0 -mb-px justify-center">
           {ANCLAS.map((ancla) => (
             <li key={ancla.etiqueta} className="flex-shrink-0">
               <a
