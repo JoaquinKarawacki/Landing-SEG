@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export const metadata = {
   title: "Movilidad Eléctrica — SEG Ingeniería",
@@ -148,7 +148,7 @@ function SeccionHero() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   NAVEGACIÓN INTERNA — Guía §5: sticky top-[88px]
+   NAVEGACIÓN INTERNA — Guía §5: sticky top-[108px]
 ══════════════════════════════════════════════════════════════════════════════ */
 const ANCLAS = [
   { etiqueta: "Reconocimientos",       href: "#reconocimientos" },
@@ -161,7 +161,7 @@ const ANCLAS = [
 function NavegacionInterna() {
   return (
     <nav
-      className="bg-gray-100 border-b border-gray-200 sticky top-[88px] z-40"
+      className="bg-gray-100 border-b border-gray-200 sticky top-[108px] z-40"
       aria-label="Secciones de la página"
     >
       <div className="max-w-7xl mx-auto px-4">
@@ -217,7 +217,7 @@ function SeccionReconocimientos() {
   return (
     <section
       id="reconocimientos"
-      className="py-16 relative overflow-hidden scroll-mt-[140px]"
+      className="py-16 relative overflow-hidden scroll-mt-[160px]"
       style={{ backgroundColor: "#ca3517" }}
       aria-label="Reconocimientos y credenciales"
     >
@@ -287,7 +287,7 @@ const AREAS_ESPECIALIZACION = [
 
 function SeccionEspecializacion() {
   return (
-    <section id="especializacion" className="py-16 bg-white scroll-mt-[140px]">
+    <section id="especializacion" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">
@@ -332,7 +332,7 @@ function SeccionEspecializacion() {
 ══════════════════════════════════════════════════════════════════════════════ */
 function SeccionInfraestructura() {
   return (
-    <section id="infraestructura" className="py-16 bg-gray-50 scroll-mt-[140px]">
+    <section id="infraestructura" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">
@@ -401,7 +401,7 @@ function SeccionInfraestructura() {
 ══════════════════════════════════════════════════════════════════════════════ */
 function SeccionMercadoB2B() {
   return (
-    <section id="mercado-b2b" className="py-16 bg-white scroll-mt-[140px]">
+    <section id="mercado-b2b" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">
@@ -472,7 +472,7 @@ function SeccionMercadoB2B() {
 ══════════════════════════════════════════════════════════════════════════════ */
 function SeccionCamara() {
   return (
-    <section id="camara" className="py-16 bg-gray-50 scroll-mt-[140px]">
+    <section id="camara" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">

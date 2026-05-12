@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export const metadata = {
   title: "Contacto — SEG Ingeniería",
@@ -116,7 +116,7 @@ const ANCLAS = [
 function NavegacionInterna() {
   return (
     <nav
-      className="bg-gray-100 border-b border-gray-200 sticky top-[88px] z-40"
+      className="bg-gray-100 border-b border-gray-200 sticky top-[108px] z-40"
       aria-label="Secciones de la página"
     >
       <div className="max-w-7xl mx-auto px-4">
@@ -147,7 +147,7 @@ const claseInput =
 
 function SeccionFormulario() {
   return (
-    <section id="formulario" className="py-16 bg-white scroll-mt-[140px]">
+    <section id="formulario" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
@@ -376,7 +376,7 @@ function SeccionFormulario() {
 ══════════════════════════════════════════════════════════════════════════════ */
 function SeccionIndicadores() {
   return (
-    <section id="indicadores" className="py-16 bg-gray-50 scroll-mt-[140px]">
+    <section id="indicadores" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
@@ -504,7 +504,7 @@ function SeccionTrabaja() {
   return (
     <section
       id="trabaja"
-      className="py-16 relative overflow-hidden scroll-mt-[140px]"
+      className="py-16 relative overflow-hidden scroll-mt-[160px]"
       style={{ backgroundColor: "#ca3517" }}
       aria-label="Trabajar en SEG Ingeniería"
     >

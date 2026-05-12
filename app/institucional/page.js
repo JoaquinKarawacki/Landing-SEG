@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export const metadata = {
   title: "Institucional — SEG Ingeniería",
@@ -129,7 +129,7 @@ const ANCLAS = [
 function NavegacionInterna() {
   return (
     <nav
-      className="bg-gray-100 border-b border-gray-200 sticky top-[88px] z-40"
+      className="bg-gray-100 border-b border-gray-200 sticky top-[108px] z-40"
       aria-label="Secciones de la página"
     >
       <div className="max-w-7xl mx-auto px-4">
@@ -176,7 +176,7 @@ const HITOS = [
 
 function SeccionTrayectoria() {
   return (
-    <section id="trayectoria" className="py-16 bg-white scroll-mt-[140px]">
+    <section id="trayectoria" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">
@@ -254,7 +254,7 @@ const VALORES = [
 
 function SeccionCapitalHumano() {
   return (
-    <section id="capital-humano" className="py-16 bg-gray-50 scroll-mt-[140px]">
+    <section id="capital-humano" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">
@@ -337,7 +337,7 @@ const PAISES_FORMACION = ["Alemania", "Brasil", "Japón", "China"];
 
 function SeccionFormacion() {
   return (
-    <section id="formacion" className="py-16 bg-white scroll-mt-[140px]">
+    <section id="formacion" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">
@@ -397,7 +397,7 @@ function SeccionTrabaja() {
   return (
     <section
       id="trabaja"
-      className="py-16 relative overflow-hidden scroll-mt-[140px]"
+      className="py-16 relative overflow-hidden scroll-mt-[160px]"
       style={{ backgroundColor: "#ca3517" }}
       aria-label="Trabajar en SEG Ingeniería"
     >

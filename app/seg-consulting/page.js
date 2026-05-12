@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export const metadata = {
   title: "SEG Consulting — SEG Ingeniería",
@@ -159,7 +159,7 @@ const ANCLAS = [
 function NavegacionInterna() {
   return (
     <nav
-      className="bg-gray-100 border-b border-gray-200 sticky top-[88px] z-40"
+      className="bg-gray-100 border-b border-gray-200 sticky top-[108px] z-40"
       aria-label="Secciones de la página"
     >
       <div className="max-w-7xl mx-auto px-4">
@@ -216,7 +216,7 @@ const SERVICIOS = [
 
 function SeccionPropuestaValor() {
   return (
-    <section id="propuesta-valor" className="py-16 bg-white scroll-mt-[140px]">
+    <section id="propuesta-valor" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">
@@ -380,7 +380,7 @@ const CATEGORIAS_UY = [
 
 function SeccionUruguay() {
   return (
-    <section id="uruguay" className="py-16 bg-gray-50 scroll-mt-[140px]">
+    <section id="uruguay" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-3">
           <div className="text-[#ca3517]">
@@ -486,7 +486,7 @@ const PROYECTOS_ARG = [
 
 function SeccionArgentina() {
   return (
-    <section id="argentina" className="py-16 bg-white scroll-mt-[140px]">
+    <section id="argentina" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-3">
           <div className="text-[#ca3517]">
@@ -553,7 +553,7 @@ function SeccionInternacional() {
   return (
     <section
       id="internacional"
-      className="py-16 relative overflow-hidden scroll-mt-[140px]"
+      className="py-16 relative overflow-hidden scroll-mt-[160px]"
       style={{ backgroundColor: "#ca3517" }}
       aria-label="Proyectos internacionales"
     >
@@ -632,7 +632,7 @@ const LISTA_CLIENTES = [
 
 function SeccionClientes() {
   return (
-    <section id="clientes" className="py-16 bg-gray-50 scroll-mt-[140px]">
+    <section id="clientes" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-3">
           <div className="text-[#ca3517]">

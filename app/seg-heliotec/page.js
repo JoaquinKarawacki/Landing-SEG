@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export const metadata = {
   title: "SEG Heliotec — SEG Ingeniería",
@@ -160,7 +160,7 @@ const ANCLAS = [
 function NavegacionInterna() {
   return (
     <nav
-      className="bg-gray-100 border-b border-gray-200 sticky top-[88px] z-40"
+      className="bg-gray-100 border-b border-gray-200 sticky top-[108px] z-40"
       aria-label="Secciones de la página"
     >
       <div className="max-w-7xl mx-auto px-4">
@@ -186,7 +186,7 @@ function NavegacionInterna() {
 ══════════════════════════════════════════════════════════════════════════════ */
 function SeccionDescripcion() {
   return (
-    <section id="descripcion" className="py-16 bg-white scroll-mt-[140px]">
+    <section id="descripcion" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">
@@ -284,7 +284,7 @@ function SeccionHeliotecAlemania() {
   return (
     <section
       id="heliotec-alemania"
-      className="py-16 relative overflow-hidden scroll-mt-[140px]"
+      className="py-16 relative overflow-hidden scroll-mt-[160px]"
       style={{ backgroundColor: "#ca3517" }}
       aria-label="Credenciales de Heliotec Alemania"
     >
@@ -365,7 +365,7 @@ const SERVICIOS = [
 
 function SeccionServicios() {
   return (
-    <section id="servicios" className="py-16 bg-gray-50 scroll-mt-[140px]">
+    <section id="servicios" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">

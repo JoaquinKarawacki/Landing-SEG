@@ -1,3 +1,7 @@
+import Image from "next/image";
+import imagenMar2026 from "@/img/imagenweb2603.jpg";
+import imagenFeb2026 from "@/img/imagenweb2602.jpg";
+
 /* ─── Ícono lamparita (sección "Sobre SEG") ───────────────────────────────── */
 function IconoLamparita() {
   return (
@@ -48,20 +52,21 @@ function IconoGrafico() {
 const ARTICULOS_INDICADORES = [
   {
     id: 1,
-    periodo: "Enero 2026",
-    titulo:
-      "La era de la electricidad y la transformación del sistema eléctrico",
+    periodo: "Marzo 2026",
+    titulo: "La matriz energética de Uruguay sigue cambiando",
     descripcion:
-      "La demanda global de electricidad está entrando en una nueva fase de crecimiento estructural.",
-    href: "#",
+      "El Balance Energético Preliminar 2025 confirma que la biomasa alcanza el 50% del abastecimiento energético y que la demanda eléctrica llegó a un nuevo máximo histórico.",
+    href: "https://www.linkedin.com/posts/seg-ingenieria_energ%C3%ADa-uruguay-transici%C3%B3nenerg%C3%A9tica-activity-7450322296952639488-kb0I/?originalSubdomain=es",
+    imagen: imagenMar2026,
   },
   {
     id: 2,
-    periodo: "Diciembre 2025",
-    titulo: "Destacados energéticos de Uruguay en 2025",
+    periodo: "Febrero 2026",
+    titulo: "El rápido avance de la movilidad eléctrica en Uruguay",
     descripcion:
-      "Este reporte repasa los principales hechos y tendencias del año en el sector energético uruguayo.",
-    href: "#",
+      "Los vehículos eléctricos ya representan más del 2% del parque automotor. En 2025 se vendieron más de 14.000 unidades, el 21% del total de vehículos livianos.",
+    href: "https://www.linkedin.com/posts/seg-ingenieria_movilidadelaezctrica-vehaedculoselaezctricos-activity-7439453792200445952-1P-H?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
+    imagen: imagenFeb2026,
   },
 ];
 
@@ -120,7 +125,9 @@ export default function SobreYIndicadores() {
             </p>
 
             <a
-              href="#"
+              href="https://www.linkedin.com/company/seg-ingenieria/posts/?feedView=all"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-[#ca3517] text-white px-8 py-2.5 rounded-full font-semibold text-sm hover:bg-[#a82d12] transition-colors duration-200"
             >
               Más información
@@ -142,10 +149,27 @@ export default function SobreYIndicadores() {
                   key={articulo.id}
                   className="flex gap-4 pb-5 border-b border-gray-100 last:border-0"
                 >
-                  <PlaceholderImagen
-                    descripcion={`Imagen\n${articulo.periodo}`}
-                    className="flex-shrink-0 w-24 h-20"
-                  />
+                  {articulo.imagen ? (
+                    <a
+                      href={articulo.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-shrink-0"
+                    >
+                      <Image
+                        src={articulo.imagen}
+                        alt={articulo.titulo}
+                        width={96}
+                        height={80}
+                        className="w-24 h-20 object-cover rounded"
+                      />
+                    </a>
+                  ) : (
+                    <PlaceholderImagen
+                      descripcion={`Imagen\n${articulo.periodo}`}
+                      className="flex-shrink-0 w-24 h-20"
+                    />
+                  )}
 
                   <div className="flex flex-col justify-center">
                     <span className="text-[#ca3517] text-xs font-bold uppercase tracking-wide mb-1">
@@ -154,6 +178,8 @@ export default function SobreYIndicadores() {
                     <h3 className="font-bold text-gray-900 text-sm leading-snug mb-1.5">
                       <a
                         href={articulo.href}
+                        target={articulo.href.startsWith("http") ? "_blank" : undefined}
+                        rel={articulo.href.startsWith("http") ? "noopener noreferrer" : undefined}
                         className="hover:text-[#ca3517] transition-colors"
                       >
                         {articulo.titulo}
@@ -168,13 +194,20 @@ export default function SobreYIndicadores() {
             </div>
 
             {/* Mención a cuenta X / Twitter */}
-            <div className="flex items-center gap-2 text-gray-600 text-sm mb-6">
+            <a
+              href="https://x.com/SEGIngenieria"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-gray-600 text-sm mb-6 hover:text-black transition-colors"
+            >
               <IconoX />
               <span className="font-semibold">@SEGIngenieria</span>
-            </div>
+            </a>
 
             <a
-              href="#"
+              href="https://www.linkedin.com/company/seg-ingenieria/posts/?feedView=all"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block border-2 border-[#ca3517] text-[#ca3517] px-8 py-2.5 rounded-full font-semibold text-sm hover:bg-[#ca3517] hover:text-white transition-colors duration-200"
             >
               Más información

@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export const metadata = {
   title: "Eficiencia Energética — SEG Ingeniería",
@@ -147,7 +147,7 @@ const ANCLAS_INTERNAS = [
 function NavegacionInterna() {
   return (
     <nav
-      className="bg-gray-100 border-b border-gray-200 sticky top-[88px] z-40"
+      className="bg-gray-100 border-b border-gray-200 sticky top-[108px] z-40"
       aria-label="Secciones de la página"
     >
       <div className="max-w-7xl mx-auto px-4">
@@ -173,7 +173,7 @@ function NavegacionInterna() {
 ══════════════════════════════════════════════════════════════════════════════ */
 function SeccionPropuestaValor() {
   return (
-    <section id="propuesta-valor" className="py-16 bg-white scroll-mt-[140px]">
+    <section id="propuesta-valor" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         {/* Encabezado de sección */}
         <div className="flex items-center gap-4 mb-10">
@@ -283,7 +283,7 @@ const AREAS = [
 
 function SeccionAreasEstudio() {
   return (
-    <section id="areas-estudio" className="py-16 bg-gray-50 scroll-mt-[140px]">
+    <section id="areas-estudio" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">
@@ -381,7 +381,7 @@ const ETAPAS_PROCESO = [
 
 function SeccionMetodologia() {
   return (
-    <section id="metodologia" className="py-16 bg-white scroll-mt-[140px]">
+    <section id="metodologia" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">
@@ -488,7 +488,7 @@ const BENEFICIOS_SGE = [
 
 function SeccionISO50001() {
   return (
-    <section id="iso-50001" className="py-16 bg-gray-50 scroll-mt-[140px]">
+    <section id="iso-50001" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">
@@ -557,13 +557,16 @@ function SeccionISO50001() {
 ══════════════════════════════════════════════════════════════════════════════ */
 function SeccionMonitoreoRemoto() {
   return (
-    <section id="gestion-remota" className="py-16 bg-white scroll-mt-[140px]">
+    <section id="gestion-remota" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">
             <IconoMonitoreo />
           </div>
           <div>
+            <span className="inline-block text-[#ca3517] text-xs font-bold uppercase tracking-widest mb-1">
+              SEG Smart
+            </span>
             <h2 className="text-3xl font-bold text-gray-900">Sistema de Monitoreo Remoto</h2>
             <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
           </div>
@@ -572,14 +575,15 @@ function SeccionMonitoreoRemoto() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <p className="text-gray-600 leading-relaxed text-base mb-6">
-              SEG Ingeniería promueve un entorno energéticamente eficiente,
-              sustentable y renovable, suscribiendo a los Objetivos de Desarrollo
-              Sostenible (ODS).
+              SEG Smart es la plataforma de monitoreo energético remoto de SEG
+              Ingeniería. Permite visualizar en tiempo real el consumo, la demanda
+              y el factor de potencia de cada instalación, detectar desvíos
+              automáticamente y tomar decisiones basadas en datos.
             </p>
             <p className="text-gray-600 leading-relaxed text-base mb-8">
-              A través de nuestra plataforma de gestión remota, clientes y
-              técnicos pueden acceder en tiempo real a los indicadores de consumo
-              energético, identificar desvíos y tomar decisiones basadas en datos.
+              Clientes y técnicos acceden desde cualquier dispositivo a un
+              dashboard centralizado con históricos, alertas configurables e
+              informes automáticos — sin necesidad de estar en el sitio.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">

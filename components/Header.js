@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import logoSEG from "@/img/seg ingenieria logo.png";
+import odsImg from "@/img/ODS.png";
 
 /* ─── Estructura del menú de navegación ──────────────────────────────────────── */
 const ITEMS_MENU = [
@@ -172,11 +173,17 @@ export default function Header() {
   return (
     <header className={`sticky top-0 z-50 transition-shadow duration-300 ${conSombra ? "shadow-xl" : ""}`}>
       {/* ── Barra superior roja ────────────────────────────────────────────── */}
-      <div className="bg-[#ca3517] text-white text-center py-2 px-4 text-xs sm:text-sm">
+      <div className="bg-[#ca3517] text-white py-1.5 px-4 text-xs sm:text-sm flex items-center justify-center gap-4">
         <span className="hidden sm:inline">
           SEG Ingeniería promueve un entorno energéticamente eficiente, sustentable y renovable
         </span>
         <span className="sm:hidden">SEG · Energía eficiente y renovable</span>
+        <Image
+          src={odsImg}
+          alt="Objetivos de Desarrollo Sostenible"
+          height={32}
+          className="object-contain"
+        />
       </div>
 
       {/* ── Barra de navegación negra ──────────────────────────────────────── */}

@@ -1,4 +1,6 @@
-import Link from "next/link";
+﻿import Link from "next/link";
+import Image from "next/image";
+import imagenMapaDesarrollos from "@/img/614875ff-48dc-4a27-bf70-7e51def7ecbc.png";
 
 export const metadata = {
   title: "Energías Renovables — SEG Ingeniería",
@@ -148,11 +150,11 @@ const ANCLAS = [
 function NavegacionInterna() {
   return (
     <nav
-      className="bg-gray-100 border-b border-gray-200 sticky top-[88px] z-40"
+      className="bg-gray-100 border-b border-gray-200 sticky top-[108px] z-40"
       aria-label="Secciones de la página"
     >
       <div className="max-w-7xl mx-auto px-4">
-        <ul className="flex overflow-x-auto gap-0 -mb-px">
+        <ul className="flex overflow-x-auto gap-0 -mb-px justify-center">
           {ANCLAS.map((ancla) => (
             <li key={ancla.etiqueta} className="flex-shrink-0">
               <a
@@ -174,7 +176,7 @@ function NavegacionInterna() {
 ══════════════════════════════════════════════════════════════════════════════ */
 function SeccionUruguay() {
   return (
-    <section id="uruguay" className="py-16 bg-white scroll-mt-[140px]">
+    <section id="uruguay" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
           <p className="text-[#ca3517] font-bold uppercase tracking-widest text-sm mb-2">
@@ -226,7 +228,7 @@ function SeccionImpacto() {
   return (
     <section
       id="impacto"
-      className="py-16 relative overflow-hidden scroll-mt-[140px]"
+      className="py-16 relative overflow-hidden scroll-mt-[160px]"
       style={{ backgroundColor: "#ca3517" }}
       aria-label="Impacto ambiental"
     >
@@ -274,7 +276,7 @@ function SeccionImpacto() {
 ══════════════════════════════════════════════════════════════════════════════ */
 function SeccionMapaDesarrollos() {
   return (
-    <section id="mapa-desarrollos" className="py-16 bg-gray-50 scroll-mt-[140px]">
+    <section id="mapa-desarrollos" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
           <div className="text-[#ca3517]">
@@ -286,16 +288,14 @@ function SeccionMapaDesarrollos() {
           </div>
         </div>
 
-        <div className="bg-gray-200 rounded-xl h-80 flex items-center justify-center text-gray-500 shadow-inner border border-gray-300">
-          <div className="text-center">
-            <div className="text-[#ca3517] flex justify-center mb-3">
-              <IconoGlobo className="w-12 h-12" />
-            </div>
-            <p className="font-semibold text-gray-700">Mapa interactivo de desarrollos</p>
-            <p className="text-xs text-gray-400 mt-1">
-              Uruguay · Brasil · Chile · México · Perú · Argentina · Colombia
-            </p>
-          </div>
+        <div className="rounded-xl overflow-hidden shadow-inner border border-gray-300 max-w-2xl mx-auto">
+          <Image
+            src={imagenMapaDesarrollos}
+            alt="Mapa de desarrollos de energías renovables"
+            width={1200}
+            height={600}
+            className="w-full h-auto object-contain"
+          />
         </div>
       </div>
     </section>
@@ -311,7 +311,7 @@ const PAISES_GREENPOWER = [
 
 function SeccionConozcaMas() {
   return (
-    <section id="conozca-mas" className="py-16 bg-white scroll-mt-[140px]">
+    <section id="conozca-mas" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
@@ -418,7 +418,7 @@ function SeccionTipoEnergia({ tipo, fondoGris, imagenDerecha }) {
   return (
     <section
       id={tipo.id}
-      className={`py-16 scroll-mt-[140px] ${fondoGris ? "bg-gray-50" : "bg-white"}`}
+      className={`py-16 scroll-mt-[160px] ${fondoGris ? "bg-gray-50" : "bg-white"}`}
     >
       <div className="max-w-7xl mx-auto px-4">
         <div
