@@ -70,7 +70,7 @@ function IconoChevron({ abierto }) {
 function LogoSEG() {
   return (
     <Link href="/" className="flex items-center flex-shrink-0">
-      <Image src={logoSEG} alt="SEG Ingeniería" height={40} className="object-contain" />
+      <Image src={logoSEG} alt="SEG Ingeniería" height={52} className="object-contain" />
     </Link>
   );
 }
