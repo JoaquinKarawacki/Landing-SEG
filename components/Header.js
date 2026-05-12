@@ -185,7 +185,7 @@ export default function Header() {
           <LogoSEG />
 
           {/* Menú desktop */}
-          <ul className="hidden lg:flex items-center gap-5 xl:gap-7 ml-8">
+          <ul className="hidden lg:flex items-center gap-5 xl:gap-7 flex-1 justify-center">
             {ITEMS_MENU.map((item) => (
               <ItemMenuDesktop key={item.etiqueta} item={item} rutaActual={rutaActual} />
             ))}
