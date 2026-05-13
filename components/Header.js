@@ -70,8 +70,17 @@ function IconoChevron({ abierto }) {
 /* ─── Logo SEG ─────────────────────────────────────────────────────────────── */
 function LogoSEG() {
   return (
-    <Link href="/" className="flex items-center flex-shrink-0">
-      <Image src={logoSEG} alt="SEG Ingeniería" height={52} className="object-contain" />
+    <Link
+      href="/"
+      className="flex items-center flex-shrink-0 leading-none m-0 p-0"
+    >
+      <Image
+        src={logoSEG}
+        alt="SEG Ingeniería"
+        height={64}
+        className="object-contain block m-0 p-0"
+        priority
+      />
     </Link>
   );
 }
@@ -175,42 +184,39 @@ export default function Header() {
       {/* ── Barra superior roja ────────────────────────────────────────────── */}
       {/* relative + overflow-visible permite que la imagen ODS se posicione en absolute
           y "flote" centrada sin afectar la altura de la barra roja */}
-      <div className="relative bg-[#ca3517] text-white py-1.5 px-4 text-xs sm:text-sm flex items-center justify-center gap-4 overflow-visible">
-        <span className="hidden sm:inline">
-          SEG Ingeniería promueve un entorno energéticamente eficiente, sustentable y renovable
-        </span>
-        <span className="sm:hidden">SEG · Energía eficiente y renovable</span>
+      <div className="bg-[#ca3517] text-white py-1.5 px-4 text-xs sm:text-sm flex items-center justify-center overflow-visible">
+        <div className="relative flex items-center">
+          <span className="hidden sm:inline">
+            SEG Ingeniería promueve un entorno energéticamente eficiente, sustentable y renovable
+          </span>
+          <span className="sm:hidden">SEG · Energía eficiente y renovable</span>
 
-        {/* Imagen ODS posicionada en absolute: centrada verticalmente, alineada a la derecha
-            del texto. No afecta la altura de la barra roja porque está fuera del flujo. */}
-        <div
-          className="absolute top-1/2 -translate-y-1/2"
-          style={{ left: "calc(50% + min(40vw, 480px))" }}
-        >
-          <Image
-            src={odsImg}
-            alt="Objetivos de Desarrollo Sostenible"
-            width={400}
-            height={100}
-            className="object-contain h-[80px] w-auto max-w-none"
-            priority
-          />
+          <div className="absolute left-full ml-4 top-1/2 -translate-y-1/2">
+            <Image
+              src={odsImg}
+              alt="Objetivos de Desarrollo Sostenible"
+              width={400}
+              height={100}
+              className="object-contain h-[80px] w-auto max-w-none"
+              priority
+            />
+          </div>
         </div>
       </div>
 
       {/* ── Barra de navegación negra ──────────────────────────────────────── */}
       <nav className="bg-black text-white" aria-label="Navegación principal">
-        <div className="max-w-7xl mx-auto px-4 flex items-center h-16">
-          <LogoSEG />
+        <div className="h-16 flex items-center justify-center px-6">
+          <div className="flex items-center">
+            <LogoSEG />
 
-          {/* Menú desktop */}
-          <ul className="hidden lg:flex items-center gap-5 xl:gap-7 flex-1 justify-center">
-            {ITEMS_MENU.map((item) => (
-              <ItemMenuDesktop key={item.etiqueta} item={item} rutaActual={rutaActual} />
-            ))}
-          </ul>
+            <ul className="hidden lg:flex items-center gap-5 xl:gap-7 ml-8">
+              {ITEMS_MENU.map((item) => (
+                <ItemMenuDesktop key={item.etiqueta} item={item} rutaActual={rutaActual} />
+              ))}
+            </ul>
+          </div>
 
-          {/* Botón hamburguesa */}
           <button
             className="lg:hidden ml-auto p-1 rounded hover:bg-white/10 transition-colors"
             onClick={() => setMenuAbierto((prev) => !prev)}
@@ -220,7 +226,7 @@ export default function Header() {
             {menuAbierto ? <IconoCerrar /> : <IconoHamburguesa />}
           </button>
         </div>
-
+        
         {/* ── Menú mobile desplegable ────────────────────────────────────────── */}
         {menuAbierto && (
           <div className="lg:hidden border-t border-gray-700 bg-black">

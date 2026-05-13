@@ -148,7 +148,7 @@ function SeccionHero() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   NAVEGACIÓN INTERNA — Guía §5: sticky top-[108px]
+   NAVEGACIÓN INTERNA — Guía §5: sticky top-[88px]
 ══════════════════════════════════════════════════════════════════════════════ */
 const ANCLAS = [
   { etiqueta: "Reconocimientos",       href: "#reconocimientos" },
@@ -161,7 +161,7 @@ const ANCLAS = [
 function NavegacionInterna() {
   return (
     <nav
-      className="bg-gray-100 border-b border-gray-200 sticky top-[108px] z-40"
+      className="bg-gray-100 border-b border-gray-200 sticky top-[88px] z-40"
       aria-label="Secciones de la página"
     >
       <div className="max-w-7xl mx-auto px-4">

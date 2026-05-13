@@ -60,13 +60,14 @@ export default function HeroSlider() {
   return (
     <section
       className="relative h-screen min-h-[560px] overflow-hidden bg-black"
-      aria-label="Slider de bienvenida"
-    >
-      {/* ── Fondo: gradiente oscuro como reemplazo del video ──────────────── */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-slate-800 to-black" />
+      aria-label="Slider de bienvenida">
+
+      <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
+            <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
 
       {/* Overlay semitransparente para mejorar legibilidad del texto */}
-      <div className="absolute inset-0 bg-black/55" />
+      <div className="absolute inset-0 bg-black/25" />
 
       {/* Detalle visual: línea roja sutil en la parte inferior */}
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#ca3517]" />
@@ -85,12 +86,15 @@ export default function HeroSlider() {
             {diapositivaActual.titulo}
           </h1>
 
-          <button
-            className="animar-boton bg-[#ca3517] hover:bg-[#a82d12] active:bg-[#8a2410] text-white font-semibold px-10 py-3 rounded-full transition-colors duration-200 text-base shadow-lg"
-            aria-label="Ver video"
-          >
-            Ver Video
-          </button>
+            <a
+              href="https://www.youtube.com/watch?v=u4SsgJ9M8mM"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="animar-boton inline-block bg-[#ca3517] hover:bg-[#a82d12] active:bg-[#8a2410] text-white font-semibold px-10 py-3 rounded-full transition-colors duration-200 text-base shadow-lg"
+              aria-label="Ver video"
+            >
+              Ver Video
+            </a>
         </div>
       </div>
 
