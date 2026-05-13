@@ -173,17 +173,29 @@ export default function Header() {
   return (
     <header className={`sticky top-0 z-50 transition-shadow duration-300 ${conSombra ? "shadow-xl" : ""}`}>
       {/* ── Barra superior roja ────────────────────────────────────────────── */}
-      <div className="bg-[#ca3517] text-white py-1 px-4 text-xs sm:text-sm flex items-center justify-center gap-4">
+      {/* relative + overflow-visible permite que la imagen ODS se posicione en absolute
+          y "flote" centrada sin afectar la altura de la barra roja */}
+      <div className="relative bg-[#ca3517] text-white py-1.5 px-4 text-xs sm:text-sm flex items-center justify-center gap-4 overflow-visible">
         <span className="hidden sm:inline">
           SEG Ingeniería promueve un entorno energéticamente eficiente, sustentable y renovable
         </span>
         <span className="sm:hidden">SEG · Energía eficiente y renovable</span>
-        <Image
-          src={odsImg}
-          alt="Objetivos de Desarrollo Sostenible"
-          height={40}
-          className="object-contain"
-        />
+
+        {/* Imagen ODS posicionada en absolute: centrada verticalmente, alineada a la derecha
+            del texto. No afecta la altura de la barra roja porque está fuera del flujo. */}
+        <div
+          className="absolute top-1/2 -translate-y-1/2"
+          style={{ left: "calc(50% + min(40vw, 480px))" }}
+        >
+          <Image
+            src={odsImg}
+            alt="Objetivos de Desarrollo Sostenible"
+            width={400}
+            height={100}
+            className="object-contain h-[80px] w-auto max-w-none"
+            priority
+          />
+        </div>
       </div>
 
       {/* ── Barra de navegación negra ──────────────────────────────────────── */}
