@@ -1,4 +1,6 @@
 ﻿import Link from "next/link";
+import FormularioContacto from "@/components/FormularioContacto";
+import FormularioSuscripcion from "@/components/FormularioSuscripcion";
 
 export const metadata = {
   title: "Contacto — SEG Ingeniería",
@@ -141,10 +143,6 @@ function NavegacionInterna() {
    SECCIÓN: FORMULARIO + OFICINAS — bg-white — Guía §4.1
 ══════════════════════════════════════════════════════════════════════════════ */
 
-/* Clases reutilizables para campos del formulario */
-const claseInput =
-  "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ca3517] focus:ring-1 focus:ring-[#ca3517] transition-colors duration-200 bg-white";
-
 function SeccionFormulario() {
   return (
     <section id="formulario" className="py-16 bg-white scroll-mt-[160px]">
@@ -163,99 +161,7 @@ function SeccionFormulario() {
               </div>
             </div>
 
-            {/* El formulario requiere un servicio de envío configurado en producción */}
-            <form action="#" method="POST" className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="nombre" className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-                    Nombre completo <span className="text-[#ca3517]">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="nombre"
-                    name="nombre"
-                    required
-                    placeholder="Juan García"
-                    className={claseInput}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-                    Correo electrónico <span className="text-[#ca3517]">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    placeholder="juan@empresa.com"
-                    className={claseInput}
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="empresa" className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-                    Empresa
-                  </label>
-                  <input
-                    type="text"
-                    id="empresa"
-                    name="empresa"
-                    placeholder="Mi Empresa S.A."
-                    className={claseInput}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="telefono" className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-                    Teléfono <span className="text-gray-400 font-normal normal-case">(opcional)</span>
-                  </label>
-                  <input
-                    type="tel"
-                    id="telefono"
-                    name="telefono"
-                    placeholder="+598 99 000 000"
-                    className={claseInput}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="asunto" className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-                  Asunto <span className="text-[#ca3517]">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="asunto"
-                  name="asunto"
-                  required
-                  placeholder="Consulta sobre eficiencia energética"
-                  className={claseInput}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="mensaje" className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-                  Mensaje <span className="text-[#ca3517]">*</span>
-                </label>
-                <textarea
-                  id="mensaje"
-                  name="mensaje"
-                  required
-                  rows={5}
-                  placeholder="Describa su consulta o proyecto..."
-                  className={`${claseInput} resize-none`}
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-[#ca3517] text-white py-3 rounded-full font-semibold text-sm hover:bg-[#a82d12] transition-colors duration-200"
-              >
-                Enviar mensaje
-              </button>
-            </form>
+            <FormularioContacto />
           </div>
 
           {/* ── Información de oficinas ──────────────────────────────────── */}
@@ -427,69 +333,7 @@ function SeccionIndicadores() {
               Completá tus datos para suscribirte:
             </p>
 
-            <form action="#" method="POST" className="space-y-4">
-              <div>
-                <label htmlFor="sub-nombre" className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-                  Nombre completo <span className="text-[#ca3517]">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="sub-nombre"
-                  name="nombre"
-                  required
-                  placeholder="Juan García"
-                  className={claseInput}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="sub-email" className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-                  Correo electrónico <span className="text-[#ca3517]">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="sub-email"
-                  name="email"
-                  required
-                  placeholder="juan@empresa.com"
-                  className={claseInput}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="sub-empresa" className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-                  Empresa <span className="text-[#ca3517]">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="sub-empresa"
-                  name="empresa"
-                  required
-                  placeholder="Mi Empresa S.A."
-                  className={claseInput}
-                />
-              </div>
-
-              <div>
-                <label htmlFor="sub-telefono" className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">
-                  Teléfono <span className="text-gray-400 font-normal normal-case">(opcional)</span>
-                </label>
-                <input
-                  type="tel"
-                  id="sub-telefono"
-                  name="telefono"
-                  placeholder="+598 99 000 000"
-                  className={claseInput}
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-[#ca3517] text-white py-3 rounded-full font-semibold text-sm hover:bg-[#a82d12] transition-colors duration-200 mt-2"
-              >
-                Suscribirse a los Indicadores
-              </button>
-            </form>
+            <FormularioSuscripcion />
           </div>
         </div>
       </div>
