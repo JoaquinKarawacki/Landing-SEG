@@ -28,8 +28,8 @@ export const metadata = {
 */
 export default function LayoutRaiz({ children }) {
   return (
-    <html lang="es" className={redHatDisplay.variable}>
-      <body className="antialiased flex flex-col min-h-screen">
+    <html lang="es" className={`${redHatDisplay.variable} overflow-x-hidden`}>
+      <body className="antialiased flex flex-col min-h-screen overflow-x-hidden">
         <IdiomaProvider>
           <Header />
           <main className="flex-1">{children}</main>
