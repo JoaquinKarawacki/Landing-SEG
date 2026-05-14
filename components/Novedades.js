@@ -112,7 +112,7 @@ export default function Novedades() {
 
         <div className="text-center mt-10">
           <a
-            href="#"
+            href="https://www.linkedin.com/company/seg-ingenieria/?originalSubdomain=uy"
             className="inline-block border-2 border-white text-white font-semibold px-10 py-3 rounded-full hover:bg-white hover:text-[#ca3517] transition-colors duration-200"
           >
             Ver Todas
