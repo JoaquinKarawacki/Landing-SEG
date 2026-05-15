@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import imagenCertSEG from "@/img/2025-12-22_seg_certificacion huella.jpg";
 import imagenCertCasa from "@/img/2025-12-23_creditos de la casa certificaciones ISO.jpg";
 import imagenMercadoElectrico from "@/img/1778542229765.jpeg";
@@ -12,7 +13,7 @@ const NOVEDADES = [
     fecha: "05/05/2026",
     descripcion:
       "El precio spot promedió 33 USD/MWh en abril, mientras que el promedio anual móvil descendió a 45 USD/MWh. Según datos de la Administración del Mercado Eléctrico.",
-    href: "https://www.linkedin.com/posts/seg-ingenieria_mercadoelaezctrico-spot-electricidad-activity-7459918298890039296-tgEL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
+    href: "/novedades",
     imagen: imagenMercadoElectrico,
     claseImagen: "object-cover object-top",
   },
@@ -23,7 +24,7 @@ const NOVEDADES = [
     fecha: "12/05/2026",
     descripcion:
       "SEG Ingeniería refuerza su liderazgo en sostenibilidad al obtener la certificación de Huella de Carbono bajo la norma internacional ISO 14064.",
-    href: "#",
+    href: "/novedades",
     imagen: imagenCertSEG,
   },
   {
@@ -33,7 +34,7 @@ const NOVEDADES = [
     fecha: "31/12/2025",
     descripcion:
       "Crédito de la Casa alcanza las certificaciones ISO 50001 de gestión de energía e ISO 14064 de huella de carbono, consolidando su compromiso ambiental.",
-    href: "https://www.linkedin.com/posts/gestiaejnenergaeztica-iso50001-huelladecarbono-share-7412105864926633984-mc7g?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
+    href: "/novedades",
     imagen: imagenCertCasa,
   },
 ];
@@ -112,7 +113,7 @@ export default function Novedades() {
 
         <div className="text-center mt-10">
           <a
-            href="https://www.linkedin.com/company/seg-ingenieria/?originalSubdomain=uy"
+            href="/novedades"
             className="inline-block border-2 border-white text-white font-semibold px-10 py-3 rounded-full hover:bg-white hover:text-[#ca3517] transition-colors duration-200"
           >
             Ver Todas
