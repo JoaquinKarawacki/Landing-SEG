@@ -51,7 +51,7 @@ export async function POST(request) {
 
   try {
     await sendMail({
-      to: process.env.MAIL_TO || "uruguay@segingenieria.com",
+      to: process.env.MAIL_TO || "notificaciones@segingenieria.com",
       subject: `[Contacto Web] ${asunto.trim()}`,
       html,
       replyTo: email.trim(),
