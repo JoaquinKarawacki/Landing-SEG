@@ -8,33 +8,32 @@ export const metadata = {
 
 /* ─── Datos de artículos ────────────────────────────────────────────────────── */
 const ARTICULOS = [
-  {
+    {
     id: 1,
-    titulo:
-      "SEG Ingeniería reconocida como ESCO destacada en el Premio Nacional de Eficiencia Energética 2024",
-    fecha: "30/10/2024",
+    titulo: "Archidoc SAS obtiene la certificación de Huella de Carbono ISO 14064",
+    fecha: "22/12/2025",
     categoria: "Reconocimientos",
     descripcion:
-      "SEG Ingeniería fue distinguida como Empresa de Servicios Energéticos (ESCO) destacada en el Premio Nacional de Eficiencia Energética 2024, reconocimiento otorgado por la MIEM en Uruguay.",
-    href: "#",
+      "SEG Ingeniería acompañó a Archidoc SAS en la obtención de su certificación de Huella de Carbono ISO 14064, acreditando que sus emisiones de gases de efecto invernadero fueron cuantificadas y verificadas conforme a estándares internacionales.",
+    href: "https://www.linkedin.com/feed/update/urn:li:activity:7425592115109281793",
   },
   {
     id: 2,
-    titulo: "Certificación ISO 50.001 del CASMU",
-    fecha: "26/09/2024",
-    categoria: "Proyectos",
+    titulo: "SEG Ingeniería obtiene la certificación de Huella de Carbono ISO 14064",
+    fecha: "23/12/2025",
+    categoria: "Reconocimientos",
     descripcion:
-      "El Centro de Asistencia del Sindicato Médico del Uruguay (CASMU) obtuvo la certificación ISO 50001 de Gestión de Energía con el acompañamiento técnico de SEG Ingeniería.",
-    href: "#",
+      "SEG Ingeniería certificó su propio inventario de emisiones de gases de efecto invernadero bajo la norma ISO 14064, verificado por UNIT Uruguay. Un paso clave para acompañar con coherencia a las organizaciones que asesoramos.",
+    href: "https://www.linkedin.com/feed/update/urn:li:activity:7414720479082586112/",
   },
   {
-    id: 3,
-    titulo: "Delegación internacional sobre energías limpias en California",
-    fecha: "18/09/2024",
-    categoria: "Internacional",
-    descripcion:
-      "Representantes de SEG Ingeniería participaron en una delegación internacional sobre energías limpias en California, intercambiando experiencias con referentes globales del sector.",
-    href: "#",
+  id: 3,
+  titulo: "Grupo Disco Uruguay reconocido en el Premio Nacional de Eficiencia Energética 2025",
+  fecha: "15/01/2026",
+  categoria: "Reconocimientos",
+  descripcion:
+    "SEG Ingeniería acompañó a Grupo Disco Uruguay en la implementación de su sistema de gestión ISO 50001. La empresa fue reconocida por el MIEM por su compromiso con la eficiencia energética y la mejora continua en sus locales.",
+  href: "https://www.linkedin.com/feed/update/urn:li:activity:7401634682431352832/",
   },
   {
     id: 4,
