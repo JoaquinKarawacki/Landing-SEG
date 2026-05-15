@@ -1,4 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
+import imagen1 from "@/img/indicador1.jpg";
+import imagen2 from "@/img/indicador2.jpg";
+import imagen3 from "@/img/indicador3.png";
+import imagen4 from "@/img/indicador4.jpg";
+import imagen5 from "@/img/indicador5.jpg";
 
 export const metadata = {
   title: "Indicadores Energéticos | SEG Ingeniería",
@@ -9,50 +15,57 @@ export const metadata = {
 /* ─── Datos de artículos ────────────────────────────────────────────────────── */
 const ARTICULOS = [
   {
-    id: 1,
-    titulo: "Febrero 2025. Olas de calor y picos de demanda en Uruguay",
-    fecha: "16/03/2025",
-    mes: "Febrero 2025",
-    descripcion:
-      "Las olas de calor registradas en febrero impulsaron la demanda eléctrica a niveles récord. Analizamos el comportamiento del sistema y las implicancias para la planificación energética.",
-    href: "#",
+  id: 1,
+  titulo: "Diciembre 2025. Destacados energéticos de Uruguay en 2025",
+  fecha: "25/12/2025",
+  mes: "Diciembre 2025",
+  descripcion:
+    "La demanda eléctrica alcanzó un máximo histórico de 12,5 TWh con una matriz 98,1% renovable. El pico de 2.507 MW del 7 de marzo fue el mayor en la historia. Las ventas de vehículos eléctricos superaron las 14.000 unidades, el 21% del mercado liviano.",
+  href: "#",
+  imagen: imagen1,
+  posicion: "object-bottom",
   },
   {
     id: 2,
-    titulo: "Enero 2025. El futuro es eléctrico",
-    fecha: "20/02/2025",
-    mes: "Enero 2025",
+    titulo: "Noviembre 2025. El hidrógeno verde en el transporte pesado",
+    fecha: "25/11/2025",
+    mes: "Noviembre 2025",
     descripcion:
-      "La electrificación avanza en todos los sectores: transporte, industria y residencial. Uruguay consolida su posición como referente regional en la transición energética.",
+      "Uruguay da un paso concreto hacia la descarbonización con el Proyecto Kahirós, primer piloto nacional de hidrógeno verde para transporte pesado. Una planta solar de 4,2 MW alimentará un electrolizador PEM para abastecer ocho camiones de celda de combustible en Fray Bentos.",
     href: "#",
+    imagen: imagen2,
   },
   {
     id: 3,
-    titulo: "Diciembre 2024. Destacados energéticos de Uruguay en 2024",
-    fecha: "15/01/2025",
-    mes: "Diciembre 2024",
+    titulo: "Octubre 2025. La nueva fase del gas natural licuado",
+    fecha: "25/10/2025",
+    mes: "Octubre 2025",
     descripcion:
-      "Repaso de los hitos más relevantes del sector energético uruguayo en 2024: récords de generación renovable, avances en movilidad eléctrica y nuevas certificaciones.",
+      "El informe 'Gas 2025' de la AIE anticipa 300 bcm de nueva capacidad de exportación de GNL hacia 2030, un incremento del 50% respecto a hoy. EE.UU. liderará la expansión. En Uruguay, el gas natural representa el 1% de la oferta primaria y acumula una baja de 13,2% en 2025.",
     href: "#",
+    imagen: imagen3,
   },
   {
     id: 4,
-    titulo: "Noviembre 2024. Energías renovables: el eje de un futuro sostenible",
-    fecha: "13/12/2024",
-    mes: "Noviembre 2024",
+    titulo: "Setiembre 2025. El consumo energético de los hogares uruguayos",
+    fecha: "25/09/2025",
+    mes: "Setiembre 2025",
     descripcion:
-      "Las energías renovables representan ya más del 95% de la matriz eléctrica uruguaya. Exploramos los desafíos de integración y las oportunidades para el sector privado.",
+      "El BNEU 2023 revela que por primera vez la electricidad supera a la leña como principal fuente energética de los hogares uruguayos (43% vs. 40%). Los calefones eléctricos concentran el 46% del consumo eléctrico residencial.",
     href: "#",
+    imagen: imagen4,
+    posicion: "object-center",
   },
   {
-    id: 5,
-    titulo: "Octubre 2024. Etiquetado de eficiencia energética de vehículos en Uruguay",
-    fecha: "15/11/2024",
-    mes: "Octubre 2024",
-    descripcion:
-      "Uruguay avanza en la reglamentación del etiquetado de eficiencia energética para vehículos, alineándose con estándares internacionales y promoviendo decisiones de compra informadas.",
-    href: "#",
-  },
+  id: 5,
+  titulo: "Agosto 2025. 60 años del Balance Energético Nacional de Uruguay",
+  fecha: "25/08/2025",
+  mes: "Agosto 2025",
+  descripcion:
+    "El BEN 2024 muestra que la generación eléctrica fue 99% renovable y el factor de emisión cayó a un mínimo histórico de 6 tCO₂/GWh. Por primera vez, la biomasa superó a los combustibles fósiles en el consumo final de energía.",
+  href: "#",
+   imagen: imagen5,
+},
 ];
 
 /* ─── Ícono gráfico de barras ───────────────────────────────────────────────── */
@@ -114,17 +127,27 @@ function SeccionHero() {
 function CardArticulo({ articulo }) {
   return (
     <article className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition-shadow duration-200">
-      {/* Imagen placeholder */}
-      <div className="bg-gray-200 h-44 flex items-center justify-center">
-        <div className="text-[#ca3517]">
-          <IconoIndicadores />
+      {articulo.imagen ? (
+        <div className="h-44 relative overflow-hidden">
+          <Image
+            src={articulo.imagen}
+            alt={articulo.titulo}
+            fill
+            className={`object-cover ${articulo.posicion || "object-center"}`}
+          />
         </div>
-      </div>
+      ) : (
+        <div className="bg-gray-200 h-44 flex items-center justify-center">
+          <div className="text-[#ca3517]">
+            <IconoIndicadores />
+          </div>
+        </div>
+      )}
       <div className="p-5 flex flex-col flex-1">
         <span className="text-[#ca3517] text-xs font-bold uppercase tracking-wide mb-2">
           Indicadores Energéticos
         </span>
-        <h3 className="font-bold text-gray-900 text-base leading-snug mb-3 flex-1">
+        <h3 className="font-bold text-gray-900 text-base leading-snug mb-3">
           <a href={articulo.href} className="hover:text-[#ca3517] transition-colors">
             {articulo.titulo}
           </a>

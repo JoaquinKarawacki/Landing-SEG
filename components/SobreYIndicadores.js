@@ -127,8 +127,6 @@ export default function SobreYIndicadores() {
 
             <a
               href="/institucional"
-              target="_blank"
-              rel="noopener noreferrer"
               className="inline-block bg-[#ca3517] text-white px-8 py-2.5 rounded-full font-semibold text-sm hover:bg-[#a82d12] transition-colors duration-200"
             >
               Más información
@@ -198,9 +196,7 @@ export default function SobreYIndicadores() {
             </a>
 
             <a
-              href="https://www.linkedin.com/company/seg-ingenieria/posts/?feedView=all"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/indicadores"
               className="inline-block border-2 border-[#ca3517] text-[#ca3517] px-8 py-2.5 rounded-full font-semibold text-sm hover:bg-[#ca3517] hover:text-white transition-colors duration-200"
             >
               Más información
