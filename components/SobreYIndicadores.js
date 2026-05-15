@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import imagenMar2026 from "@/img/imagenweb2603.jpg";
 import imagenFeb2026 from "@/img/imagenweb2602.jpg";
 
@@ -56,7 +57,7 @@ const ARTICULOS_INDICADORES = [
     titulo: "La matriz energética de Uruguay sigue cambiando",
     descripcion:
       "El Balance Energético Preliminar 2025 confirma que la biomasa alcanza el 50% del abastecimiento energético y que la demanda eléctrica llegó a un nuevo máximo histórico.",
-    href: "https://www.linkedin.com/posts/seg-ingenieria_energ%C3%ADa-uruguay-transici%C3%B3nenerg%C3%A9tica-activity-7450322296952639488-kb0I/?originalSubdomain=es",
+    href: "/indicadores",
     imagen: imagenMar2026,
   },
   {
@@ -65,7 +66,7 @@ const ARTICULOS_INDICADORES = [
     titulo: "El rápido avance de la movilidad eléctrica en Uruguay",
     descripcion:
       "Los vehículos eléctricos ya representan más del 2% del parque automotor. En 2025 se vendieron más de 14.000 unidades, el 21% del total de vehículos livianos.",
-    href: "https://www.linkedin.com/posts/seg-ingenieria_movilidadelaezctrica-vehaedculoselaezctricos-activity-7439453792200445952-1P-H?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
+    href: "/indicadores",
     imagen: imagenFeb2026,
   },
 ];
@@ -125,7 +126,7 @@ export default function SobreYIndicadores() {
             </p>
 
             <a
-              href="https://www.linkedin.com/company/seg-ingenieria/posts/?feedView=all"
+              href="/institucional"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-[#ca3517] text-white px-8 py-2.5 rounded-full font-semibold text-sm hover:bg-[#a82d12] transition-colors duration-200"
@@ -150,12 +151,8 @@ export default function SobreYIndicadores() {
                   className="flex gap-4 pb-5 border-b border-gray-100 last:border-0"
                 >
                   {articulo.imagen ? (
-                    <a
-                      href={articulo.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-shrink-0"
-                    >
+                    <Link href={articulo.href} className="flex-shrink-0">
+
                       <Image
                         src={articulo.imagen}
                         alt={articulo.titulo}
@@ -163,7 +160,7 @@ export default function SobreYIndicadores() {
                         height={80}
                         className="w-24 h-20 object-cover rounded"
                       />
-                    </a>
+                    </Link>
                   ) : (
                     <PlaceholderImagen
                       descripcion={`Imagen\n${articulo.periodo}`}
@@ -176,14 +173,10 @@ export default function SobreYIndicadores() {
                       {articulo.periodo}
                     </span>
                     <h3 className="font-bold text-gray-900 text-sm leading-snug mb-1.5">
-                      <a
-                        href={articulo.href}
-                        target={articulo.href.startsWith("http") ? "_blank" : undefined}
-                        rel={articulo.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="hover:text-[#ca3517] transition-colors"
-                      >
+                      <Link
+                        href={articulo.href} className="hover:text-[#ca3517] transition-colors">
                         {articulo.titulo}
-                      </a>
+                      </Link>
                     </h3>
                     <p className="text-gray-500 text-xs leading-relaxed">
                       {articulo.descripcion}
