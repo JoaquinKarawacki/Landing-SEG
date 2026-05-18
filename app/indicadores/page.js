@@ -1,10 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import imagen1 from "@/img/indicador1.jpg";
-import imagen2 from "@/img/indicador2.jpg";
-import imagen3 from "@/img/indicador3.png";
-import imagen4 from "@/img/indicador4.jpg";
-import imagen5 from "@/img/indicador5.jpg";
+import imagen4 from "@/img/indicador1.jpg";
+import imagen5 from "@/img/indicador2.jpg";
+import imagen3 from "@/img/indicador3.jpg";
+import imagenMar2026 from "@/img/imagenweb2603.jpg";
+import imagenFeb2026 from "@/img/imagenweb2602.jpg";
 
 export const metadata = {
   title: "Indicadores Energéticos | SEG Ingeniería",
@@ -15,56 +15,53 @@ export const metadata = {
 /* ─── Datos de artículos ────────────────────────────────────────────────────── */
 const ARTICULOS = [
   {
-  id: 1,
-  titulo: "Diciembre 2025. Destacados energéticos de Uruguay en 2025",
-  fecha: "25/12/2025",
-  mes: "Diciembre 2025",
-  descripcion:
-    "La demanda eléctrica alcanzó un máximo histórico de 12,5 TWh con una matriz 98,1% renovable. El pico de 2.507 MW del 7 de marzo fue el mayor en la historia. Las ventas de vehículos eléctricos superaron las 14.000 unidades, el 21% del mercado liviano.",
-  href: "#",
-  imagen: imagen1,
-  posicion: "object-bottom",
+    id: 1,
+    titulo: "Marzo 2026. La matriz energética de Uruguay sigue cambiando",
+    fecha: "26/03/2026",
+    descripcion:
+        "El Balance Energético Preliminar 2025 muestra que la biomasa alcanzó el 50,2% del abastecimiento energético total, la primera vez que una fuente supera la mitad de la matriz. El petróleo cayó al 33,6%, su valor más bajo desde 1965. La demanda eléctrica llegó a un nuevo máximo histórico de 13,5 TWh, con cinco años consecutivos de crecimiento y una matriz 98% renovable.",
+    href: "/indicadores",
+    imagen: imagenMar2026,
   },
   {
     id: 2,
+    titulo: "Febrero 2026. El rápido avance de la movilidad eléctrica en Uruguay",
+    fecha: "26/02/2026",
+    descripcion:
+      "En 2025 se vendieron más de 14.000 vehículos eléctricos en Uruguay, el 21% del total de livianos, y en apenas cuatro años el parque eléctrico creció casi 30 veces. En el primer bimestre de 2026 los eléctricos ya representaron el 31% de las ventas. El costo de recorrer 10.000 km con carga domiciliaria es hasta un 90% menor que en un vehículo a nafta.",
+    href: "/indicadores",
+    imagen: imagenFeb2026,
+  },
+  {
+    id: 3,
+    titulo: "Enero 2026. La era de la electricidad y la transformación del sistema eléctrico",
+    fecha: "25/01/2026",
+    mes: "Enero 2026",
+    descripcion:
+      "El informe 'Electricity 2026' de la AIE proyecta que el consumo eléctrico mundial crecerá 3,6% anual entre 2026 y 2030, un ritmo 50% superior al de la década previa. En EE.UU., los centros de datos explicarán casi la mitad del crecimiento. Uruguay, con una matriz 99% renovable y emisiones de apenas 6 g CO₂/kWh, está estructuralmente bien posicionado ante la nueva era eléctrica.",
+    href: "#",
+    imagen: imagen3,
+  },
+  {
+    id: 4,
+    titulo: "Diciembre 2025. Destacados energéticos de Uruguay en 2025",
+    fecha: "25/12/2025",
+    mes: "Diciembre 2025",
+    descripcion:
+      "La demanda eléctrica alcanzó un máximo histórico de 12,5 TWh con una matriz 98,1% renovable. El pico de 2.507 MW del 7 de marzo fue el mayor en la historia. Las ventas de vehículos eléctricos superaron las 14.000 unidades, el 21% del mercado liviano.",
+    href: "#",
+    imagen: imagen4,
+    posicion: "object-bottom",
+  },
+  {
+    id: 5,
     titulo: "Noviembre 2025. El hidrógeno verde en el transporte pesado",
     fecha: "25/11/2025",
     mes: "Noviembre 2025",
     descripcion:
       "Uruguay da un paso concreto hacia la descarbonización con el Proyecto Kahirós, primer piloto nacional de hidrógeno verde para transporte pesado. Una planta solar de 4,2 MW alimentará un electrolizador PEM para abastecer ocho camiones de celda de combustible en Fray Bentos.",
     href: "#",
-    imagen: imagen2,
-  },
-  {
-    id: 3,
-    titulo: "Octubre 2025. La nueva fase del gas natural licuado",
-    fecha: "25/10/2025",
-    mes: "Octubre 2025",
-    descripcion:
-      "El informe 'Gas 2025' de la AIE anticipa 300 bcm de nueva capacidad de exportación de GNL hacia 2030, un incremento del 50% respecto a hoy. EE.UU. liderará la expansión. En Uruguay, el gas natural representa el 1% de la oferta primaria y acumula una baja de 13,2% en 2025.",
-    href: "#",
-    imagen: imagen3,
-  },
-  {
-    id: 4,
-    titulo: "Setiembre 2025. El consumo energético de los hogares uruguayos",
-    fecha: "25/09/2025",
-    mes: "Setiembre 2025",
-    descripcion:
-      "El BNEU 2023 revela que por primera vez la electricidad supera a la leña como principal fuente energética de los hogares uruguayos (43% vs. 40%). Los calefones eléctricos concentran el 46% del consumo eléctrico residencial.",
-    href: "#",
-    imagen: imagen4,
-    posicion: "object-center",
-  },
-  {
-  id: 5,
-  titulo: "Agosto 2025. 60 años del Balance Energético Nacional de Uruguay",
-  fecha: "25/08/2025",
-  mes: "Agosto 2025",
-  descripcion:
-    "El BEN 2024 muestra que la generación eléctrica fue 99% renovable y el factor de emisión cayó a un mínimo histórico de 6 tCO₂/GWh. Por primera vez, la biomasa superó a los combustibles fósiles en el consumo final de energía.",
-  href: "#",
-   imagen: imagen5,
+    imagen: imagen5,
 },
 ];
 
