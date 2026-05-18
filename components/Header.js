@@ -17,7 +17,7 @@ const ITEMS_MENU = [
       { etiqueta: "Propuesta de Valor", href: "/eficiencia-energetica#propuesta-valor" },
       { etiqueta: "Áreas de Estudio",   href: "/eficiencia-energetica#areas-estudio" },
       { etiqueta: "ISO 50001",           href: "/eficiencia-energetica#iso-50001" },
-      { etiqueta: "Gestión Remota",      href: "/eficiencia-energetica#gestion-remota" },
+      { etiqueta: "SEG SMART",      href: "/eficiencia-energetica#gestion-remota" },
     ],
   },
   {

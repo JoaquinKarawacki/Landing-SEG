@@ -69,7 +69,7 @@ function CardNovedad({ novedad }) {
         )}
       </a>
 
-      <div className="p-5 flex flex-col flex-1">
+      <div className="p-5 flex flex-col">
         <span className="text-[#ca3517] text-xs font-bold uppercase tracking-wide mb-2">
           {novedad.categoria}
         </span>
@@ -85,7 +85,7 @@ function CardNovedad({ novedad }) {
           </a>
         </h3>
 
-        <div className="flex-1" />
+        <div/>
 
         <time className="text-gray-400 text-xs mb-3 block" dateTime={novedad.fecha}>
           {novedad.fecha}
