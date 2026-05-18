@@ -70,7 +70,7 @@ const PILARES = [
     Icono: IconoEficiencia,
     titulo: "Eficiencia energética",
     descripcion: "Mayor compañía de servicios energéticos del Uruguay",
-    href: "#",
+    href: "/eficiencia-energetica",
   },
   {
     id: "renovables",
@@ -78,14 +78,14 @@ const PILARES = [
     titulo: "Energías renovables",
     descripcion:
       "Mayor desarrollador uruguayo de energías renovables en la región",
-    href: "#",
+    href: "/energias-renovables",
   },
   {
     id: "hidrogeno",
     Icono: IconoHidrogeno,
     titulo: "Hidrógeno Verde",
     descripcion: "Pioneros en nuevas tecnologías de punta en la región.",
-    href: "#",
+    href: "/energias-renovables",
   },
 ];
 
@@ -101,11 +101,11 @@ export default function Pilares() {
       <div className="absolute inset-0 bg-gradient-to-br from-[#ca3517] via-[#b83015] to-[#8a2410] opacity-80" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:divide-x md:divide-white/25">
           {PILARES.map((pilar) => (
             <article
               key={pilar.id}
-              className="flex flex-col items-center text-center text-white"
+              className="flex flex-col items-center text-center text-white md:px-8 py-4"
             >
               <pilar.Icono />
 
