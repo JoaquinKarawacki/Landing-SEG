@@ -1,4 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
+import imagen1 from "@/img/novedad1.jpeg"
+import imagen2 from "@/img/2025-12-22_seg_certificacion huella.jpg"
+import imagen3 from "@/img/2025-12-23_creditos de la casa certificaciones ISO.jpg"
+import imagen4 from "@/img/novedad4.jpeg"
+import imagen5 from "@/img/novedad5.jpeg"
 
 export const metadata = {
   title: "Novedades | SEG Ingeniería",
@@ -11,47 +17,54 @@ const ARTICULOS = [
     {
     id: 1,
     titulo: "Archidoc SAS obtiene la certificación de Huella de Carbono ISO 14064",
-    fecha: "22/12/2025",
+    fecha: "06/02/2026",
     categoria: "Reconocimientos",
     descripcion:
       "SEG Ingeniería acompañó a Archidoc SAS en la obtención de su certificación de Huella de Carbono ISO 14064, acreditando que sus emisiones de gases de efecto invernadero fueron cuantificadas y verificadas conforme a estándares internacionales.",
     href: "https://www.linkedin.com/feed/update/urn:li:activity:7425592115109281793",
+    Imagen: imagen1,
   },
   {
     id: 2,
     titulo: "SEG Ingeniería obtiene la certificación de Huella de Carbono ISO 14064",
-    fecha: "23/12/2025",
+    fecha: "07/01/2026",
     categoria: "Reconocimientos",
     descripcion:
-      "SEG Ingeniería certificó su propio inventario de emisiones de gases de efecto invernadero bajo la norma ISO 14064, verificado por UNIT Uruguay. Un paso clave para acompañar con coherencia a las organizaciones que asesoramos.",
-    href: "https://www.linkedin.com/feed/update/urn:li:activity:7414720479082586112/",
+      "SEG Ingeniería certificó su propio inventario de emisiones de gases de efecto invernadero bajo la norma ISO 14064, verificado por UNIT Uruguay. Creemos que la sostenibilidad debe comenzar por casa: medir y transparentar nuestras propias emisiones es un paso clave para acompañar con coherencia a las organizaciones que asesoramos.",
+    href: "https://www.linkedin.com/posts/seg-ingenieria_huelladecarbono-iso14064-gestiaejnambiental-activity-7414720479082586112-z3mE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
+    Imagen: imagen2,
+    posicion: "object-top",
   },
   {
-  id: 3,
-  titulo: "Grupo Disco Uruguay reconocido en el Premio Nacional de Eficiencia Energética 2025",
-  fecha: "15/01/2026",
-  categoria: "Reconocimientos",
-  descripcion:
-    "SEG Ingeniería acompañó a Grupo Disco Uruguay en la implementación de su sistema de gestión ISO 50001. La empresa fue reconocida por el MIEM por su compromiso con la eficiencia energética y la mejora continua en sus locales.",
-  href: "https://www.linkedin.com/feed/update/urn:li:activity:7401634682431352832/",
+    id: 3,
+    titulo: "Crédito de la Casa obtiene la doble certificación ISO 50001 e ISO 14064",
+    fecha: "31/12/2025",
+    categoria: "Reconocimientos",
+    descripcion:
+      "Felicitamos a Crédito de la Casa por la obtención de la doble certificación ISO 50001 en Sistema de Gestión de la Energía e ISO 14064 en Huella de Carbono. Desde SEG Ingeniería acompañamos este proceso aportando soporte técnico para la implementación de ambas normas, orientados a generar mejoras operativas medibles y decisiones basadas en datos.",
+    href: "https://www.linkedin.com/posts/seg-ingenieria_gestiaejnenergaeztica-iso50001-huelladecarbono-activity-7412168660263260160-Jspk?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
+    Imagen: imagen3,
+    posicion: "object-top",
   },
   {
     id: 4,
-    titulo: "Acuerdo con el Club de Golf del Uruguay en proyecto de Eficiencia Energética",
-    fecha: "11/09/2024",
-    categoria: "Proyectos",
+    titulo: "Grupo Disco Uruguay recibe mención en el Premio Nacional de Eficiencia Energética 2025",
+    fecha: "2/12/2025",
+    categoria: "Reconocimientos",
     descripcion:
-      "SEG Ingeniería firmó un acuerdo con el Club de Golf del Uruguay para el desarrollo de un proyecto integral de eficiencia energética en sus instalaciones.",
-    href: "#",
+      "Felicitamos a Grupo Disco Uruguay por la mención en el Premio Nacional de Eficiencia Energética 2025 del MIEM, que destaca su compromiso con la incorporación de equipamiento eficiente y la mejora continua en la gestión energética. Desde SEG Ingeniería acompañamos la implementación de su sistema de gestión ISO 50001.",
+    href: "https://www.linkedin.com/posts/seg-ingenieria_eficienciaenergaeztica-premio-gestiaejnenergaeztica-activity-7401634682431352832-nbJE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
+    Imagen: imagen4,
   },
   {
     id: 5,
-    titulo: "Charla con el Centro Argentino de Ingenieros",
-    fecha: "10/09/2024",
+    titulo: "SEG Ingeniería participó en el H2LATAM Summit 2025 en Brasil",
+    fecha: "09/10/2025",
     categoria: "Institucional",
     descripcion:
-      "Nuestro equipo técnico brindó una charla ante el Centro Argentino de Ingenieros sobre gestión energética, eficiencia y las oportunidades que ofrece la región en energías renovables.",
-    href: "#",
+      "Nuestro socio Fernando Schaich fue invitado por la GIZ a integrar el panel sobre e-fuels en el H2LATAM Summit 2025 en Fortaleza, Brasil. Augusto Lanza también participó en representación de SEG Ingeniería, en un encuentro que reunió a referentes de gobiernos, empresas e instituciones de América Latina para analizar las oportunidades del hidrógeno verde en la transición energética regional.",
+    href: "https://www.linkedin.com/posts/seg-ingenieria_hidraejgenoverde-transiciaejnenergaeztica-activity-7383917258844291072-nIIt?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
+    Imagen: imagen5,
   },
 ];
 
@@ -112,27 +125,40 @@ function SeccionHero() {
 
 /* ─── Card artículo ─────────────────────────────────────────────────────────── */
 function CardArticulo({ articulo }) {
+  const img = articulo.imagen || articulo.Imagen;
   return (
     <article className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition-shadow duration-200">
-      <div className="bg-gray-200 h-44 flex items-center justify-center">
-        <div className="text-[#ca3517]">
-          <IconoNovedades />
+      {img ? (
+        <div className="h-44 relative overflow-hidden">
+          <Image
+            src={img}
+            alt={articulo.titulo}
+            fill
+            className={`object-cover ${articulo.posicion || "object-center"}`}
+          />
         </div>
-      </div>
+      ) : (
+        <div className="bg-gray-200 h-44 flex items-center justify-center">
+          <div className="text-[#ca3517]">
+            <IconoNovedades />
+          </div>
+        </div>
+      )}
       <div className="p-5 flex flex-col flex-1">
         <span className="text-[#ca3517] text-xs font-bold uppercase tracking-wide mb-2">
           {articulo.categoria}
         </span>
-        <h3 className="font-bold text-gray-900 text-base leading-snug mb-3 flex-1">
+        <h3 className="font-bold text-gray-900 text-base leading-snug mb-3">
           <a href={articulo.href} className="hover:text-[#ca3517] transition-colors">
             {articulo.titulo}
           </a>
         </h3>
+        <div className="flex-1" />
         <div className="flex items-center gap-1.5 text-gray-400 text-xs mb-3">
           <IconoCalendario />
           <time>{articulo.fecha}</time>
         </div>
-        <p className="text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-3">
+        <p className="text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-3 line-clamp-4">
           {articulo.descripcion}
         </p>
       </div>

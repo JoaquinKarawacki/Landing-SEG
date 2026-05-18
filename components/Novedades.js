@@ -1,21 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
+import imagen1 from "@/img/novedad1.jpeg";
 import imagenCertSEG from "@/img/2025-12-22_seg_certificacion huella.jpg";
 import imagenCertCasa from "@/img/2025-12-23_creditos de la casa certificaciones ISO.jpg";
-import imagenMercadoElectrico from "@/img/1778542229765.jpeg";
+
 
 /* ─── Datos de las últimas novedades ──────────────────────────────────────── */
 const NOVEDADES = [
   {
-    id: 1,
-    categoria: "Mercado Eléctrico",
-    titulo: "Precio spot del mercado eléctrico en Uruguay cae a su menor valor de 2026",
-    fecha: "05/05/2026",
+   id: 1,
+    titulo: "Archidoc SAS obtiene la certificación de Huella de Carbono ISO 14064",
+    fecha: "06/02/2026",
+    categoria: "Reconocimientos",
     descripcion:
-      "El precio spot promedió 33 USD/MWh en abril, mientras que el promedio anual móvil descendió a 45 USD/MWh. Según datos de la Administración del Mercado Eléctrico.",
+      "SEG Ingeniería acompañó a Archidoc SAS en la obtención de su certificación de Huella de Carbono ISO 14064, acreditando que sus emisiones de gases de efecto invernadero fueron cuantificadas y verificadas conforme a estándares internacionales.",
     href: "/novedades",
-    imagen: imagenMercadoElectrico,
-    claseImagen: "object-cover object-top",
+    imagen: imagen1,
+    posicion: "object-top",
   },
   {
     id: 2,
@@ -26,6 +27,7 @@ const NOVEDADES = [
       "SEG Ingeniería refuerza su liderazgo en sostenibilidad al obtener la certificación de Huella de Carbono bajo la norma internacional ISO 14064.",
     href: "/novedades",
     imagen: imagenCertSEG,
+    posicion: "object-top",
   },
   {
     id: 3,
@@ -36,6 +38,7 @@ const NOVEDADES = [
       "Crédito de la Casa alcanza las certificaciones ISO 50001 de gestión de energía e ISO 14064 de huella de carbono, consolidando su compromiso ambiental.",
     href: "/novedades",
     imagen: imagenCertCasa,
+    posicion: "object-top",
   },
 ];
 
@@ -57,7 +60,7 @@ function CardNovedad({ novedad }) {
             alt={novedad.titulo}
             width={600}
             height={192}
-            className={`w-full h-48 ${novedad.claseImagen ?? "object-cover"}`}
+            className={`w-full h-48 object-cover ${novedad.posicion || "object-center"}`}
           />
         ) : (
           <div className="bg-gray-300 h-48 flex items-center justify-center text-gray-500 text-sm">
@@ -71,7 +74,7 @@ function CardNovedad({ novedad }) {
           {novedad.categoria}
         </span>
 
-        <h3 className="font-bold text-gray-900 text-base leading-snug mb-2 flex-1">
+        <h3 className="font-bold text-gray-900 text-base leading-snug mb-2">
           <a
             href={novedad.href}
             target={esExterno ? "_blank" : undefined}
@@ -82,11 +85,13 @@ function CardNovedad({ novedad }) {
           </a>
         </h3>
 
+        <div className="flex-1" />
+
         <time className="text-gray-400 text-xs mb-3 block" dateTime={novedad.fecha}>
           {novedad.fecha}
         </time>
 
-        <p className="text-gray-600 text-sm leading-relaxed">
+        <p className="text-gray-600 text-sm leading-relaxed line-clamp-4">
           {novedad.descripcion}
         </p>
       </div>
