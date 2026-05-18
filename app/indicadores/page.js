@@ -18,18 +18,22 @@ const ARTICULOS = [
     id: 1,
     titulo: "Marzo 2026. La matriz energética de Uruguay sigue cambiando",
     fecha: "26/03/2026",
+    mes: "Marzo 2026",
     descripcion:
         "El Balance Energético Preliminar 2025 muestra que la biomasa alcanzó el 50,2% del abastecimiento energético total, la primera vez que una fuente supera la mitad de la matriz. El petróleo cayó al 33,6%, su valor más bajo desde 1965. La demanda eléctrica llegó a un nuevo máximo histórico de 13,5 TWh, con cinco años consecutivos de crecimiento y una matriz 98% renovable.",
     href: "/indicadores",
+    pdf: "/Indicadores%20Energ%C3%A9ticos_2603.pdf",
     imagen: imagenMar2026,
   },
   {
     id: 2,
     titulo: "Febrero 2026. El rápido avance de la movilidad eléctrica en Uruguay",
     fecha: "26/02/2026",
+    mes: "Febrero 2026",
     descripcion:
       "En 2025 se vendieron más de 14.000 vehículos eléctricos en Uruguay, el 21% del total de livianos, y en apenas cuatro años el parque eléctrico creció casi 30 veces. En el primer bimestre de 2026 los eléctricos ya representaron el 31% de las ventas. El costo de recorrer 10.000 km con carga domiciliaria es hasta un 90% menor que en un vehículo a nafta.",
     href: "/indicadores",
+    pdf: "/Indicadores%20Energ%C3%A9ticos_2602.pdf",
     imagen: imagenFeb2026,
   },
   {
@@ -40,6 +44,7 @@ const ARTICULOS = [
     descripcion:
       "El informe 'Electricity 2026' de la AIE proyecta que el consumo eléctrico mundial crecerá 3,6% anual entre 2026 y 2030, un ritmo 50% superior al de la década previa. En EE.UU., los centros de datos explicarán casi la mitad del crecimiento. Uruguay, con una matriz 99% renovable y emisiones de apenas 6 g CO₂/kWh, está estructuralmente bien posicionado ante la nueva era eléctrica.",
     href: "#",
+    pdf: "/Indicadores%20Energ%C3%A9ticos_2601.pdf",
     imagen: imagen3,
   },
   {
@@ -50,6 +55,7 @@ const ARTICULOS = [
     descripcion:
       "La demanda eléctrica alcanzó un máximo histórico de 12,5 TWh con una matriz 98,1% renovable. El pico de 2.507 MW del 7 de marzo fue el mayor en la historia. Las ventas de vehículos eléctricos superaron las 14.000 unidades, el 21% del mercado liviano.",
     href: "#",
+    pdf: "/Indicadores%20Energ%C3%A9ticos_2512.pdf",
     imagen: imagen4,
     posicion: "object-bottom",
   },
@@ -61,8 +67,9 @@ const ARTICULOS = [
     descripcion:
       "Uruguay da un paso concreto hacia la descarbonización con el Proyecto Kahirós, primer piloto nacional de hidrógeno verde para transporte pesado. Una planta solar de 4,2 MW alimentará un electrolizador PEM para abastecer ocho camiones de celda de combustible en Fray Bentos.",
     href: "#",
+    pdf: "/Indicadores%20Energ%C3%A9ticos_2511.pdf",
     imagen: imagen5,
-},
+  },
 ];
 
 /* ─── Ícono gráfico de barras ───────────────────────────────────────────────── */
@@ -156,6 +163,22 @@ function CardArticulo({ articulo }) {
         <p className="text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-3">
           {articulo.descripcion}
         </p>
+        {articulo.pdf && (
+          <a
+            href={articulo.pdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-2 text-[#ca3517] text-sm font-semibold hover:underline"
+          >
+            <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="12" y1="18" x2="12" y2="12" />
+              <line x1="9" y1="15" x2="15" y2="15" />
+            </svg>
+            Ver informe completo
+          </a>
+        )}
       </div>
     </article>
   );
