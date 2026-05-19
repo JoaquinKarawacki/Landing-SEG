@@ -18,7 +18,7 @@ export const metadata = {
     "SEG Ingeniería es la primera consultora de reducción de costos energéticos del Uruguay. " +
     "Líder en eficiencia energética y energías renovables desde 1996.",
   icons: {
-    icon: "/logo.png",
+    icon: "/img/seg ingenieria logo.png",
   },
 };
 
