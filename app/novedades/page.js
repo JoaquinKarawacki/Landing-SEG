@@ -76,7 +76,7 @@ function IconoNovedades() {
       <path d="M16 22l28-14v36L16 30V22z" />
       <path d="M44 26a6 6 0 0 1 0 12" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" />
       <path d="M22 42l4 10h6l-4-12" />
-    </svg>
+    </svg> 
   );
 }
 

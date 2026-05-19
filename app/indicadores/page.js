@@ -5,6 +5,7 @@ import imagen5 from "@/img/indicador2.jpg";
 import imagen3 from "@/img/indicador3.jpg";
 import imagenMar2026 from "@/img/imagenweb2603.jpg";
 import imagenFeb2026 from "@/img/imagenweb2602.jpg";
+import imagenAbril2026 from "@/img/imagenweb2604.jpg";
 
 export const metadata = {
   title: "Indicadores Energéticos | SEG Ingeniería",
@@ -14,6 +15,17 @@ export const metadata = {
 
 /* ─── Datos de artículos ────────────────────────────────────────────────────── */
 const ARTICULOS = [
+   {
+    id: 0,
+    titulo: "Abril 2026. Derivados del petróleo empujan al alza los índices energéticos",
+    fecha: "26/04/2026",
+    mes: "Abril 2026",
+    descripcion:
+        "Los derivados del petróleo lideraron los aumentos de precios en abril: fueloil, supergás, gasoil y naftas subieron 7% desde el 1° de abril, y el barril Brent alcanzó 117,29 USD, un 72% por encima de hace un año. El IPEI creció 1,36% y el IPER un 0,93%. Este número analiza el nuevo Plan Nacional de Eficiencia Energética 2025–2035, aprobado el 15 de abril, que busca evitar el 7,2% del consumo energético proyectado a 2035.",
+    href: "/indicadores",
+    pdf: "/Indicadores%20Energ%C3%A9ticos_2604.pdf",
+    imagen: imagenAbril2026,
+  },
   {
     id: 1,
     titulo: "Marzo 2026. La matriz energética de Uruguay sigue cambiando",
