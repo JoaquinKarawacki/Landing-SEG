@@ -246,7 +246,12 @@ export default function Footer() {
                 Todos los derechos reservados ® 2026 SEG INGENIERÍA
               </span>
             </div>
-
+            <a
+              href="/admin"
+              className="text-xs text-gray-700 hover:text-gray-500 transition-colors duration-200"
+            >
+              Acceso interno
+            </a>
           </div>
         </div>
       </footer>
