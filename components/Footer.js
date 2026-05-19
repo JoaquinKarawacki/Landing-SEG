@@ -1,7 +1,6 @@
-import Image from "next/image";
-import logoSEG from "@/img/seg ingenieria logo.png";
+﻿import Image from "next/image";
 
-/* ─── Ícono LinkedIn ───────────────────────────────────────────────────────── */
+/* --- Ícono LinkedIn --------------------------------------------------------- */
 function IconoLinkedIn() {
   return (
     <svg
@@ -15,7 +14,7 @@ function IconoLinkedIn() {
   );
 }
 
-/* ─── Ícono X (Twitter) ───────────────────────────────────────────────────── */
+/* --- Ícono X (Twitter) ----------------------------------------------------- */
 function IconoX() {
   return (
     <svg
@@ -29,7 +28,7 @@ function IconoX() {
   );
 }
 
-/* ─── Columnas de navegación del footer ───────────────────────────────────── */
+/* --- Columnas de navegación del footer ------------------------------------- */
 const COLUMNAS_NAV = [
   {
     id: "negocios",
@@ -61,7 +60,7 @@ const COLUMNAS_NAV = [
   },
 ];
 
-/* ─── Columna genérica de navegación ──────────────────────────────────────── */
+/* --- Columna genérica de navegación ---------------------------------------- */
 function ColumnaNav({ columna }) {
   return (
     <div>
@@ -84,7 +83,7 @@ function ColumnaNav({ columna }) {
   );
 }
 
-/* ─── Separador diagonal naranja (SVG decorativo) ─────────────────────────── */
+/* --- Separador diagonal naranja (SVG decorativo) --------------------------- */
 function SeparadorDiagonal() {
   return (
     <div className="relative h-16 bg-white overflow-hidden" aria-hidden="true">
@@ -111,7 +110,7 @@ function SeparadorDiagonal() {
   );
 }
 
-/* ─── Footer principal ─────────────────────────────────────────────────────── */
+/* --- Footer principal ------------------------------------------------------- */
 export default function Footer() {
   return (
     <>
@@ -120,7 +119,7 @@ export default function Footer() {
       <footer className="bg-[#1a1a1a] text-gray-400 pt-12 pb-6">
         <div className="max-w-7xl mx-auto px-4">
 
-          {/* ── Grilla principal: columnas de links + contacto + oficinas ──── */}
+          {/* -- Grilla principal: columnas de links + contacto + oficinas ---- */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8 mb-10">
 
             {/* Columnas de navegación */}
@@ -128,7 +127,7 @@ export default function Footer() {
               <ColumnaNav key={columna.id} columna={columna} />
             ))}
 
-            {/* ── Contacto ───────────────────────────────────────────────── */}
+            {/* -- Contacto ------------------------------------------------- */}
             <div>
               <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">
                 Contacto
@@ -175,7 +174,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* ── Oficina Uruguay ────────────────────────────────────────── */}
+            {/* -- Oficina Uruguay ------------------------------------------ */}
             <div>
               <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">
                 Oficina Uruguay
@@ -202,7 +201,7 @@ export default function Footer() {
               </address>
             </div>
 
-            {/* ── Oficina Chile ──────────────────────────────────────────── */}
+            {/* -- Oficina Chile -------------------------------------------- */}
             <div>
               <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-4">
                 Oficina Chile
@@ -239,12 +238,12 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ── Barra inferior: logo + derechos + créditos ─────────────────── */}
+          {/* -- Barra inferior: logo + derechos + créditos ------------------- */}
           <div className="border-t border-gray-700/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <Image src={logoSEG} alt="SEG Ingeniería" height={32} className="object-contain" />
+              <img src="/img/seg ingenieria logo.png" alt="SEG Ingeniería" className="h-16 w-auto" />
               <span className="text-xs text-gray-500">
-                Todos los derechos reservados ® 2012 SEG INGENIERÍA
+                Todos los derechos reservados ® 2026 SEG INGENIERÍA
               </span>
             </div>
 

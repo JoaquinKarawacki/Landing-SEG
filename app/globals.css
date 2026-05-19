@@ -1,17 +1,17 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
-/* ─── Fuente principal ─────────────────────────────────────────────────────── */
+/* --- Fuente principal ------------------------------------------------------- */
 /* La variable --font-red-hat es inyectada por next/font en el elemento <html> */
 body {
   font-family: var(--font-red-hat, "Red Hat Display", Arial, sans-serif);
 }
 
-/* ─── Scroll suave para anclas internas ───────────────────────────────────── */
+/* --- Scroll suave para anclas internas ------------------------------------- */
 html {
   scroll-behavior: smooth;
 }
 
-/* ─── Animación de entrada para el texto del hero ─────────────────────────── */
+/* --- Animación de entrada para el texto del hero --------------------------- */
 @keyframes deslizarEntrada {
   from {
     opacity: 0;
@@ -27,7 +27,7 @@ html {
   animation: deslizarEntrada 0.7s ease-out both;
 }
 
-/* ─── Animación del botón del hero ────────────────────────────────────────── */
+/* --- Animación del botón del hero ------------------------------------------ */
 @keyframes aparecer {
   from {
     opacity: 0;

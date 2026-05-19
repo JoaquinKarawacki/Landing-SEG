@@ -1,10 +1,8 @@
+﻿import { readFileSync } from "fs";
+import { join } from "path";
 import Link from "next/link";
 import Image from "next/image";
-import imagen1 from "@/img/novedad1.jpeg"
-import imagen2 from "@/img/2025-12-22_seg_certificacion huella.jpg"
-import imagen3 from "@/img/2025-12-23_creditos de la casa certificaciones ISO.jpg"
-import imagen4 from "@/img/novedad4.jpeg"
-import imagen5 from "@/img/novedad5.jpeg"
+
 
 export const metadata = {
   title: "Novedades | SEG Ingeniería",
@@ -12,63 +10,9 @@ export const metadata = {
     "Últimas noticias y novedades de SEG Ingeniería: proyectos, reconocimientos, certificaciones y presencia internacional.",
 };
 
-/* ─── Datos de artículos ────────────────────────────────────────────────────── */
-const ARTICULOS = [
-    {
-    id: 1,
-    titulo: "Archidoc SAS obtiene la certificación de Huella de Carbono ISO 14064",
-    fecha: "06/02/2026",
-    categoria: "Reconocimientos",
-    descripcion:
-      "SEG Ingeniería acompañó a Archidoc SAS en la obtención de su certificación de Huella de Carbono ISO 14064, acreditando que sus emisiones de gases de efecto invernadero fueron cuantificadas y verificadas conforme a estándares internacionales.",
-    href: "https://www.linkedin.com/feed/update/urn:li:activity:7425592115109281793",
-    Imagen: imagen1,
-  },
-  {
-    id: 2,
-    titulo: "SEG Ingeniería obtiene la certificación de Huella de Carbono ISO 14064",
-    fecha: "07/01/2026",
-    categoria: "Reconocimientos",
-    descripcion:
-      "SEG Ingeniería certificó su propio inventario de emisiones de gases de efecto invernadero bajo la norma ISO 14064, verificado por UNIT Uruguay. Creemos que la sostenibilidad debe comenzar por casa: medir y transparentar nuestras propias emisiones es un paso clave para acompañar con coherencia a las organizaciones que asesoramos.",
-    href: "https://www.linkedin.com/posts/seg-ingenieria_huelladecarbono-iso14064-gestiaejnambiental-activity-7414720479082586112-z3mE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
-    Imagen: imagen2,
-    posicion: "object-top",
-  },
-  {
-    id: 3,
-    titulo: "Crédito de la Casa obtiene la doble certificación ISO 50001 e ISO 14064",
-    fecha: "31/12/2025",
-    categoria: "Reconocimientos",
-    descripcion:
-      "Felicitamos a Crédito de la Casa por la obtención de la doble certificación ISO 50001 en Sistema de Gestión de la Energía e ISO 14064 en Huella de Carbono. Desde SEG Ingeniería acompañamos este proceso aportando soporte técnico para la implementación de ambas normas, orientados a generar mejoras operativas medibles y decisiones basadas en datos.",
-    href: "https://www.linkedin.com/posts/seg-ingenieria_gestiaejnenergaeztica-iso50001-huelladecarbono-activity-7412168660263260160-Jspk?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
-    Imagen: imagen3,
-    posicion: "object-top",
-  },
-  {
-    id: 4,
-    titulo: "Grupo Disco Uruguay recibe mención en el Premio Nacional de Eficiencia Energética 2025",
-    fecha: "2/12/2025",
-    categoria: "Reconocimientos",
-    descripcion:
-      "Felicitamos a Grupo Disco Uruguay por la mención en el Premio Nacional de Eficiencia Energética 2025 del MIEM, que destaca su compromiso con la incorporación de equipamiento eficiente y la mejora continua en la gestión energética. Desde SEG Ingeniería acompañamos la implementación de su sistema de gestión ISO 50001.",
-    href: "https://www.linkedin.com/posts/seg-ingenieria_eficienciaenergaeztica-premio-gestiaejnenergaeztica-activity-7401634682431352832-nbJE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
-    Imagen: imagen4,
-  },
-  {
-    id: 5,
-    titulo: "SEG Ingeniería participó en el H2LATAM Summit 2025 en Brasil",
-    fecha: "09/10/2025",
-    categoria: "Institucional",
-    descripcion:
-      "Nuestro socio Fernando Schaich fue invitado por la GIZ a integrar el panel sobre e-fuels en el H2LATAM Summit 2025 en Fortaleza, Brasil. Augusto Lanza también participó en representación de SEG Ingeniería, en un encuentro que reunió a referentes de gobiernos, empresas e instituciones de América Latina para analizar las oportunidades del hidrógeno verde en la transición energética regional.",
-    href: "https://www.linkedin.com/posts/seg-ingenieria_hidraejgenoverde-transiciaejnenergaeztica-activity-7383917258844291072-nIIt?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
-    Imagen: imagen5,
-  },
-];
 
-/* ─── Ícono megáfono ────────────────────────────────────────────────────────── */
+
+/* --- Ícono megáfono ---------------------------------------------------------- */
 function IconoNovedades() {
   return (
     <svg className="w-8 h-8" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
@@ -80,7 +24,7 @@ function IconoNovedades() {
   );
 }
 
-/* ─── Ícono calendario ──────────────────────────────────────────────────────── */
+/* --- Ícono calendario -------------------------------------------------------- */
 function IconoCalendario() {
   return (
     <svg className="w-4 h-4" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
@@ -93,7 +37,7 @@ function IconoCalendario() {
   );
 }
 
-/* ─── Hero ──────────────────────────────────────────────────────────────────── */
+/* --- Hero -------------------------------------------------------------------- */
 function SeccionHero() {
   return (
     <section className="relative bg-black overflow-hidden py-24 px-4">
@@ -123,7 +67,7 @@ function SeccionHero() {
   );
 }
 
-/* ─── Card artículo ─────────────────────────────────────────────────────────── */
+/* --- Card artículo ----------------------------------------------------------- */
 function CardArticulo({ articulo }) {
   const img = articulo.imagen || articulo.Imagen;
   return (
@@ -166,8 +110,11 @@ function CardArticulo({ articulo }) {
   );
 }
 
-/* ─── Sección listado ───────────────────────────────────────────────────────── */
+/* --- Sección listado --------------------------------------------------------- */
 function SeccionArticulos() {
+  const ARTICULOS = JSON.parse(
+    readFileSync(join(process.cwd(), "data/novedades.json"), "utf-8")
+  );
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4">
@@ -191,7 +138,7 @@ function SeccionArticulos() {
   );
 }
 
-/* ─── Sección destacados ────────────────────────────────────────────────────── */
+/* --- Sección destacados ------------------------------------------------------ */
 function SeccionDestacados() {
   const destacados = [
     { numero: "2024", label: "Premio Nacional de Eficiencia Energética" },
@@ -221,7 +168,7 @@ function SeccionDestacados() {
   );
 }
 
-/* ─── CTA ────────────────────────────────────────────────────────────────────── */
+/* --- CTA ---------------------------------------------------------------------- */
 function SeccionCTA() {
   return (
     <section className="py-16 bg-black text-white">
@@ -243,7 +190,7 @@ function SeccionCTA() {
   );
 }
 
-/* ─── Página Novedades ──────────────────────────────────────────────────────── */
+/* --- Página Novedades -------------------------------------------------------- */
 export default function PaginaNovedades() {
   return (
     <>

@@ -1,0 +1,49 @@
+[
+  {
+    "id": 1,
+    "titulo": "Archidoc SAS obtiene la certificación de Huella de Carbono ISO 14064",
+    "fecha": "06/02/2026",
+    "categoria": "Reconocimientos",
+    "descripcion": "SEG Ingeniería acompañó a Archidoc SAS en la obtención de su certificación de Huella de Carbono ISO 14064, acreditando que sus emisiones de gases de efecto invernadero fueron cuantificadas y verificadas conforme a estándares internacionales.",
+    "href": "https://www.linkedin.com/feed/update/urn:li:activity:7425592115109281793",
+    "Imagen": "/img/novedad1.jpeg"
+  },
+  {
+    "id": 2,
+    "titulo": "SEG Ingeniería obtiene la certificación de Huella de Carbono ISO 14064",
+    "fecha": "07/01/2026",
+    "categoria": "Reconocimientos",
+    "descripcion": "SEG Ingeniería certificó su propio inventario de emisiones de gases de efecto invernadero bajo la norma ISO 14064, verificado por UNIT Uruguay. Creemos que la sostenibilidad debe comenzar por casa: medir y transparentar nuestras propias emisiones es un paso clave para acompañar con coherencia a las organizaciones que asesoramos.",
+    "href": "https://www.linkedin.com/posts/seg-ingenieria_huelladecarbono-iso14064-gestiaejnambiental-activity-7414720479082586112-z3mE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
+    "Imagen": "/img/2025-12-22_seg_certificacion huella.jpg",
+    "posicion": "object-top"
+  },
+  {
+    "id": 3,
+    "titulo": "Crédito de la Casa obtiene la doble certificación ISO 50001 e ISO 14064",
+    "fecha": "31/12/2025",
+    "categoria": "Reconocimientos",
+    "descripcion": "Felicitamos a Crédito de la Casa por la obtención de la doble certificación ISO 50001 en Sistema de Gestión de la Energía e ISO 14064 en Huella de Carbono. Desde SEG Ingeniería acompañamos este proceso aportando soporte técnico para la implementación de ambas normas, orientados a generar mejoras operativas medibles y decisiones basadas en datos.",
+    "href": "https://www.linkedin.com/posts/seg-ingenieria_gestiaejnenergaeztica-iso50001-huelladecarbono-activity-7412168660263260160-Jspk?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
+    "Imagen": "/img/2025-12-23_creditos de la casa certificaciones ISO.jpg",
+    "posicion": "object-top"
+  },
+  {
+    "id": 4,
+    "titulo": "Grupo Disco Uruguay recibe mención en el Premio Nacional de Eficiencia Energética 2025",
+    "fecha": "2/12/2025",
+    "categoria": "Reconocimientos",
+    "descripcion": "Felicitamos a Grupo Disco Uruguay por la mención en el Premio Nacional de Eficiencia Energética 2025 del MIEM, que destaca su compromiso con la incorporación de equipamiento eficiente y la mejora continua en la gestión energética. Desde SEG Ingeniería acompañamos la implementación de su sistema de gestión ISO 50001.",
+    "href": "https://www.linkedin.com/posts/seg-ingenieria_eficienciaenergaeztica-premio-gestiaejnenergaeztica-activity-7401634682431352832-nbJE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
+    "Imagen": "/img/novedad4.jpeg"
+  },
+  {
+    "id": 5,
+    "titulo": "SEG Ingeniería participó en el H2LATAM Summit 2025 en Brasil",
+    "fecha": "09/10/2025",
+    "categoria": "Institucional",
+    "descripcion": "Nuestro socio Fernando Schaich fue invitado por la GIZ a integrar el panel sobre e-fuels en el H2LATAM Summit 2025 en Fortaleza, Brasil. Augusto Lanza también participó en representación de SEG Ingeniería, en un encuentro que reunió a referentes de gobiernos, empresas e instituciones de América Latina para analizar las oportunidades del hidrógeno verde en la transición energética regional.",
+    "href": "https://www.linkedin.com/posts/seg-ingenieria_hidraejgenoverde-transiciaejnenergaeztica-activity-7383917258844291072-nIIt?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFX0gPwBWDSrD1Q-Q4ceZikpq9s76k4U3fs",
+    "Imagen": "/img/novedad5.jpeg"
+  }
+]

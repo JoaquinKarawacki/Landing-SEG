@@ -1,6 +1,5 @@
 ﻿import Link from "next/link";
 import Image from "next/image";
-import imagenMapaDesarrollos from "@/img/614875ff-48dc-4a27-bf70-7e51def7ecbc.png";
 
 export const metadata = {
   title: "Energías Renovables — SEG Ingeniería",
@@ -290,7 +289,7 @@ function SeccionMapaDesarrollos() {
 
         <div className="rounded-xl overflow-hidden shadow-inner border border-gray-300 max-w-2xl mx-auto">
           <Image
-            src={imagenMapaDesarrollos}
+            src="/img/614875ff-48dc-4a27-bf70-7e51def7ecbc.png"
             alt="Mapa de desarrollos de energías renovables"
             width={1200}
             height={600}

@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useCallback } from "react";
 
-/* ─── Contenido de las 4 diapositivas del slider ─────────────────────────── */
+/* --- Contenido de las 4 diapositivas del slider --------------------------- */
 const DIAPOSITIVAS = [
   { id: 1, titulo: "Cuidamos la energía, generamos futuro" },
   { id: 2, titulo: "Hacemos que las cosas sucedan" },
@@ -16,7 +16,7 @@ const DIAPOSITIVAS = [
 
 const INTERVALO_MS = 5000; /* tiempo entre slides */
 
-/* ─── Botón de navegación lateral ─────────────────────────────────────────── */
+/* --- Botón de navegación lateral ------------------------------------------- */
 function BulletNavegacion({ activo, onClick, numero }) {
   return (
     <button
@@ -31,7 +31,7 @@ function BulletNavegacion({ activo, onClick, numero }) {
   );
 }
 
-/* ─── Hero Slider principal ────────────────────────────────────────────────── */
+/* --- Hero Slider principal -------------------------------------------------- */
 export default function HeroSlider() {
   const [indiceActual, setIndiceActual] = useState(0);
   /* pausado=true detiene el avance automático (p.ej. al hacer clic en un bullet) */
@@ -72,7 +72,7 @@ export default function HeroSlider() {
       {/* Detalle visual: línea roja sutil en la parte inferior */}
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#ca3517]" />
 
-      {/* ── Contenido central del slide ────────────────────────────────────── */}
+      {/* -- Contenido central del slide -------------------------------------- */}
       <div className="relative z-10 h-full flex items-center justify-center px-8 sm:px-12">
         <div className="max-w-4xl text-center text-white">
           {/*
@@ -98,7 +98,7 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* ── Bullets de navegación (lado izquierdo) ─────────────────────────── */}
+      {/* -- Bullets de navegación (lado izquierdo) --------------------------- */}
       <div
         className="absolute left-5 sm:left-8 top-1/2 -translate-y-1/2 z-10 flex flex-col gap-4"
         role="tablist"
@@ -114,7 +114,7 @@ export default function HeroSlider() {
         ))}
       </div>
 
-      {/* ── Indicador de slide actual (mobile, esquina inferior derecha) ───── */}
+      {/* -- Indicador de slide actual (mobile, esquina inferior derecha) ----- */}
       <div className="absolute bottom-6 right-6 z-10 text-white/50 text-sm font-light sm:hidden">
         {indiceActual + 1} / {DIAPOSITIVAS.length}
       </div>

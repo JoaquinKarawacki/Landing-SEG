@@ -1,11 +1,8 @@
+﻿import { readFileSync } from "fs";
+import { join } from "path";
 import Link from "next/link";
 import Image from "next/image";
-import imagen4 from "@/img/indicador1.jpg";
-import imagen5 from "@/img/indicador2.jpg";
-import imagen3 from "@/img/indicador3.jpg";
-import imagenMar2026 from "@/img/imagenweb2603.jpg";
-import imagenFeb2026 from "@/img/imagenweb2602.jpg";
-import imagenAbril2026 from "@/img/imagenweb2604.jpg";
+
 
 export const metadata = {
   title: "Indicadores Energéticos | SEG Ingeniería",
@@ -13,78 +10,8 @@ export const metadata = {
     "Análisis mensuales sobre el sector energético en Uruguay y la región. Tendencias, consumo, renovables y eficiencia energética.",
 };
 
-/* ─── Datos de artículos ────────────────────────────────────────────────────── */
-const ARTICULOS = [
-   {
-    id: 0,
-    titulo: "Abril 2026. Derivados del petróleo empujan al alza los índices energéticos",
-    fecha: "26/04/2026",
-    mes: "Abril 2026",
-    descripcion:
-        "Los derivados del petróleo lideraron los aumentos de precios en abril: fueloil, supergás, gasoil y naftas subieron 7% desde el 1° de abril, y el barril Brent alcanzó 117,29 USD, un 72% por encima de hace un año. El IPEI creció 1,36% y el IPER un 0,93%. Este número analiza el nuevo Plan Nacional de Eficiencia Energética 2025–2035, aprobado el 15 de abril, que busca evitar el 7,2% del consumo energético proyectado a 2035.",
-    href: "/indicadores",
-    pdf: "/Indicadores%20Energ%C3%A9ticos_2604.pdf",
-    imagen: imagenAbril2026,
-  },
-  {
-    id: 1,
-    titulo: "Marzo 2026. La matriz energética de Uruguay sigue cambiando",
-    fecha: "26/03/2026",
-    mes: "Marzo 2026",
-    descripcion:
-        "El Balance Energético Preliminar 2025 muestra que la biomasa alcanzó el 50,2% del abastecimiento energético total, la primera vez que una fuente supera la mitad de la matriz. El petróleo cayó al 33,6%, su valor más bajo desde 1965. La demanda eléctrica llegó a un nuevo máximo histórico de 13,5 TWh, con cinco años consecutivos de crecimiento y una matriz 98% renovable.",
-    href: "/indicadores",
-    pdf: "/Indicadores%20Energ%C3%A9ticos_2603.pdf",
-    imagen: imagenMar2026,
-  },
-  {
-    id: 2,
-    titulo: "Febrero 2026. El rápido avance de la movilidad eléctrica en Uruguay",
-    fecha: "26/02/2026",
-    mes: "Febrero 2026",
-    descripcion:
-      "En 2025 se vendieron más de 14.000 vehículos eléctricos en Uruguay, el 21% del total de livianos, y en apenas cuatro años el parque eléctrico creció casi 30 veces. En el primer bimestre de 2026 los eléctricos ya representaron el 31% de las ventas. El costo de recorrer 10.000 km con carga domiciliaria es hasta un 90% menor que en un vehículo a nafta.",
-    href: "/indicadores",
-    pdf: "/Indicadores%20Energ%C3%A9ticos_2602.pdf",
-    imagen: imagenFeb2026,
-  },
-  {
-    id: 3,
-    titulo: "Enero 2026. La era de la electricidad y la transformación del sistema eléctrico",
-    fecha: "25/01/2026",
-    mes: "Enero 2026",
-    descripcion:
-      "El informe 'Electricity 2026' de la AIE proyecta que el consumo eléctrico mundial crecerá 3,6% anual entre 2026 y 2030, un ritmo 50% superior al de la década previa. En EE.UU., los centros de datos explicarán casi la mitad del crecimiento. Uruguay, con una matriz 99% renovable y emisiones de apenas 6 g CO₂/kWh, está estructuralmente bien posicionado ante la nueva era eléctrica.",
-    href: "#",
-    pdf: "/Indicadores%20Energ%C3%A9ticos_2601.pdf",
-    imagen: imagen3,
-  },
-  {
-    id: 4,
-    titulo: "Diciembre 2025. Destacados energéticos de Uruguay en 2025",
-    fecha: "25/12/2025",
-    mes: "Diciembre 2025",
-    descripcion:
-      "La demanda eléctrica alcanzó un máximo histórico de 12,5 TWh con una matriz 98,1% renovable. El pico de 2.507 MW del 7 de marzo fue el mayor en la historia. Las ventas de vehículos eléctricos superaron las 14.000 unidades, el 21% del mercado liviano.",
-    href: "#",
-    pdf: "/Indicadores%20Energ%C3%A9ticos_2512.pdf",
-    imagen: imagen4,
-    posicion: "object-bottom",
-  },
-  {
-    id: 5,
-    titulo: "Noviembre 2025. El hidrógeno verde en el transporte pesado",
-    fecha: "25/11/2025",
-    mes: "Noviembre 2025",
-    descripcion:
-      "Uruguay da un paso concreto hacia la descarbonización con el Proyecto Kahirós, primer piloto nacional de hidrógeno verde para transporte pesado. Una planta solar de 4,2 MW alimentará un electrolizador PEM para abastecer ocho camiones de celda de combustible en Fray Bentos.",
-    href: "#",
-    pdf: "/Indicadores%20Energ%C3%A9ticos_2511.pdf",
-    imagen: imagen5,
-  },
-];
 
-/* ─── Ícono gráfico de barras ───────────────────────────────────────────────── */
+/* --- Ícono gráfico de barras ------------------------------------------------- */
 function IconoIndicadores() {
   return (
     <svg className="w-8 h-8" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
@@ -96,7 +23,7 @@ function IconoIndicadores() {
   );
 }
 
-/* ─── Ícono calendario ──────────────────────────────────────────────────────── */
+/* --- Ícono calendario -------------------------------------------------------- */
 function IconoCalendario() {
   return (
     <svg className="w-4 h-4" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
@@ -109,7 +36,7 @@ function IconoCalendario() {
   );
 }
 
-/* ─── Hero ──────────────────────────────────────────────────────────────────── */
+/* --- Hero -------------------------------------------------------------------- */
 function SeccionHero() {
   return (
     <section className="relative bg-black overflow-hidden py-24 px-4">
@@ -139,7 +66,7 @@ function SeccionHero() {
   );
 }
 
-/* ─── Artículo card ─────────────────────────────────────────────────────────── */
+/* --- Artículo card ----------------------------------------------------------- */
 function CardArticulo({ articulo }) {
   return (
     <article className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition-shadow duration-200">
@@ -149,6 +76,7 @@ function CardArticulo({ articulo }) {
             src={articulo.imagen}
             alt={articulo.titulo}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className={`object-cover ${articulo.posicion || "object-center"}`}
           />
         </div>
@@ -196,8 +124,11 @@ function CardArticulo({ articulo }) {
   );
 }
 
-/* ─── Sección listado de artículos ─────────────────────────────────────────── */
+/* --- Sección listado de artículos ------------------------------------------- */
 function SeccionArticulos() {
+  const ARTICULOS = JSON.parse(
+    readFileSync(join(process.cwd(), "data/indicadores.json"), "utf-8")
+  );
   return (
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4">
@@ -221,7 +152,7 @@ function SeccionArticulos() {
   );
 }
 
-/* ─── Sección suscripción ───────────────────────────────────────────────────── */
+/* --- Sección suscripción ----------------------------------------------------- */
 function SeccionSuscripcion() {
   return (
     <section className="py-16 bg-gray-50">
@@ -248,7 +179,7 @@ function SeccionSuscripcion() {
   );
 }
 
-/* ─── CTA ────────────────────────────────────────────────────────────────────── */
+/* --- CTA ---------------------------------------------------------------------- */
 function SeccionCTA() {
   return (
     <section className="py-16 bg-black text-white">
@@ -270,7 +201,7 @@ function SeccionCTA() {
   );
 }
 
-/* ─── Página Indicadores ────────────────────────────────────────────────────── */
+/* --- Página Indicadores ------------------------------------------------------ */
 export default function PaginaIndicadores() {
   return (
     <>

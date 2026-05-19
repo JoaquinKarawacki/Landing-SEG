@@ -1,10 +1,10 @@
-import { Red_Hat_Display } from "next/font/google";
+﻿import { Red_Hat_Display } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { IdiomaProvider } from "@/contexts/IdiomaContext";
 
-/* ─── Fuente principal de SEG Ingeniería ──────────────────────────────────── */
+/* --- Fuente principal de SEG Ingeniería ------------------------------------ */
 const redHatDisplay = Red_Hat_Display({
   subsets: ["latin"],
   variable: "--font-red-hat",

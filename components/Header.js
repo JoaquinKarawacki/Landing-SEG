@@ -1,13 +1,11 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import logoSEG from "@/img/seg ingenieria logo.png";
-import odsImg from "@/img/ODS.png";
 
-/* ─── Estructura del menú de navegación ──────────────────────────────────────── */
+/* --- Estructura del menú de navegación ---------------------------------------- */
 const ITEMS_MENU = [
   { etiqueta: "Home", href: "/" },
   {
@@ -34,7 +32,7 @@ const ITEMS_MENU = [
   { etiqueta: "Contacto",            href: "/contacto" },
 ];
 
-/* ─── Ícono hamburguesa ────────────────────────────────────────────────────── */
+/* --- Ícono hamburguesa ------------------------------------------------------ */
 function IconoHamburguesa() {
   return (
     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -43,7 +41,7 @@ function IconoHamburguesa() {
   );
 }
 
-/* ─── Ícono cerrar ─────────────────────────────────────────────────────────── */
+/* --- Ícono cerrar ----------------------------------------------------------- */
 function IconoCerrar() {
   return (
     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -52,7 +50,7 @@ function IconoCerrar() {
   );
 }
 
-/* ─── Ícono chevron (flecha desplegable) ───────────────────────────────────── */
+/* --- Ícono chevron (flecha desplegable) ------------------------------------- */
 function IconoChevron({ abierto }) {
   return (
     <svg
@@ -67,25 +65,24 @@ function IconoChevron({ abierto }) {
   );
 }
 
-/* ─── Logo SEG ─────────────────────────────────────────────────────────────── */
+/* --- Logo SEG --------------------------------------------------------------- */
 function LogoSEG() {
   return (
     <Link
       href="/"
       className="flex items-center flex-shrink-0 leading-none m-0 p-0"
     >
-      <Image
-        src={logoSEG}
+      <img
+        src="/img/seg ingenieria logo.png"
         alt="SEG Ingeniería"
-        height={64}
-        className="object-contain block m-0 p-0"
-        priority
+        className="h-16 w-auto block m-0 p-0"
       />
+
     </Link>
   );
 }
 
-/* ─── Ítem de menú desktop con soporte de submenu ─────────────────────────── */
+/* --- Ítem de menú desktop con soporte de submenu --------------------------- */
 function ItemMenuDesktop({ item, rutaActual }) {
   const [submenuAbierto, setSubmenuAbierto] = useState(false);
   const contenedorRef = useRef(null);
@@ -149,7 +146,7 @@ function ItemMenuDesktop({ item, rutaActual }) {
   );
 }
 
-/* ─── Header principal ─────────────────────────────────────────────────────── */
+/* --- Header principal ------------------------------------------------------- */
 export default function Header() {
   const [menuAbierto, setMenuAbierto] = useState(false);
   const [conSombra, setConSombra] = useState(false);
@@ -181,7 +178,7 @@ export default function Header() {
 
   return (
     <header className={`sticky top-0 z-50 transition-shadow duration-300 ${conSombra ? "shadow-xl" : ""}`}>
-      {/* ── Barra superior roja ────────────────────────────────────────────── */}
+      {/* -- Barra superior roja ---------------------------------------------- */}
       {/* relative + overflow-visible permite que la imagen ODS se posicione en absolute
           y "flote" centrada sin afectar la altura de la barra roja */}
       <div className="bg-[#ca3517] text-white py-1.5 px-4 text-xs sm:text-sm flex items-center justify-center overflow-visible">
@@ -193,7 +190,7 @@ export default function Header() {
 
           <div className="absolute left-full ml-4 top-1/2 -translate-y-1/2">
             <Image
-              src={odsImg}
+              src="/img/ODS.png"
               alt="Objetivos de Desarrollo Sostenible"
               width={400}
               height={100}
@@ -204,7 +201,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ── Barra de navegación negra ──────────────────────────────────────── */}
+      {/* -- Barra de navegación negra ---------------------------------------- */}
       <nav className="bg-black text-white" aria-label="Navegación principal">
         <div className="h-16 flex items-center justify-center px-6">
           <div className="flex items-center">
@@ -227,7 +224,7 @@ export default function Header() {
           </button>
         </div>
         
-        {/* ── Menú mobile desplegable ────────────────────────────────────────── */}
+        {/* -- Menú mobile desplegable ------------------------------------------ */}
         {menuAbierto && (
           <div className="lg:hidden border-t border-gray-700 bg-black">
             <ul className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">

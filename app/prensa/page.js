@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export const metadata = {
   title: "Prensa | SEG Ingeniería",
@@ -6,7 +6,7 @@ export const metadata = {
     "Sala de prensa de SEG Ingeniería. Comunicados, materiales para medios y contacto periodístico.",
 };
 
-/* ─── Ícono periódico ───────────────────────────────────────────────────────── */
+/* --- Ícono periódico --------------------------------------------------------- */
 function IconoPrensa() {
   return (
     <svg className="w-8 h-8" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
@@ -21,7 +21,7 @@ function IconoPrensa() {
   );
 }
 
-/* ─── Ícono descarga ────────────────────────────────────────────────────────── */
+/* --- Ícono descarga ---------------------------------------------------------- */
 function IconoDescarga() {
   return (
     <svg className="w-5 h-5" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
@@ -31,7 +31,7 @@ function IconoDescarga() {
   );
 }
 
-/* ─── Ícono email ───────────────────────────────────────────────────────────── */
+/* --- Ícono email ------------------------------------------------------------- */
 function IconoEmail() {
   return (
     <svg className="w-5 h-5" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
@@ -42,7 +42,7 @@ function IconoEmail() {
   );
 }
 
-/* ─── Hero ──────────────────────────────────────────────────────────────────── */
+/* --- Hero -------------------------------------------------------------------- */
 function SeccionHero() {
   return (
     <section className="relative bg-black overflow-hidden py-24 px-4">
@@ -72,7 +72,7 @@ function SeccionHero() {
   );
 }
 
-/* ─── Sección materiales ────────────────────────────────────────────────────── */
+/* --- Sección materiales ------------------------------------------------------ */
 function SeccionMateriales() {
   const materiales = [
     {
@@ -138,7 +138,7 @@ function SeccionMateriales() {
   );
 }
 
-/* ─── Sección sobre SEG ─────────────────────────────────────────────────────── */
+/* --- Sección sobre SEG ------------------------------------------------------- */
 function SeccionSobreSEG() {
   return (
     <section className="py-16 bg-gray-50">
@@ -193,7 +193,7 @@ function SeccionSobreSEG() {
   );
 }
 
-/* ─── Sección contacto prensa ───────────────────────────────────────────────── */
+/* --- Sección contacto prensa ------------------------------------------------- */
 function SeccionContactoPrensa() {
   return (
     <section className="py-16 relative overflow-hidden" style={{ backgroundColor: "#ca3517" }}>
@@ -220,7 +220,7 @@ function SeccionContactoPrensa() {
   );
 }
 
-/* ─── CTA ────────────────────────────────────────────────────────────────────── */
+/* --- CTA ---------------------------------------------------------------------- */
 function SeccionCTA() {
   return (
     <section className="py-16 bg-black text-white">
@@ -250,7 +250,7 @@ function SeccionCTA() {
   );
 }
 
-/* ─── Página Prensa ─────────────────────────────────────────────────────────── */
+/* --- Página Prensa ----------------------------------------------------------- */
 export default function PaginaPrensa() {
   return (
     <>

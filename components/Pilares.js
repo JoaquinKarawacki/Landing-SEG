@@ -1,4 +1,4 @@
-/* ─── Ícono alcancía (eficiencia energética) ──────────────────────────────── */
+﻿/* --- Ícono alcancía (eficiencia energética) -------------------------------- */
 function IconoEficiencia() {
   return (
     <svg
@@ -27,7 +27,7 @@ function IconoEficiencia() {
   );
 }
 
-/* ─── Ícono molino de viento (energías renovables) ────────────────────────── */
+/* --- Ícono molino de viento (energías renovables) -------------------------- */
 function IconoRenovable() {
   return (
     <svg
@@ -50,7 +50,7 @@ function IconoRenovable() {
   );
 }
 
-/* ─── Ícono H₂ (hidrógeno verde) ──────────────────────────────────────────── */
+/* --- Ícono H₂ (hidrógeno verde) -------------------------------------------- */
 function IconoHidrogeno() {
   return (
     <div
@@ -63,7 +63,7 @@ function IconoHidrogeno() {
   );
 }
 
-/* ─── Datos de los tres pilares de SEG ────────────────────────────────────── */
+/* --- Datos de los tres pilares de SEG -------------------------------------- */
 const PILARES = [
   {
     id: "eficiencia",
@@ -89,7 +89,7 @@ const PILARES = [
   },
 ];
 
-/* ─── Sección pilares principales de SEG ──────────────────────────────────── */
+/* --- Sección pilares principales de SEG ------------------------------------ */
 export default function Pilares() {
   return (
     <section

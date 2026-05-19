@@ -149,7 +149,7 @@ function SeccionFormulario() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
-          {/* ── Formulario de contacto general ──────────────────────────── */}
+          {/* -- Formulario de contacto general ---------------------------- */}
           <div>
             <div className="flex items-center gap-4 mb-10">
               <div className="text-[#ca3517]">
@@ -164,7 +164,7 @@ function SeccionFormulario() {
             <FormularioContacto />
           </div>
 
-          {/* ── Información de oficinas ──────────────────────────────────── */}
+          {/* -- Información de oficinas ------------------------------------ */}
           <div className="space-y-6">
             <div className="flex items-center gap-4 mb-10">
               <div className="text-[#ca3517]">

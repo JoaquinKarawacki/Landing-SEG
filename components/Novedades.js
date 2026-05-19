@@ -1,11 +1,8 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
-import imagen1 from "@/img/novedad1.jpeg";
-import imagenCertSEG from "@/img/2025-12-22_seg_certificacion huella.jpg";
-import imagenCertCasa from "@/img/2025-12-23_creditos de la casa certificaciones ISO.jpg";
 
 
-/* ─── Datos de las últimas novedades ──────────────────────────────────────── */
+/* --- Datos de las últimas novedades ---------------------------------------- */
 const NOVEDADES = [
   {
    id: 1,
@@ -15,7 +12,7 @@ const NOVEDADES = [
     descripcion:
       "SEG Ingeniería acompañó a Archidoc SAS en la obtención de su certificación de Huella de Carbono ISO 14064, acreditando que sus emisiones de gases de efecto invernadero fueron cuantificadas y verificadas conforme a estándares internacionales.",
     href: "/novedades",
-    imagen: imagen1,
+    imagen: "/img/novedad1.jpeg",
     posicion: "object-top",
   },
   {
@@ -26,7 +23,7 @@ const NOVEDADES = [
     descripcion:
       "SEG Ingeniería refuerza su liderazgo en sostenibilidad al obtener la certificación de Huella de Carbono bajo la norma internacional ISO 14064.",
     href: "/novedades",
-    imagen: imagenCertSEG,
+    imagen: "/img/2025-12-22_seg_certificacion huella.jpg",
     posicion: "object-top",
   },
   {
@@ -37,12 +34,12 @@ const NOVEDADES = [
     descripcion:
       "Crédito de la Casa alcanza las certificaciones ISO 50001 de gestión de energía e ISO 14064 de huella de carbono, consolidando su compromiso ambiental.",
     href: "/novedades",
-    imagen: imagenCertCasa,
+    imagen: "/img/2025-12-23_creditos de la casa certificaciones ISO.jpg",
     posicion: "object-top",
   },
 ];
 
-/* ─── Card individual de novedad ──────────────────────────────────────────── */
+/* --- Card individual de novedad -------------------------------------------- */
 function CardNovedad({ novedad }) {
   const esExterno = novedad.href.startsWith("http");
 
@@ -99,7 +96,7 @@ function CardNovedad({ novedad }) {
   );
 }
 
-/* ─── Sección Últimas Novedades ────────────────────────────────────────────── */
+/* --- Sección Últimas Novedades ---------------------------------------------- */
 export default function Novedades() {
   return (
     <section className="py-16 relative overflow-hidden" aria-label="Últimas novedades">

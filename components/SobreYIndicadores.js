@@ -1,9 +1,7 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
-import imagenMar2026 from "@/img/imagenweb2603.jpg";
-import imagenFeb2026 from "@/img/imagenweb2602.jpg";
 
-/* ─── Ícono lamparita (sección "Sobre SEG") ───────────────────────────────── */
+/* --- Ícono lamparita (sección "Sobre SEG") --------------------------------- */
 function IconoLamparita() {
   return (
     <svg
@@ -30,7 +28,7 @@ function IconoLamparita() {
   );
 }
 
-/* ─── Ícono gráfico de barras (sección "Indicadores") ─────────────────────── */
+/* --- Ícono gráfico de barras (sección "Indicadores") ----------------------- */
 function IconoGrafico() {
   return (
     <svg
@@ -49,7 +47,7 @@ function IconoGrafico() {
   );
 }
 
-/* ─── Artículos de indicadores energéticos ────────────────────────────────── */
+/* --- Artículos de indicadores energéticos ---------------------------------- */
 const ARTICULOS_INDICADORES = [
   {
     id: 1,
@@ -58,7 +56,7 @@ const ARTICULOS_INDICADORES = [
     descripcion:
       "El Balance Energético Preliminar 2025 confirma que la biomasa alcanza el 50% del abastecimiento energético y que la demanda eléctrica llegó a un nuevo máximo histórico.",
     href: "/indicadores",
-    imagen: imagenMar2026,
+    imagen: "/img/imagenweb2603.jpg",
   },
   {
     id: 2,
@@ -67,11 +65,11 @@ const ARTICULOS_INDICADORES = [
     descripcion:
       "Los vehículos eléctricos ya representan más del 2% del parque automotor. En 2025 se vendieron más de 14.000 unidades, el 21% del total de vehículos livianos.",
     href: "/indicadores",
-    imagen: imagenFeb2026,
+    imagen: "/img/imagenweb2602.jpg",
   },
 ];
 
-/* ─── Ícono X / Twitter ───────────────────────────────────────────────────── */
+/* --- Ícono X / Twitter ----------------------------------------------------- */
 function IconoX() {
   return (
     <svg
@@ -85,7 +83,7 @@ function IconoX() {
   );
 }
 
-/* ─── Placeholder de imagen ────────────────────────────────────────────────── */
+/* --- Placeholder de imagen -------------------------------------------------- */
 function PlaceholderImagen({ descripcion, className }) {
   return (
     <div
@@ -96,14 +94,14 @@ function PlaceholderImagen({ descripcion, className }) {
   );
 }
 
-/* ─── Sección "Sobre SEG" + "Indicadores energéticos" (2 columnas) ─────────── */
+/* --- Sección "Sobre SEG" + "Indicadores energéticos" (2 columnas) ----------- */
 export default function SobreYIndicadores() {
   return (
     <section className="py-16 bg-white" aria-label="Sobre SEG e Indicadores">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 xl:gap-20">
 
-          {/* ── Columna izquierda: Sobre SEG Ingeniería ────────────────────── */}
+          {/* -- Columna izquierda: Sobre SEG Ingeniería ---------------------- */}
           <div>
             <IconoLamparita />
 
@@ -133,7 +131,7 @@ export default function SobreYIndicadores() {
             </a>
           </div>
 
-          {/* ── Columna derecha: Indicadores energéticos ───────────────────── */}
+          {/* -- Columna derecha: Indicadores energéticos --------------------- */}
           <div>
             <IconoGrafico />
 
