@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Novedades | SEG Ingeniería",
   description:
