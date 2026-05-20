@@ -1,43 +1,8 @@
-﻿import Image from "next/image";
+﻿import { readFileSync } from "fs";
+import { join } from "path";
+import Image from "next/image";
 import Link from "next/link";
 
-
-/* --- Datos de las últimas novedades ---------------------------------------- */
-const NOVEDADES = [
-  {
-   id: 1,
-    titulo: "Archidoc SAS obtiene la certificación de Huella de Carbono ISO 14064",
-    fecha: "06/02/2026",
-    categoria: "Reconocimientos",
-    descripcion:
-      "SEG Ingeniería acompañó a Archidoc SAS en la obtención de su certificación de Huella de Carbono ISO 14064, acreditando que sus emisiones de gases de efecto invernadero fueron cuantificadas y verificadas conforme a estándares internacionales.",
-    href: "/novedades",
-    imagen: "/img/novedad1.jpeg",
-    posicion: "object-top",
-  },
-  {
-    id: 2,
-    categoria: "Certificaciones",
-    titulo: "SEG Ingeniería obtiene la certificación de Huella de Carbono, norma ISO 14064",
-    fecha: "12/05/2026",
-    descripcion:
-      "SEG Ingeniería refuerza su liderazgo en sostenibilidad al obtener la certificación de Huella de Carbono bajo la norma internacional ISO 14064.",
-    href: "/novedades",
-    imagen: "/img/2025-12-22_seg_certificacion huella.jpg",
-    posicion: "object-top",
-  },
-  {
-    id: 3,
-    categoria: "Certificaciones",
-    titulo: "Certificaciones ISO 50001 e ISO 14064 para Crédito de la Casa",
-    fecha: "31/12/2025",
-    descripcion:
-      "Crédito de la Casa alcanza las certificaciones ISO 50001 de gestión de energía e ISO 14064 de huella de carbono, consolidando su compromiso ambiental.",
-    href: "/novedades",
-    imagen: "/img/2025-12-23_creditos de la casa certificaciones ISO.jpg",
-    posicion: "object-top",
-  },
-];
 
 /* --- Card individual de novedad -------------------------------------------- */
 function CardNovedad({ novedad }) {
@@ -51,9 +16,9 @@ function CardNovedad({ novedad }) {
         rel={esExterno ? "noopener noreferrer" : undefined}
         className="block"
       >
-        {novedad.imagen ? (
+        {novedad.Imagen ? (
           <Image
-            src={novedad.imagen}
+            src={novedad.Imagen}
             alt={novedad.titulo}
             width={600}
             height={192}
@@ -73,7 +38,7 @@ function CardNovedad({ novedad }) {
 
         <h3 className="font-bold text-gray-900 text-base leading-snug mb-2">
           <a
-            href={novedad.href}
+            href="/novedades"
             target={esExterno ? "_blank" : undefined}
             rel={esExterno ? "noopener noreferrer" : undefined}
             className="hover:text-[#ca3517] transition-colors duration-200"
@@ -81,8 +46,6 @@ function CardNovedad({ novedad }) {
             {novedad.titulo}
           </a>
         </h3>
-
-        <div/>
 
         <time className="text-gray-400 text-xs mb-3 block" dateTime={novedad.fecha}>
           {novedad.fecha}
@@ -98,6 +61,9 @@ function CardNovedad({ novedad }) {
 
 /* --- Sección Últimas Novedades ---------------------------------------------- */
 export default function Novedades() {
+    const NOVEDADES = JSON.parse(
+    readFileSync(join(process.cwd(), "data/novedades.json"), "utf-8")
+  );
   return (
     <section className="py-16 relative overflow-hidden" aria-label="Últimas novedades">
       <div className="absolute inset-0 bg-gradient-to-br from-[#ca3517] via-[#b83015] to-[#7a1e09]" />
@@ -108,7 +74,7 @@ export default function Novedades() {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {NOVEDADES.map((novedad) => (
+          {NOVEDADES.slice(0, 3).map((novedad) => (
             <CardNovedad key={novedad.id} novedad={novedad} />
           ))}
         </div>

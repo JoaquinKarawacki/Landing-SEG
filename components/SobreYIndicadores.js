@@ -1,5 +1,9 @@
-﻿import Image from "next/image";
+﻿import { readFileSync } from "fs";
+import { join } from "path";
+import Image from "next/image";
 import Link from "next/link";
+
+
 
 /* --- Ícono lamparita (sección "Sobre SEG") --------------------------------- */
 function IconoLamparita() {
@@ -47,28 +51,6 @@ function IconoGrafico() {
   );
 }
 
-/* --- Artículos de indicadores energéticos ---------------------------------- */
-const ARTICULOS_INDICADORES = [
-  {
-    id: 1,
-    periodo: "Marzo 2026",
-    titulo: "La matriz energética de Uruguay sigue cambiando",
-    descripcion:
-      "El Balance Energético Preliminar 2025 confirma que la biomasa alcanza el 50% del abastecimiento energético y que la demanda eléctrica llegó a un nuevo máximo histórico.",
-    href: "/indicadores",
-    imagen: "/img/imagenweb2603.jpg",
-  },
-  {
-    id: 2,
-    periodo: "Febrero 2026",
-    titulo: "El rápido avance de la movilidad eléctrica en Uruguay",
-    descripcion:
-      "Los vehículos eléctricos ya representan más del 2% del parque automotor. En 2025 se vendieron más de 14.000 unidades, el 21% del total de vehículos livianos.",
-    href: "/indicadores",
-    imagen: "/img/imagenweb2602.jpg",
-  },
-];
-
 /* --- Ícono X / Twitter ----------------------------------------------------- */
 function IconoX() {
   return (
@@ -96,6 +78,8 @@ function PlaceholderImagen({ descripcion, className }) {
 
 /* --- Sección "Sobre SEG" + "Indicadores energéticos" (2 columnas) ----------- */
 export default function SobreYIndicadores() {
+   const ARTICULOS_INDICADORES = JSON.parse(
+        readFileSync(join(process.cwd(), "data/indicadores.json"), "utf-8"));
   return (
     <section className="py-16 bg-white" aria-label="Sobre SEG e Indicadores">
       <div className="max-w-7xl mx-auto px-4">
@@ -141,7 +125,7 @@ export default function SobreYIndicadores() {
 
             {/* Lista de artículos recientes */}
             <div className="space-y-5 mb-6">
-              {ARTICULOS_INDICADORES.map((articulo) => (
+              {ARTICULOS_INDICADORES.slice(0,2).map((articulo) => (
                 <article
                   key={articulo.id}
                   className="flex gap-4 pb-5 border-b border-gray-100 last:border-0"
