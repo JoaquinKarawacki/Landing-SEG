@@ -188,7 +188,7 @@ export default function Header() {
           </span>
           <span className="sm:hidden">SEG · Energía eficiente y renovable</span>
 
-          <div className="absolute left-full ml-4 top-1/2 -translate-y-1/2">
+          <div className="hidden sm:block absolute left-full ml-4 top-1/2 -translate-y-1/2">
             <Image
               src="/img/ODS.png"
               alt="Objetivos de Desarrollo Sostenible"

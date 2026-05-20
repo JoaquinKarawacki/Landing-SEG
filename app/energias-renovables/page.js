@@ -1,14 +1,14 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import Image from "next/image";
 
 export const metadata = {
   title: "Energías Renovables — SEG Ingeniería",
   description:
-    "Mayor desarrollador uruguayo de energías renovables en la región. Proyectos de energía eólica, solar, biomasa y pequeñas centrales hidroeléctricas desde 2008.",
+    "Mayor desarrollador uruguayo de energías renovables en la región. Proyectos de energía eólica, solar e hidrógeno verde desde 2008.",
 };
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   ÍCONOS SVG — todos usan currentColor para heredar el color del contenedor
+   ÍCONOS SVG
 ══════════════════════════════════════════════════════════════════════════════ */
 
 function IconoMolino({ className = "w-10 h-10" }) {
@@ -27,8 +27,8 @@ function IconoSol({ className = "w-10 h-10" }) {
   return (
     <svg className={className} viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
       <circle cx="32" cy="32" r="11" />
-      <rect x="29.5" y="4"  width="5" height="9" rx="2.5" />
-      <rect x="29.5" y="51" width="5" height="9" rx="2.5" />
+      <rect x="29.5" y="4"    width="5" height="9" rx="2.5" />
+      <rect x="29.5" y="51"   width="5" height="9" rx="2.5" />
       <rect x="4"    y="29.5" width="9" height="5" rx="2.5" />
       <rect x="51"   y="29.5" width="9" height="5" rx="2.5" />
       <rect x="11.7" y="11.7" width="5" height="9" rx="2.5" transform="rotate(-45 14.2 16.2)" />
@@ -73,14 +73,6 @@ function IconoGlobo({ className = "w-10 h-10" }) {
   );
 }
 
-function IconoHoja({ className = "w-8 h-8" }) {
-  return (
-    <svg className={className} viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
-      <path d="M32 6 C32 6 6 16 10 44 C18 44 34 34 40 16 C44 26 42 44 42 44 C54 18 32 6 32 6z" />
-    </svg>
-  );
-}
-
 function IconoRayo({ className = "w-8 h-8" }) {
   return (
     <svg className={className} viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
@@ -89,42 +81,42 @@ function IconoRayo({ className = "w-8 h-8" }) {
   );
 }
 
+function IconoH2({ className = "w-10 h-10" }) {
+  return (
+    <svg className={className} viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+      <circle cx="32" cy="32" r="7" />
+      <ellipse cx="32" cy="32" rx="28" ry="10" fill="none" stroke="currentColor" strokeWidth="2.5" />
+      <ellipse cx="32" cy="32" rx="28" ry="10" fill="none" stroke="currentColor" strokeWidth="2.5" transform="rotate(60 32 32)" />
+      <ellipse cx="32" cy="32" rx="28" ry="10" fill="none" stroke="currentColor" strokeWidth="2.5" transform="rotate(-60 32 32)" />
+    </svg>
+  );
+}
+
 /* ══════════════════════════════════════════════════════════════════════════════
-   SECCIÓN: HERO BANNER
-   — mismo esquema que eficiencia-energetica: fondo oscuro, acento lateral rojo
+   HERO
 ══════════════════════════════════════════════════════════════════════════════ */
 function SeccionHero() {
   return (
     <section className="relative bg-black overflow-hidden py-24 px-4">
       <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black" />
       <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#ca3517]" />
-
       <div className="relative z-10 max-w-5xl mx-auto text-white">
         <nav className="mb-6 text-sm text-gray-400" aria-label="Ubicación en el sitio">
           <Link href="/" className="hover:text-[#ca3517] transition-colors">Home</Link>
           <span className="mx-2 text-gray-600">›</span>
           <span className="text-white">Energías Renovables</span>
         </nav>
-
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-5 leading-tight">
           Energías Renovables
         </h1>
-
         <p className="text-xl sm:text-2xl text-gray-300 font-light mb-8">
           Mayor desarrollador uruguayo de energías renovables en la región
         </p>
-
         <div className="inline-block border-l-4 border-[#ca3517] pl-5 py-2">
-          <p className="text-base sm:text-lg text-gray-200 leading-relaxed max-w-3xl mb-3">
-            Desde 2008 SEG Ingeniería cuenta con un sector de técnicos
-            exclusivamente dedicados al desarrollo de proyectos de energía
-            eólica, solar, biomasa y pequeñas centrales hidroeléctricas.
-          </p>
-          <p className="text-sm text-gray-400 leading-relaxed max-w-3xl">
-            El desarrollo de un proyecto de energías renovables requiere un
-            trabajo previo muy detallado con un único propósito: asegurarle al
-            inversor un proyecto que pueda concretarse rápida y eficazmente con
-            la mayor rentabilidad posible.
+          <p className="text-base sm:text-lg text-gray-200 leading-relaxed max-w-3xl">
+            Desde 2008 SEG Ingeniería cuenta con un sector de técnicos exclusivamente dedicados al
+            desarrollo de proyectos de energía eólica, solar e hidrógeno verde. Aseguramos al inversor
+            un proyecto que pueda concretarse rápida y eficazmente con la mayor rentabilidad posible.
           </p>
         </div>
       </div>
@@ -133,17 +125,16 @@ function SeccionHero() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   NAVEGACIÓN INTERNA — misma estructura que eficiencia-energetica
+   NAVEGACIÓN INTERNA
 ══════════════════════════════════════════════════════════════════════════════ */
 const ANCLAS = [
-  { etiqueta: "Uruguay",          href: "#uruguay"         },
-  { etiqueta: "Impacto",          href: "#impacto"         },
-  { etiqueta: "Mapa de Desarrollos", href: "#mapa-desarrollos" },
-  { etiqueta: "Conozca más",      href: "#conozca-mas"     },
-  { etiqueta: "Eólica",           href: "#eolica"          },
-  { etiqueta: "Solar",            href: "#solar"           },
-  { etiqueta: "Biomasa",          href: "#biomasa"         },
-  { etiqueta: "PCH",              href: "#pch"             },
+  { etiqueta: "Impacto",  href: "#impacto"          },
+  { etiqueta: "Mapa",     href: "#mapa-desarrollos"  },
+  { etiqueta: "LATAM",    href: "#latam"             },
+  { etiqueta: "Eólica",   href: "#eolica"            },
+  { etiqueta: "Solar",    href: "#solar"             },
+  { etiqueta: "H₂ verde", href: "#h2-verde"          },
+  { etiqueta: "Otras",    href: "#otras"             },
 ];
 
 function NavegacionInterna() {
@@ -171,122 +162,120 @@ function NavegacionInterna() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   SECCIÓN: URUGUAY — PARQUES INSTALADOS
+   IMPACTO — KPIs
 ══════════════════════════════════════════════════════════════════════════════ */
-function SeccionUruguay() {
-  return (
-    <section id="uruguay" className="py-16 bg-white scroll-mt-[160px]">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <p className="text-[#ca3517] font-bold uppercase tracking-widest text-sm mb-2">
-            Energías Renovables / Uruguay
-          </p>
-          <h2 className="text-3xl font-bold text-gray-900">
-            Proyectos desarrollados e instalados en Uruguay
-          </h2>
-          <div className="w-16 h-1 bg-[#ca3517] mx-auto mt-4 rounded" />
-        </div>
+const KPIS = [
+  { label: "Operando",          valor: "244 MW",    sub: "Uruguay · eólico + FV"   },
+  { label: "Pipeline regional", valor: "+1.300 MW", sub: "eólico, solar e H₂"      },
+  { label: "Presencia",         valor: "7 países",  sub: "LATAM y Caribe"          },
+  { label: "CO₂ evitado",       valor: "320 mil t", sub: "anuales · 7% demanda UY" },
+];
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-          {/* Parques Eólicos */}
-          <article className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
-            <div className="bg-[#ca3517] p-8 text-white flex flex-col items-center text-center">
-              <IconoMolino className="w-16 h-16 mb-4" />
-              <h3 className="text-xl font-bold">Parques Eólicos</h3>
-            </div>
-            <div className="p-6 text-center">
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Desarrollados por SEG Ingeniería e instalados en Uruguay
-              </p>
-            </div>
-          </article>
-
-          {/* Parques Fotovoltaicos */}
-          <article className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
-            <div className="bg-[#ca3517] p-8 text-white flex flex-col items-center text-center">
-              <IconoSol className="w-16 h-16 mb-4" />
-              <h3 className="text-xl font-bold">Parques Fotovoltaicos</h3>
-            </div>
-            <div className="p-6 text-center">
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Desarrollados por SEG Ingeniería e instalados en Uruguay
-              </p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   SECCIÓN: IMPACTO — 320.000 ton CO₂
-   — usa fondo rojo igual que Pilares y Novedades en el home
-══════════════════════════════════════════════════════════════════════════════ */
 function SeccionImpacto() {
   return (
-    <section
-      id="impacto"
-      className="py-16 relative overflow-hidden scroll-mt-[160px]"
-      style={{ backgroundColor: "#ca3517" }}
-      aria-label="Impacto ambiental"
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-[#ca3517] via-[#b83015] to-[#8a2410] opacity-80" />
-
-      <div className="relative z-10 max-w-5xl mx-auto px-4 text-center text-white">
-        <p className="text-white/80 text-base sm:text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
-          Nuestros desarrollos cubren el{" "}
-          <strong className="text-white text-xl">7%</strong> de la demanda
-          energética nacional y evitan:
-        </p>
-
-        <div className="mb-10">
-          <div className="text-7xl sm:text-8xl font-black leading-none">320.000</div>
-          <div className="text-3xl sm:text-4xl font-bold mt-2">toneladas anuales</div>
-          <div className="text-2xl sm:text-3xl font-light mt-1 text-white/80">de CO₂</div>
-        </div>
-
-        {/* Separador decorativo — igual al de Pilares */}
-        <div className="w-12 h-0.5 bg-white/40 mx-auto mb-8" />
-
-        <div className="flex justify-center gap-8 sm:gap-16">
-          <div className="flex flex-col items-center gap-2 text-white/80">
-            <IconoHoja />
-            <span className="text-xs uppercase tracking-widest">Menos emisiones</span>
-          </div>
-          <div className="w-px bg-white/20 self-stretch" />
-          <div className="flex flex-col items-center gap-2 text-white/80">
-            <IconoRayo />
-            <span className="text-xs uppercase tracking-widest">Energía limpia</span>
-          </div>
-          <div className="w-px bg-white/20 self-stretch" />
-          <div className="flex flex-col items-center gap-2 text-white/80">
-            <IconoGlobo />
-            <span className="text-xs uppercase tracking-widest">Impacto regional</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════════════════
-   SECCIÓN: MAPA DE DESARROLLOS
-══════════════════════════════════════════════════════════════════════════════ */
-function SeccionMapaDesarrollos() {
-  return (
-    <section id="mapa-desarrollos" className="py-16 bg-gray-50 scroll-mt-[160px]">
+    <section id="impacto" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center gap-4 mb-10">
-          <div className="text-[#ca3517]">
-            <IconoGlobo className="w-8 h-8" />
-          </div>
+          <div className="text-[#ca3517]"><IconoRayo /></div>
           <div>
-            <h2 className="text-3xl font-bold text-gray-900">Mapa de Desarrollos</h2>
+            <h2 className="text-3xl font-bold text-gray-900">Impacto</h2>
             <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
           </div>
         </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {KPIS.map((kpi) => (
+            <div key={kpi.label} className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+              <p className="text-gray-500 text-sm mb-2">{kpi.label}</p>
+              <div className="text-3xl sm:text-4xl font-black text-gray-900 leading-none mb-1">{kpi.valor}</div>
+              <p className="text-gray-400 text-xs leading-snug">{kpi.sub}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
+/* ══════════════════════════════════════════════════════════════════════════════
+   SERVICIOS TRANSVERSALES
+══════════════════════════════════════════════════════════════════════════════ */
+const SERVICIOS = [
+  {
+    titulo: "Diseño y optimización de parques",
+    descripcion: "Layouts a gran escala, combinando eólico y fotovoltaico, con reportes de producción y análisis de pérdidas e incertidumbres.",
+  },
+  {
+    titulo: "Análisis de complementariedad horaria",
+    descripcion: "Modelado del recurso eólico/solar para maximizar el factor de utilización del electrolizador.",
+  },
+  {
+    titulo: "Ingeniería básica y evaluación de costos",
+    descripcion: "Elaboración y optimización de diseño preliminar, diseño de procesos de llamados a precios y solicitud de cotizaciones para determinación de CAPEX/OPEX.",
+  },
+  {
+    titulo: "Cálculo y optimización de LCOH",
+    descripcion: "Modelos económicos con análisis de sensibilidad y escenarios combinados para minimizar el costo nivelado del hidrógeno.",
+  },
+  {
+    titulo: "Análisis de potencial de derivados",
+    descripcion: "Estudios técnico-económicos de producción de e-metanol, e-fuels y e-fertilizantes según mercado objetivo y logística.",
+  },
+  {
+    titulo: "Due diligence técnica y ambiental",
+    descripcion: "Auditorías de proyectos para inversionistas, prestamistas o procesos de adquisición, incluyendo evaluación regulatoria.",
+  },
+  {
+    titulo: "Evaluación financiera de proyectos",
+    descripcion: "Elaboración de flujo de fondos y determinación de hipótesis de mercado para análisis de rentabilidad y optimización del modelo.",
+  },
+  {
+    titulo: "Gestión y seguimiento de trámites y permisos",
+    descripcion: "Gestión de subcontratos, contacto con las autoridades pertinentes, seguimiento de hitos clave necesarios para alcanzar el estado de listo para construcción.",
+  },
+  {
+    titulo: "Selección y negociación de tierras",
+    descripcion: "Incluido el asesoramiento del modelo contractual bancable, identificación de sitios óptimos, negociación de plazos y demás condiciones.",
+  },
+];
+
+function SeccionServicios() {
+  return (
+    <section className="py-16 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-2xl font-bold text-gray-900 mb-8">
+          Servicios transversales a diversas tecnologías
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {SERVICIOS.map((s) => (
+            <div key={s.titulo} className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+              <h3 className="font-bold text-[#ca3517] text-sm mb-2 leading-snug">{s.titulo}</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">{s.descripcion}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   MAPA DE DESARROLLOS
+══════════════════════════════════════════════════════════════════════════════ */
+function SeccionMapaDesarrollos() {
+  return (
+    <section id="mapa-desarrollos" className="py-16 bg-white scroll-mt-[160px]">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="text-[#ca3517]"><IconoGlobo className="w-8 h-8" /></div>
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900">Mapa de desarrollos LATAM</h2>
+            <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
+          </div>
+        </div>
+        <p className="text-gray-600 text-base mb-8">
+          Proyectos operando, en construcción y en desarrollo a lo largo de Uruguay, Argentina,
+          Brasil, Chile, Colombia, México y Perú.
+        </p>
         <div className="rounded-xl overflow-hidden shadow-inner border border-gray-300 max-w-2xl mx-auto">
           <Image
             src="/img/614875ff-48dc-4a27-bf70-7e51def7ecbc.png"
@@ -302,62 +291,50 @@ function SeccionMapaDesarrollos() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   SECCIÓN: SEG GREENPOWER — CONOZCA MÁS
+   LATAM — PRESENCIA REGIONAL
 ══════════════════════════════════════════════════════════════════════════════ */
-const PAISES_GREENPOWER = [
-  "Uruguay", "Brasil", "Chile", "México", "Perú", "Argentina", "Colombia",
+const PAISES = ["Uruguay", "Argentina", "Brasil", "Chile", "Colombia", "México", "Perú"];
+
+const PARTNERS = [
+  "Acciona & Nordex", "Arboreal", "Atlas", "CIR", "CWP Global", "Enercon",
+  "Enertis (Applus+)", "Enertrag", "Gletir", "Innergex", "SACEEM", "UPM",
 ];
 
-function SeccionConozcaMas() {
+function SeccionLATAM() {
   return (
-    <section id="conozca-mas" className="py-16 bg-white scroll-mt-[160px]">
+    <section id="latam" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-
+        <div className="flex items-center gap-4 mb-6">
+          <div className="text-[#ca3517]"><IconoGlobo className="w-8 h-8" /></div>
           <div>
-            {/* Badge SEG Greenpower — paleta roja SEG */}
-            <div className="inline-flex items-center gap-2 bg-[#ca3517]/10 border border-[#ca3517]/30 text-[#ca3517] px-4 py-2 rounded-full text-sm font-semibold mb-6">
-              <span className="w-2 h-2 bg-[#ca3517] rounded-full" />
-              SEG Greenpower
-            </div>
-
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Conozca más</h2>
-            <div className="w-16 h-1 bg-[#ca3517] mb-6 rounded" />
-
-            <p className="text-gray-600 leading-relaxed text-base mb-6">
-              SEG Ingeniería a través de la plataforma{" "}
-              <strong className="text-gray-900">SEG Greenpower</strong> desarrolla
-              proyectos de energía eólica y solar fotovoltaica en países como
-              Brasil, Chile, México, Perú, Argentina, Uruguay y Colombia, junto
-              con <strong className="text-gray-900">EAB New Energy</strong> y
-              socios locales debidamente seleccionados.
-            </p>
-
-            <p className="text-gray-600 leading-relaxed text-base">
-              Así exporta el conocimiento adquirido durante estos años en los
-              cuales Uruguay fue pionero de la instalación de energías renovables
-              en Latinoamérica.
-            </p>
+            <h2 className="text-3xl font-bold text-gray-900">LATAM · Presencia regional</h2>
+            <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
           </div>
-
-          {/* Panel de países — fondo oscuro, badges rojos */}
-          <div className="bg-gray-900 rounded-xl p-8">
-            <p className="text-white/50 text-xs uppercase tracking-widest mb-5">
-              Presencia regional
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {PAISES_GREENPOWER.map((pais) => (
-                <span
-                  key={pais}
-                  className="bg-[#ca3517] text-white text-sm font-semibold px-4 py-2 rounded-full"
-                >
-                  {pais}
-                </span>
+        </div>
+        <p className="text-gray-600 text-base mb-8 max-w-2xl">
+          A través de SEG Greenpower exportamos a la región el conocimiento adquirido en Uruguay,
+          en alianza con socios locales seleccionados.
+        </p>
+        <div className="flex flex-wrap gap-3 mb-10">
+          {PAISES.map((pais) => (
+            <span
+              key={pais}
+              className="bg-[#ca3517] text-white text-sm font-semibold px-4 py-2 rounded-full"
+            >
+              {pais}
+            </span>
+          ))}
+        </div>
+        <div>
+          <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">
+            Partners y clientes
+          </p>
+          <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+            <div className="flex flex-wrap gap-x-6 gap-y-2">
+              {PARTNERS.map((p) => (
+                <span key={p} className="text-gray-500 text-sm">{p}</span>
               ))}
             </div>
-            <p className="text-white/30 text-xs mt-6">
-              Junto a EAB New Energy y socios locales seleccionados
-            </p>
           </div>
         </div>
       </div>
@@ -366,130 +343,274 @@ function SeccionConozcaMas() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   SECCIÓN: TIPOS DE ENERGÍA
-   — mismo patrón de card que "Áreas de Estudio" en eficiencia-energetica:
-     cabecera roja con ícono blanco + cuerpo blanco con texto gris
+   BADGE DE ESTADO
 ══════════════════════════════════════════════════════════════════════════════ */
-const TIPOS_ENERGIA = [
+function BadgeEstado({ estado }) {
+  const estilos = {
+    operando:     "bg-green-100 text-green-700",
+    construccion: "bg-amber-100 text-amber-700",
+    desarrollo:   "bg-blue-100 text-blue-700",
+  };
+  const etiquetas = {
+    operando:     "Operando",
+    construccion: "En construcción",
+    desarrollo:   "En desarrollo",
+  };
+  return (
+    <span className={`inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full ${estilos[estado]}`}>
+      {etiquetas[estado]}
+    </span>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   EÓLICA
+══════════════════════════════════════════════════════════════════════════════ */
+const PROYECTOS_EOLICA = [
+  { nombre: "Peralta I & II", mw: "117 MW", ubicacion: "Tacuarembó, Uruguay",          periodo: "2011–2015", estado: "operando" },
+  { nombre: "Cerro Grande",   mw: "52 MW",  ubicacion: "Cerro Largo, Uruguay",          periodo: "2012–2017", estado: "operando" },
+  { nombre: "Kosten",         mw: "24 MW",  ubicacion: "Comodoro Rivadavia, Argentina", periodo: "2016–2020", estado: "operando" },
+];
+
+function SeccionEolica() {
+  return (
+    <section id="eolica" className="py-16 bg-white scroll-mt-[160px]">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="text-[#ca3517]"><IconoMolino className="w-8 h-8" /></div>
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900">Eólica</h2>
+            <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
+          </div>
+        </div>
+        <p className="text-gray-600 text-base mb-8 max-w-2xl">
+          Mayor desarrollador eólico independiente de Uruguay. 193 MW desarrollados y operando
+          entre Uruguay y Argentina, con pipeline activo en la región.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          {PROYECTOS_EOLICA.map((p) => (
+            <div key={p.nombre} className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+              <h3 className="font-bold text-gray-900 text-lg mb-1">{p.nombre}</h3>
+              <div className="text-3xl font-black text-gray-900 mb-2">{p.mw}</div>
+              <p className="text-gray-500 text-sm mb-1">{p.ubicacion}</p>
+              <p className="text-gray-400 text-xs mb-3">{p.periodo}</p>
+              <BadgeEstado estado={p.estado} />
+            </div>
+          ))}
+        </div>
+        <a href="#mapa-desarrollos" className="text-[#ca3517] text-sm font-semibold hover:underline">
+          → Ver pipeline completo en el mapa
+        </a>
+      </div>
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   SOLAR
+══════════════════════════════════════════════════════════════════════════════ */
+const PROYECTOS_SOLAR = [
+  { nombre: "El Naranjal", mw: "57 MWp", ubicacion: "Salto, Uruguay", periodo: "2013–2018", estado: "operando" },
+  { nombre: "Del Litoral", mw: "17 MWp", ubicacion: "Salto, Uruguay", periodo: "2013–2018", estado: "operando" },
+];
+
+function SeccionSolar() {
+  return (
+    <section id="solar" className="py-16 bg-gray-50 scroll-mt-[160px]">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="text-[#ca3517]"><IconoSol className="w-8 h-8" /></div>
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900">Solar</h2>
+            <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
+          </div>
+        </div>
+        <p className="text-gray-600 text-base mb-8 max-w-2xl">
+          Desarrollos a escala utility en Uruguay y Argentina (74 MWp instalados en Uruguay), más
+          instalaciones distribuidas en clientes corporativos. Cobertura completa del ciclo:
+          localización, selección tecnológica, beneficios fiscales, supervisión y garantías.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          {PROYECTOS_SOLAR.map((p) => (
+            <div key={p.nombre} className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+              <h3 className="font-bold text-gray-900 text-lg mb-1">{p.nombre}</h3>
+              <div className="text-3xl font-black text-gray-900 mb-2">{p.mw}</div>
+              <p className="text-gray-500 text-sm mb-1">{p.ubicacion}</p>
+              <p className="text-gray-400 text-xs mb-3">{p.periodo}</p>
+              <BadgeEstado estado={p.estado} />
+            </div>
+          ))}
+        </div>
+        <a href="#mapa-desarrollos" className="text-[#ca3517] text-sm font-semibold hover:underline">
+          → Ver pipeline completo en el mapa
+        </a>
+      </div>
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   H₂ VERDE
+══════════════════════════════════════════════════════════════════════════════ */
+const TAMBOR_STATS = [
+  { label: "Eólico",         valor: "194 MW"       },
+  { label: "Solar",          valor: "188 MWp"      },
+  { label: "Electrólisis",   valor: "140 MW"       },
+  { label: "H₂ → e-metanol", valor: "15.000 t/año" },
+];
+
+const PIPELINE_H2 = [
+  { nombre: "Tenek",        ubicacion: "México · greenfield" },
+  { nombre: "Peninsularis", ubicacion: "México · greenfield" },
+];
+
+const CONSULTORIAS = [
   {
-    id: "eolica",
-    Icono: IconoMolino,
-    titulo: "Eólica",
-    descripcion: [
-      "Siendo hoy el mayor desarrollador eólico independiente del país, SEG Ingeniería continúa desarrollando proyectos, tanto para inversores extranjeros como locales, a lo largo y ancho de América Latina.",
-      "Para dichos proyectos nuestra empresa realiza el desarrollo completo, desde la localización inicial, la selección de la tecnología ideal, el análisis de las diferentes opciones de beneficios fiscales disponibles para la generación de fuente renovable, la supervisión de la instalación y el control de especificaciones y garantías tanto de los módulos como de los servicios de mantenimiento.",
-    ],
+    descripcion: "Logística e infraestructura para exportación de H₂ verde y derivados",
+    cliente: "PNUD",
+    periodo: "2024",
   },
   {
-    id: "solar",
-    Icono: IconoSol,
-    titulo: "Solar",
-    descripcion: [
-      "Contamos con una gran experiencia en el desarrollo de instalaciones de aprovechamiento de energía solar, tanto para calentamiento de agua (térmica) como para generación de energía eléctrica (fotovoltaica).",
-      "Este trabajo abarca proyectos de diferentes dimensiones: desde pequeñas instalaciones en clubes, grandes superficies, estaciones de servicio e industrias, hasta granjas solares completas.",
-      "Para dichos proyectos nuestra empresa realiza el desarrollo completo, desde la localización inicial, la selección de tecnología ideal, el análisis de las diferentes opciones de beneficios fiscales disponibles para la generación de fuente renovable, la supervisión de la instalación y el control de especificaciones y garantías tanto de los módulos como de los servicios de mantenimiento.",
-    ],
+    descripcion: "Viabilidad de producción de metanol con biomasa",
+    cliente: "Arboreal",
+    periodo: "2024–2025",
   },
   {
-    id: "biomasa",
+    descripcion: "Soporte técnico H2U — análisis tecno-económico y LCOH",
+    cliente: "SACEEM / CIR",
+    periodo: "2023",
+  },
+];
+
+function SeccionH2Verde() {
+  return (
+    <section id="h2-verde" className="py-16 bg-white scroll-mt-[160px]">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="text-[#ca3517]"><IconoH2 className="w-8 h-8" /></div>
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900">H₂ verde</h2>
+            <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
+          </div>
+        </div>
+        <p className="text-gray-600 text-base mb-10 max-w-2xl">
+          Departamento dedicado desde 2019. Acompañamos la cadena completa del hidrógeno verde:
+          desarrollo greenfield de generación renovable, producción, transporte y derivados como
+          e-metanol, e-fuels y e-fertilizantes.
+        </p>
+
+        {/* Caso de estudio */}
+        <div className="bg-gray-900 rounded-xl p-8 mb-10">
+          <p className="text-[#ca3517] text-xs font-bold uppercase tracking-widest mb-2">
+            Caso de estudio
+          </p>
+          <h3 className="text-2xl font-bold text-white mb-3">Tambor Green Hydrogen Hub</h3>
+          <p className="text-gray-400 text-sm leading-relaxed mb-6 max-w-2xl">
+            En desarrollo con Enertrag (Alemania). Combina 194 MW de generación eólica y 188 MWp
+            de generación solar con un electrolizador de 140 MW. La producción de 15.000 toneladas
+            anuales de H₂ verde se procesa en e-metanol renovable, con potencial de reemplazar
+            aproximadamente el 10 % del metanol convencional de la mayor refinería alemana.
+          </p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {TAMBOR_STATS.map((s) => (
+              <div key={s.label} className="bg-white/5 rounded-lg p-4">
+                <p className="text-gray-400 text-xs mb-1">{s.label}</p>
+                <div className="text-2xl font-black text-white">{s.valor}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Pipeline regional */}
+        <div className="mb-10">
+          <h3 className="font-bold text-gray-900 text-lg mb-4">Pipeline regional</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg">
+            {PIPELINE_H2.map((p) => (
+              <div key={p.nombre} className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
+                <p className="font-bold text-gray-900">{p.nombre}</p>
+                <p className="text-gray-500 text-sm">{p.ubicacion}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Consultorías recientes */}
+        <div>
+          <h3 className="font-bold text-gray-900 text-lg mb-4">Consultorías recientes</h3>
+          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+            {CONSULTORIAS.map((c, i) => (
+              <div
+                key={i}
+                className={`flex items-start justify-between gap-6 px-6 py-4 ${
+                  i < CONSULTORIAS.length - 1 ? "border-b border-gray-100" : ""
+                }`}
+              >
+                <p className="text-gray-700 text-sm leading-snug">{c.descripcion}</p>
+                <p className="text-gray-400 text-xs whitespace-nowrap flex-shrink-0">
+                  {c.cliente} · {c.periodo}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   OTRAS TECNOLOGÍAS
+══════════════════════════════════════════════════════════════════════════════ */
+const OTRAS = [
+  {
     Icono: IconoBiomasa,
     titulo: "Biomasa",
-    descripcion: [
-      "Desarrollamos proyectos de generación y cogeneración de energía con Biomasa, en general con residuos de la cosecha forestal y otras fuentes de Biomasa.",
-    ],
+    descripcion: "Generación y cogeneración con residuos de cosecha forestal y otras fuentes de biomasa.",
   },
   {
-    id: "pch",
     Icono: IconoPCH,
-    titulo: "PCH — Pequeñas Centrales Hidroeléctricas",
-    descripcion: [
-      "Este tipo de generación de energía renovable aprovecha caudales de agua mediante una pequeña turbina hidroeléctrica.",
-      "En Uruguay existen varios sitios con posibilidad de generación de este tipo, con potencias relativamente pequeñas. Desarrollamos proyectos completos de PCH aprovechando embalses ya existentes o en construcción.",
-    ],
+    titulo: "PCH",
+    descripcion: "Pequeñas centrales hidroeléctricas en embalses existentes o en construcción. Proyectos completos llave en mano.",
   },
 ];
 
-/*
-  Alterna fondo blanco / gris-50 entre secciones y la grilla texto/imagen
-  cambia de lado (izquierda → derecha → ...) para dar ritmo visual.
-*/
-function SeccionTipoEnergia({ tipo, fondoGris, imagenDerecha }) {
+function SeccionOtras() {
   return (
-    <section
-      id={tipo.id}
-      className={`py-16 scroll-mt-[160px] ${fondoGris ? "bg-gray-50" : "bg-white"}`}
-    >
+    <section id="otras" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
-        <div
-          className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-start ${
-            imagenDerecha ? "" : "lg:[&>*:first-child]:order-2"
-          }`}
-        >
-          {/* Card visual — cabecera roja con ícono blanco (igual a Áreas de Estudio) */}
-          <article className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
-            <div className="bg-[#ca3517] p-10 text-white flex flex-col items-center text-center">
-              <tipo.Icono className="w-16 h-16 mb-4" />
-              <h3 className="text-2xl font-bold">{tipo.titulo}</h3>
-            </div>
-          </article>
-
-          {/* Texto */}
+        <div className="flex items-center gap-4 mb-10">
+          <div className="text-[#ca3517]"><IconoBiomasa className="w-8 h-8" /></div>
           <div>
-            <div className="flex items-center gap-4 mb-6">
-              <div className="text-[#ca3517]">
-                <tipo.Icono className="w-8 h-8" />
-              </div>
-              <div>
-                <h2 className="text-3xl font-bold text-gray-900">{tipo.titulo}</h2>
-                <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              {tipo.descripcion.map((parrafo, i) => (
-                <p key={i} className="text-gray-600 leading-relaxed text-base">
-                  {parrafo}
-                </p>
-              ))}
-            </div>
+            <h2 className="text-3xl font-bold text-gray-900">Otras tecnologías</h2>
+            <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
           </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
+          {OTRAS.map((t) => (
+            <div key={t.titulo} className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
+              <div className="text-[#ca3517] mb-3"><t.Icono className="w-8 h-8" /></div>
+              <h3 className="font-bold text-gray-900 mb-2">{t.titulo}</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">{t.descripcion}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-function SeccionTiposEnergia() {
-  return (
-    <>
-      {TIPOS_ENERGIA.map((tipo, indice) => (
-        <SeccionTipoEnergia
-          key={tipo.id}
-          tipo={tipo}
-          fondoGris={indice % 2 !== 0}
-          imagenDerecha={indice % 2 === 0}
-        />
-      ))}
-    </>
-  );
-}
-
 /* ══════════════════════════════════════════════════════════════════════════════
-   SECCIÓN: CTA FINAL
+   CTA FINAL
 ══════════════════════════════════════════════════════════════════════════════ */
 function SeccionCTA() {
   return (
     <section className="py-16 bg-black text-white">
       <div className="max-w-3xl mx-auto px-4 text-center">
-        <p className="text-white/50 uppercase text-xs tracking-widest mb-4">
-          SEG Ingeniería
-        </p>
-        <h2 className="text-3xl font-bold mb-4">
-          ¿Tiene un proyecto de energía renovable?
-        </h2>
+        <p className="text-white/50 uppercase text-xs tracking-widest mb-4">SEG Ingeniería</p>
+        <h2 className="text-3xl font-bold mb-4">¿Tiene un proyecto de energía renovable?</h2>
         <p className="text-gray-400 leading-relaxed mb-8">
-          Contáctenos y le asesoraremos sobre las mejores opciones de desarrollo,
-          financiamiento y beneficios fiscales disponibles en su país.
+          Contáctenos y le asesoraremos sobre las mejores opciones de desarrollo, financiamiento
+          y beneficios fiscales disponibles en su país.
         </p>
         <Link
           href="/contacto"
@@ -503,18 +624,21 @@ function SeccionCTA() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   PÁGINA PRINCIPAL
+   PÁGINA
 ══════════════════════════════════════════════════════════════════════════════ */
 export default function PaginaEnergiasRenovables() {
   return (
     <>
       <SeccionHero />
       <NavegacionInterna />
-      <SeccionUruguay />
       <SeccionImpacto />
+      <SeccionServicios />
       <SeccionMapaDesarrollos />
-      <SeccionConozcaMas />
-      <SeccionTiposEnergia />
+      <SeccionLATAM />
+      <SeccionEolica />
+      <SeccionSolar />
+      <SeccionH2Verde />
+      <SeccionOtras />
       <SeccionCTA />
     </>
   );
