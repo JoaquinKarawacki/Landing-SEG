@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "titulo": "Índices de Precios de los Energéticos IPER e IPEI",
+    "resumen": "Desde 2008, SEG Ingeniería elabora dos índices que miden la evolución del costo de la energía en Uruguay: el IPEI (sector industrial) y el IPER (sector residencial). Ambos siguen la metodología de índices de tipo Laspeyres —canasta fija ponderada por consumo—, con base en datos del Balance Energético Nacional publicado anualmente por la Dirección Nacional de Energía (MIEM). La canasta se actualiza cada año con el nuevo BEN. El momento base del IPEI es marzo de 2010 (igual al del IPPN del INE) y el del IPER es diciembre de 2010 (igual al del IPC). Este documento detalla la composición de las canastas, las fuentes de precios por energético y los criterios de empalme de series.",
+    "temas": ["IPER", "IPEI", "Índices de precios", "Metodología Laspeyres"],
+    "pdf": "/notas/indices-iper-ipei.pdf"
+  },
+  {
+    "id": 2,
+    "titulo": "Precios de la Energía en la Región y del Petróleo",
+    "resumen": "Documenta las fuentes y la metodología del cuadro comparativo de precios de energía publicado mensualmente en los Indicadores Energéticos. Cubre la electricidad residencial e industrial y los combustibles (gas natural, Fuel Oil, GLP, gasoil y nafta) en Uruguay, Chile, Brasil, Argentina y Paraguay, más el precio spot del barril Brent como referencia de ANCAP. Para la electricidad residencial, a partir del reporte de enero de 2025 se incorporó una metodología actualizada basada en cuatro cuentas tipo ponderadas según la proporción de clientes por tarifa, aplicada en las principales distribuidoras de cada país (representando al menos el 70% de la venta de energía). Todos los precios corresponden a precios finales al consumidor con impuestos incluidos, excepto la tarifa eléctrica industrial.",
+    "temas": ["Electricidad", "Combustibles", "Región", "Petróleo Brent"],
+    "pdf": "/notas/precios-energia-region.pdf"
+  }
+]

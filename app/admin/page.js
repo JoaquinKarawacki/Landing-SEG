@@ -20,6 +20,14 @@ const CAMPOS_NOVEDADES = [
   { name: "Imagen",      label: "Imagen",      type: "file",     accept: "image/*", fileType: "imagen" },
 ];
 
+const NOTAS = [
+  { name: "titulo",      label: "Título",      type: "text",     placeholder: "Índices de Precios de los Energéticos IPER e IPEI" },
+  { name: "resumen",     label: "Resumen",     type: "text" },
+  { name: "temas",       label: "temas",       type: "text",     placeholder: "Electricidad, Combustibles, IPER" },
+  { name: "pdf",         label: "PDF",         type: "file",     accept: ".pdf", fileType: "pdf" },
+];
+
+
 function FormularioNuevo({ campos, onAgregar, onSubir, limite }) {
   const vacio = Object.fromEntries(campos.map(c => [c.name, ""]));
   const [form, setForm] = useState(vacio);
@@ -102,6 +110,7 @@ export default function PaginaAdmin() {
   const [pestaña, setPestaña] = useState("indicadores");
   const [indicadores, setIndicadores] = useState([]);
   const [novedades, setNovedades] = useState([]);
+  const [notas, setNotas] = useState([]);
   const [token, setToken] = useState("");
   const [autenticado, setAutenticado] = useState(false);
   const [errorLogin, setErrorLogin] = useState("");
@@ -117,14 +126,24 @@ export default function PaginaAdmin() {
       setErrorLogin("");
       fetch("/api/indicadores").then(r => r.json()).then(setIndicadores);
       fetch("/api/novedades").then(r => r.json()).then(setNovedades);
+      fetch("/api/notas").then(r => r.json()).then(setNotas);
     } else {
       setErrorLogin("Token incorrecto");
     }
   }
 
   async function agregar(seccion, datos) {
-    const url = seccion === "indicadores" ? "/api/indicadores" : "/api/novedades";
-    const extra = seccion === "indicadores" ? { href: "/indicadores" } : {};
+    let url, extra;
+    if(seccion === "indicadores") {
+      url = "/api/indicadores";
+      extra = { href: "/indicadores" };
+    }else if(seccion === "novedades") {
+      url = "/api/novedades";
+      extra = {};
+    }else {
+      url = "/api/notas";
+      extra = {};
+    }
     const res = await fetch(url, {
       method: "POST",
       headers: authHeaders(),
@@ -133,7 +152,8 @@ export default function PaginaAdmin() {
     const json = await res.json();
     if (res.ok) {
       if (seccion === "indicadores") setIndicadores(prev => [json, ...prev]);
-      else setNovedades(prev => [json, ...prev]);
+      else if(seccion === "novedades") setNovedades(prev => [json, ...prev]);
+      else setNotas(prev => [json, ...prev]);
       return { ok: true };
     }
     return { ok: false, error: json.error };
@@ -150,10 +170,21 @@ export default function PaginaAdmin() {
   }
 
   async function eliminar(seccion, id) {
-    const url = seccion === "indicadores" ? "/api/indicadores" : "/api/novedades";
+    let url, extra;
+     if(seccion === "indicadores") {
+      url = "/api/indicadores";
+      extra = { href: "/indicadores" };
+    }else if(seccion === "novedades") {
+      url = "/api/novedades";
+      extra = {};
+    }else {
+      url = "/api/notas";
+      extra = {};
+    }
     await fetch(url, { method: "DELETE", headers: authHeaders(), body: JSON.stringify({ id }) });
     if (seccion === "indicadores") setIndicadores(prev => prev.filter(a => a.id !== id));
-    else setNovedades(prev => prev.filter(a => a.id !== id));
+    else if(seccion === "novedades") setNovedades(prev => prev.filter(a => a.id !== id));
+    else setNotas(prev => prev.filter(a => a.id !== id));
   }
 
   if (!autenticado) {
@@ -176,8 +207,10 @@ export default function PaginaAdmin() {
     );
   }
 
-  const articulos = pestaña === "indicadores" ? indicadores : novedades;
-  const campos = pestaña === "indicadores" ? CAMPOS_INDICADORES : CAMPOS_NOVEDADES;
+const articulos = pestaña === "indicadores" ? indicadores : pestaña === "novedades" ? novedades : notas;
+const campos = pestaña === "indicadores" ? CAMPOS_INDICADORES : pestaña === "novedades" ? CAMPOS_NOVEDADES : NOTAS;
+
+
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -201,9 +234,16 @@ export default function PaginaAdmin() {
         >
           Novedades ({novedades.length}/6)
         </button>
+         <button
+          onClick={() => setPestaña("notas")}
+          className={`px-6 py-2 rounded-full font-semibold text-sm ${pestaña === "notas" ? "bg-[#ca3517] text-white" : "bg-gray-100 text-gray-700"}`}
+        >
+          Notas ({notas.length}/6)
+        </button>
       </div>
 
       <FormularioNuevo
+        key={pestaña}
         campos={campos}
         limite={6 - articulos.length}
         onAgregar={datos => agregar(pestaña, datos)}
