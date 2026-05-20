@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import NavegacionSeccion from "@/components/NavegacionSeccion";
 
 export const metadata = {
   title: "Energías Renovables — SEG Ingeniería",
@@ -137,29 +138,6 @@ const ANCLAS = [
   { etiqueta: "Otras",    href: "#otras"             },
 ];
 
-function NavegacionInterna() {
-  return (
-    <nav
-      className="bg-gray-100 border-b border-gray-200 sticky top-[88px] z-40"
-      aria-label="Secciones de la página"
-    >
-      <div className="max-w-7xl mx-auto px-4">
-        <ul className="flex overflow-x-auto gap-0 -mb-px justify-center">
-          {ANCLAS.map((ancla) => (
-            <li key={ancla.etiqueta} className="flex-shrink-0">
-              <a
-                href={ancla.href}
-                className="block px-4 sm:px-6 py-4 text-sm font-medium text-gray-600 border-b-2 border-transparent hover:text-[#ca3517] hover:border-[#ca3517] transition-colors duration-200 whitespace-nowrap"
-              >
-                {ancla.etiqueta}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
-  );
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    IMPACTO — KPIs
@@ -376,31 +354,35 @@ function SeccionEolica() {
   return (
     <section id="eolica" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="text-[#ca3517]"><IconoMolino className="w-8 h-8" /></div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900">Eólica</h2>
-            <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
+            <div className="flex items-center gap-4 mb-4">
+              <div className="text-[#ca3517]"><IconoMolino className="w-8 h-8" /></div>
+              <div>
+                <h2 className="text-3xl font-bold text-gray-900">Eólica</h2>
+                <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
+              </div>
+            </div>
+            <p className="text-gray-600 text-base mb-6">
+              Mayor desarrollador eólico independiente de Uruguay. 193 MW desarrollados y operando
+              entre Uruguay y Argentina, con pipeline activo en la región.
+            </p>
+            <a href="#mapa-desarrollos" className="text-[#ca3517] text-sm font-semibold hover:underline">
+              → Ver pipeline completo en el mapa
+            </a>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3 gap-4">
+            {PROYECTOS_EOLICA.map((p) => (
+              <div key={p.nombre} className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+                <h3 className="font-bold text-gray-900 text-base mb-1">{p.nombre}</h3>
+                <div className="text-3xl font-black text-gray-900 mb-2">{p.mw}</div>
+                <p className="text-gray-500 text-sm mb-1">{p.ubicacion}</p>
+                <p className="text-gray-400 text-xs mb-3">{p.periodo}</p>
+                <BadgeEstado estado={p.estado} />
+              </div>
+            ))}
           </div>
         </div>
-        <p className="text-gray-600 text-base mb-8 max-w-2xl">
-          Mayor desarrollador eólico independiente de Uruguay. 193 MW desarrollados y operando
-          entre Uruguay y Argentina, con pipeline activo en la región.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          {PROYECTOS_EOLICA.map((p) => (
-            <div key={p.nombre} className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-              <h3 className="font-bold text-gray-900 text-lg mb-1">{p.nombre}</h3>
-              <div className="text-3xl font-black text-gray-900 mb-2">{p.mw}</div>
-              <p className="text-gray-500 text-sm mb-1">{p.ubicacion}</p>
-              <p className="text-gray-400 text-xs mb-3">{p.periodo}</p>
-              <BadgeEstado estado={p.estado} />
-            </div>
-          ))}
-        </div>
-        <a href="#mapa-desarrollos" className="text-[#ca3517] text-sm font-semibold hover:underline">
-          → Ver pipeline completo en el mapa
-        </a>
       </div>
     </section>
   );
@@ -418,32 +400,36 @@ function SeccionSolar() {
   return (
     <section id="solar" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="text-[#ca3517]"><IconoSol className="w-8 h-8" /></div>
-          <div>
-            <h2 className="text-3xl font-bold text-gray-900">Solar</h2>
-            <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:order-1">
+            {PROYECTOS_SOLAR.map((p) => (
+              <div key={p.nombre} className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+                <h3 className="font-bold text-gray-900 text-base mb-1">{p.nombre}</h3>
+                <div className="text-3xl font-black text-gray-900 mb-2">{p.mw}</div>
+                <p className="text-gray-500 text-sm mb-1">{p.ubicacion}</p>
+                <p className="text-gray-400 text-xs mb-3">{p.periodo}</p>
+                <BadgeEstado estado={p.estado} />
+              </div>
+            ))}
+          </div>
+          <div className="lg:order-2">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="text-[#ca3517]"><IconoSol className="w-8 h-8" /></div>
+              <div>
+                <h2 className="text-3xl font-bold text-gray-900">Solar</h2>
+                <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
+              </div>
+            </div>
+            <p className="text-gray-600 text-base mb-6">
+              Desarrollos a escala utility en Uruguay y Argentina (74 MWp instalados en Uruguay), más
+              instalaciones distribuidas en clientes corporativos. Cobertura completa del ciclo:
+              localización, selección tecnológica, beneficios fiscales, supervisión y garantías.
+            </p>
+            <a href="#mapa-desarrollos" className="text-[#ca3517] text-sm font-semibold hover:underline">
+              → Ver pipeline completo en el mapa
+            </a>
           </div>
         </div>
-        <p className="text-gray-600 text-base mb-8 max-w-2xl">
-          Desarrollos a escala utility en Uruguay y Argentina (74 MWp instalados en Uruguay), más
-          instalaciones distribuidas en clientes corporativos. Cobertura completa del ciclo:
-          localización, selección tecnológica, beneficios fiscales, supervisión y garantías.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          {PROYECTOS_SOLAR.map((p) => (
-            <div key={p.nombre} className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-              <h3 className="font-bold text-gray-900 text-lg mb-1">{p.nombre}</h3>
-              <div className="text-3xl font-black text-gray-900 mb-2">{p.mw}</div>
-              <p className="text-gray-500 text-sm mb-1">{p.ubicacion}</p>
-              <p className="text-gray-400 text-xs mb-3">{p.periodo}</p>
-              <BadgeEstado estado={p.estado} />
-            </div>
-          ))}
-        </div>
-        <a href="#mapa-desarrollos" className="text-[#ca3517] text-sm font-semibold hover:underline">
-          → Ver pipeline completo en el mapa
-        </a>
       </div>
     </section>
   );
@@ -630,7 +616,7 @@ export default function PaginaEnergiasRenovables() {
   return (
     <>
       <SeccionHero />
-      <NavegacionInterna />
+      <NavegacionSeccion anclas={ANCLAS} />
       <SeccionImpacto />
       <SeccionServicios />
       <SeccionMapaDesarrollos />

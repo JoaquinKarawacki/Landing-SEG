@@ -1,4 +1,5 @@
 ﻿import Link from "next/link";
+import NavegacionSeccion from "@/components/NavegacionSeccion";
 
 export const metadata = {
   title: "SEG Heliotec — SEG Ingeniería",
@@ -157,29 +158,6 @@ const ANCLAS = [
   { etiqueta: "Servicios",          href: "#servicios"         },
 ];
 
-function NavegacionInterna() {
-  return (
-    <nav
-      className="bg-gray-100 border-b border-gray-200 sticky top-[88px] z-40"
-      aria-label="Secciones de la página"
-    >
-      <div className="max-w-7xl mx-auto px-4">
-        <ul className="flex overflow-x-auto gap-0 -mb-px justify-center">
-          {ANCLAS.map((ancla) => (
-            <li key={ancla.etiqueta} className="flex-shrink-0">
-              <a
-                href={ancla.href}
-                className="block px-4 sm:px-6 py-4 text-sm font-medium text-gray-600 border-b-2 border-transparent hover:text-[#ca3517] hover:border-[#ca3517] transition-colors duration-200 whitespace-nowrap"
-              >
-                {ancla.etiqueta}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
-  );
-}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    SECCIÓN: DESCRIPCIÓN — bg-white — Guía §4.1
@@ -452,7 +430,7 @@ export default function PaginaSEGHeliotec() {
   return (
     <>
       <SeccionHero />
-      <NavegacionInterna />
+      <NavegacionSeccion anclas={ANCLAS} />
       <SeccionDescripcion />
       <SeccionHeliotecAlemania />
       <SeccionServicios />
