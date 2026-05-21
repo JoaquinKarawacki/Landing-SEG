@@ -285,7 +285,7 @@ const PARTNERS = [
   { nombre: "Gletir",            src: "/img/partners/gletir.png"         },
   { nombre: "Innergex",          src: "/img/partners/innergex.jpg"       },
   { nombre: "SACEEM",            src: "/img/partners/saceem.png"         },
-  { nombre: "UPM",               src: "/img/partners/upm.png"            },
+  { nombre: "UPM",               src: "/img/partners/upm.png",  grande: true },
 ];
 
 function SeccionLATAM() {
@@ -328,7 +328,7 @@ function SeccionLATAM() {
                   <img
                     src={p.src}
                     alt={p.nombre}
-                    className="max-h-10 max-w-full w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                    className={`${p.grande ? "max-h-16" : "max-h-10"} max-w-full w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300`}
                   />
                 </div>
               ))}
