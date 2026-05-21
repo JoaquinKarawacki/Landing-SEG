@@ -274,7 +274,7 @@ function SeccionMapaDesarrollos() {
 const PAISES = ["Uruguay", "Argentina", "Brasil", "Chile", "Colombia", "México", "Perú"];
 
 const PARTNERS = [
-  { nombre: "Acciona & Nordex",  src: "/img/partners/acciona-nordex.png" },
+  { nombre: "UPM",               src: "/img/partners/upm.png",  grande: true },
   { nombre: "Arboreal",          src: "/img/partners/arboreal.png"       },
   { nombre: "Atlas",             src: "/img/partners/atlas.jpg"          },
   { nombre: "CIR",               src: "/img/partners/cir.jpeg"           },
@@ -285,7 +285,7 @@ const PARTNERS = [
   { nombre: "Gletir",            src: "/img/partners/gletir.png"         },
   { nombre: "Innergex",          src: "/img/partners/innergex.jpg"       },
   { nombre: "SACEEM",            src: "/img/partners/saceem.png"         },
-  { nombre: "UPM",               src: "/img/partners/upm.png",  grande: true },
+  { nombre: "Acciona & Nordex",  src: "/img/partners/acciona-nordex.png" },
 ];
 
 function SeccionLATAM() {
