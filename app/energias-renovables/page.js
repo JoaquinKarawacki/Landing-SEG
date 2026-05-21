@@ -274,8 +274,18 @@ function SeccionMapaDesarrollos() {
 const PAISES = ["Uruguay", "Argentina", "Brasil", "Chile", "Colombia", "México", "Perú"];
 
 const PARTNERS = [
-  "Acciona & Nordex", "Arboreal", "Atlas", "CIR", "CWP Global", "Enercon",
-  "Enertis (Applus+)", "Enertrag", "Gletir", "Innergex", "SACEEM", "UPM",
+  { nombre: "Acciona & Nordex",  src: "/img/partners/acciona-nordex.png" },
+  { nombre: "Arboreal",          src: "/img/partners/arboreal.png"       },
+  { nombre: "Atlas",             src: "/img/partners/atlas.jpg"          },
+  { nombre: "CIR",               src: "/img/partners/cir.jpeg"           },
+  { nombre: "CWP Global",        src: "/img/partners/cwp.png"            },
+  { nombre: "Enercon",           src: "/img/partners/enercon.png"        },
+  { nombre: "Enertis (Applus+)", src: "/img/partners/enertis.png"        },
+  { nombre: "Enertrag",          src: "/img/partners/enertrag.jpg"       },
+  { nombre: "Gletir",            src: "/img/partners/gletir.png"         },
+  { nombre: "Innergex",          src: "/img/partners/innergex.jpg"       },
+  { nombre: "SACEEM",            src: "/img/partners/saceem.png"         },
+  { nombre: "UPM",               src: "/img/partners/upm.png"            },
 ];
 
 function SeccionLATAM() {
@@ -308,9 +318,19 @@ function SeccionLATAM() {
             Partners y clientes
           </p>
           <div className="bg-white rounded-xl border border-gray-100 shadow-sm p-6">
-            <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-6">
               {PARTNERS.map((p) => (
-                <span key={p} className="text-gray-500 text-sm">{p}</span>
+                <div
+                  key={p.nombre}
+                  className="flex items-center justify-center h-14 px-2"
+                  title={p.nombre}
+                >
+                  <img
+                    src={p.src}
+                    alt={p.nombre}
+                    className="max-h-10 max-w-full w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -509,7 +529,7 @@ function SeccionH2Verde() {
 
         {/* Pipeline regional */}
         <div className="mb-10">
-          <h3 className="font-bold text-gray-900 text-lg mb-4">Pipeline regional</h3>
+          <h3 className="font-bold text-gray-900 text-lg mb-4">Otros proyectos en pipeline</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg">
             {PIPELINE_H2.map((p) => (
               <div key={p.nombre} className="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
