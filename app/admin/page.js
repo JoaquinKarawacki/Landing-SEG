@@ -18,6 +18,7 @@ const CAMPOS_NOVEDADES = [
   { name: "descripcion", label: "Descripción", type: "textarea" },
   { name: "href",        label: "Link",        type: "text",     placeholder: "https://linkedin.com/..." },
   { name: "Imagen",      label: "Imagen",      type: "file",     accept: "image/*", fileType: "imagen" },
+  { name: "posicion",   label: "Posición",    type: "text",     placeholder: "object-top / object-center / object-bottom", optional: true },
 ];
 
 const NOTAS = [
@@ -89,7 +90,7 @@ function FormularioNuevo({ campos, onAgregar, onSubir, limite }) {
               onChange={e => setForm(p => ({ ...p, [c.name]: e.target.value }))}
               placeholder={c.placeholder || ""}
               className={inputClass}
-              required
+              required={!c.optional}
             />
           )}
         </div>
