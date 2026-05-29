@@ -18,7 +18,11 @@ const CAMPOS_NOVEDADES = [
   { name: "descripcion", label: "Descripción", type: "textarea" },
   { name: "href",        label: "Link",        type: "text",     placeholder: "https://linkedin.com/..." },
   { name: "Imagen",      label: "Imagen",      type: "file",     accept: "image/*", fileType: "imagen" },
-  { name: "posicion",   label: "Posición",    type: "text",     placeholder: "object-top / object-center / object-bottom", optional: true },
+  { name: "posicion",   label: "Posición de la imagen", type: "select", optional: true, opciones: [
+    { label: "Centrar imagen (por defecto)", value: "" },
+    { label: "Mostrar parte superior", value: "object-top" },
+    { label: "Mostrar parte inferior", value: "object-bottom" },
+  ]},
 ];
 
 const NOTAS = [
@@ -83,6 +87,16 @@ function FormularioNuevo({ campos, onAgregar, onSubir, limite }) {
               {subiendo[c.name] && <span className="text-xs text-gray-400">Subiendo...</span>}
               {form[c.name] && <span className="text-xs text-green-600 truncate max-w-xs">{form[c.name]}</span>}
             </div>
+          ) : c.type === "select" ? (
+            <select
+              value={form[c.name]}
+              onChange={e => setForm(p => ({ ...p, [c.name]: e.target.value }))}
+              className={inputClass}
+            >
+              {c.opciones.map(o => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
           ) : (
             <input
               type="text"
