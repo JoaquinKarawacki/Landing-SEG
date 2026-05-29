@@ -24,11 +24,11 @@ export async function POST(request) {
   const nombre = archivo.name.replace(/[^a-zA-Z0-9._-]/g, "_");
 
   const esPdf = archivo.type === "application/pdf";
-  const carpeta = esPdf ? "public" : "public/img";
+  const carpeta = esPdf ? "public" : "public/uploads";
   const rutaFisica = join(process.cwd(), carpeta, nombre);
   writeFileSync(rutaFisica, buffer);
 
-  const rutaPublica = esPdf ? `/${nombre}` : `/img/${nombre}`;
+  const rutaPublica = esPdf ? `/${nombre}` : `/uploads/${nombre}`;
   return Response.json({ ruta: rutaPublica });
 }
 
