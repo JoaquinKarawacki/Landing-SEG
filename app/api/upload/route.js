@@ -21,7 +21,7 @@ export async function POST(request) {
 
   const bytes = await archivo.arrayBuffer();
   const buffer = Buffer.from(bytes);
-  const nombre = archivo.name.replace(/\s+/g, "_");
+  const nombre = archivo.name.replace(/[^a-zA-Z0-9._-]/g, "_");
 
   const esPdf = archivo.type === "application/pdf";
   const carpeta = esPdf ? "public" : "public/img";
