@@ -97,7 +97,7 @@ function FormularioNuevo({ campos, onAgregar, onSubir, limite }) {
       {error && <p className="text-red-500 text-sm">{error}</p>}
       <button
         type="submit"
-        disabled={limite <= 0}
+        disabled={limite <= 0 || Object.values(subiendo).some(Boolean)}
         className="bg-[#ca3517] text-white px-6 py-2 rounded-full font-semibold text-sm hover:bg-[#a82d12] disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Agregar

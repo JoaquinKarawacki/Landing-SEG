@@ -9,20 +9,26 @@ export async function POST(request) {
 
   const formData = await request.formData();
   const archivo = formData.get("archivo");
-  const tipo = formData.get("tipo");
 
   if (!archivo) {
     return Response.json({ error: "No se recibió archivo" }, { status: 400 });
+  }
+  
+  const tiposPermitidos = ["image/jpeg", "image/png", "application/pdf"];
+  if (!tiposPermitidos.includes(archivo.type)) {
+    return Response.json({ error: "Formato no permitido" }, { status: 400 });
   }
 
   const bytes = await archivo.arrayBuffer();
   const buffer = Buffer.from(bytes);
   const nombre = archivo.name.replace(/\s+/g, "_");
 
-  const carpeta = tipo === "pdf" ? "public" : "public/img";
+  const esPdf = archivo.type === "application/pdf";
+  const carpeta = esPdf ? "public" : "public/img";
   const rutaFisica = join(process.cwd(), carpeta, nombre);
   writeFileSync(rutaFisica, buffer);
 
-  const rutaPublica = tipo === "pdf" ? `/${nombre}` : `/img/${nombre}`;
+  const rutaPublica = esPdf ? `/${nombre}` : `/img/${nombre}`;
   return Response.json({ ruta: rutaPublica });
 }
+
