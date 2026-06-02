@@ -91,6 +91,34 @@ function IconoMonitoreo() {
   );
 }
 
+function IconoBoltEnergy() {
+  return (
+    <svg className="w-10 h-10" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+      <path d="M38 4 L14 34 H28 L24 60 L52 28 H36 L38 4z" />
+    </svg>
+  );
+}
+
+function IconoHojaAmbiental() {
+  return (
+    <svg className="w-10 h-10" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+      <path d="M52 8C36 10 18 20 14 42c5-3 13-5 19-3-3 8-9 14-17 14 4 4 8 4 14 4 18 0 30-12 30-28 0-8-2-15-8-21z" />
+      <rect x="12" y="42" width="4" height="14" rx="2" />
+    </svg>
+  );
+}
+
+function IconoNubeEmisiones() {
+  return (
+    <svg className="w-10 h-10" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+      <path d="M46 24a12 12 0 00-23.4-3.2A10 10 0 0012 34h34a9 9 0 000-10z" />
+      <rect x="20" y="38" width="4" height="10" rx="2" />
+      <rect x="30" y="38" width="4" height="14" rx="2" />
+      <rect x="40" y="38" width="4" height="8" rx="2" />
+    </svg>
+  );
+}
+
 /* ══════════════════════════════════════════════════════════════════════════════
    SECCIÓN: HERO BANNER
 ══════════════════════════════════════════════════════════════════════════════ */
@@ -141,7 +169,7 @@ const ANCLAS_INTERNAS = [
   { etiqueta: "Propuesta de Valor", href: "#propuesta-valor" },
   { etiqueta: "Áreas de Estudio", href: "#areas-estudio" },
   { etiqueta: "Metodología", href: "#metodologia" },
-  { etiqueta: "ISO 50001", href: "#iso-50001" },
+  { etiqueta: "Gestión Integral para la Sostenibilidad", href: "#iso-50001" },
   { etiqueta: "Gestión Remota", href: "#gestion-remota" },
 ];
 
@@ -421,110 +449,197 @@ function SeccionMetodologia() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   SECCIÓN: ISO 50001
+   SECCIÓN: GESTIÓN INTEGRAL PARA LA SOSTENIBILIDAD
 ══════════════════════════════════════════════════════════════════════════════ */
+const NORMAS_ISO = [
+  {
+    codigo: "ISO 50001",
+    titulo: "Gestión de la energía",
+    foco: "FOCO ENERGÍA",
+    descripcion:
+      "Establece los requisitos para implementar un sistema que permita el uso eficiente de la energía y la mejora continua del desempeño energético.",
+    Icono: IconoBoltEnergy,
+  },
+  {
+    codigo: "ISO 14001",
+    titulo: "Gestión ambiental",
+    foco: "FOCO AMBIENTE",
+    descripcion:
+      "Define el marco para identificar, controlar y mejorar los impactos ambientales de la organización, asegurando el cumplimiento normativo.",
+    Icono: IconoHojaAmbiental,
+  },
+  {
+    codigo: "ISO 14064",
+    titulo: "Gases de efecto invernadero",
+    foco: "FOCO EMISIONES",
+    descripcion:
+      "Especifica principios y requisitos para cuantificar, reportar y verificar las emisiones de GEI y construir la huella de carbono.",
+    Icono: IconoNubeEmisiones,
+  },
+];
+
 const FASES_PHVA = [
   {
     letra: "P",
     nombre: "Planificar",
     color: "bg-[#ca3517]",
     descripcion:
-      "Establecer la política energética, los objetivos y los planes de acción necesarios para mejorar el desempeño energético.",
+      "Establecer la política, los objetivos y los planes de acción para mejorar el desempeño del sistema.",
   },
   {
     letra: "H",
     nombre: "Hacer",
     color: "bg-[#a82d12]",
     descripcion:
-      "Implementar los planes de acción definidos para alcanzar los objetivos y metas del sistema de gestión de la energía.",
+      "Implementar los planes definidos para alcanzar los objetivos y metas del sistema de gestión.",
   },
   {
     letra: "V",
     nombre: "Verificar",
     color: "bg-[#8a2410]",
     descripcion:
-      "Monitorear, medir y analizar los procesos y las características clave que determinan el desempeño energético.",
+      "Monitorear, medir y analizar los procesos y las características clave que determinan el desempeño.",
   },
   {
     letra: "A",
     nombre: "Actuar",
     color: "bg-[#6e1c0c]",
     descripcion:
-      "Tomar acciones para mejorar continuamente el desempeño del sistema de gestión de la energía.",
+      "Tomar acciones para mejorar continuamente el desempeño del sistema de gestión.",
   },
 ];
 
 const BENEFICIOS_SGE = [
-  "Reduce las emisiones de gases de efecto invernadero y de otros impactos ambientales relacionados",
-  "Reduce los costos de la energía",
-  "Mejora la productividad, confiabilidad y calidad",
-  "Autoconocimiento del uso y consumo de la energía",
-  "Mejora del desempeño energético, competitividad e imagen de la organización",
-  "Permite conocer el potencial de ahorro de la organización. Fomenta la innovación tecnológica",
-  "Integra intereses económicos y ambientales",
+  { titulo: "Reducción de emisiones de GEI",  descripcion: "Menor huella de carbono e impactos ambientales relacionados." },
+  { titulo: "Reducción de costos",             descripcion: "Menor consumo energético y de recursos, optimización operativa." },
+  { titulo: "Productividad y calidad",         descripcion: "Mejora de la confiabilidad de procesos y rendimiento." },
+  { titulo: "Conocimiento del consumo",        descripcion: "Información clara sobre el uso de energía y recursos." },
+  { titulo: "Cumplimiento normativo",          descripcion: "Cumplimiento de requisitos legales y regulatorios aplicables." },
+  { titulo: "Competitividad e imagen",         descripcion: "Diferenciación en el mercado y reputación corporativa." },
+  { titulo: "Trazabilidad y transparencia",    descripcion: "Reportes verificables hacia clientes, inversores y comunidad." },
+  { titulo: "Contribución a los ODS",          descripcion: "Alineación con la Agenda 2030 de desarrollo sostenible." },
+];
+
+const STATS_ISO = [
+  { stat: "3",    titulo: "Normas ISO integradas", sub: "Energía, ambiente y emisiones articuladas" },
+  { stat: "PHVA", titulo: "Metodología",           sub: "Mejora continua aplicada de forma sistemática" },
+  { stat: "ODS",  titulo: "Agenda 2030",           sub: "Alineación con Objetivos de Desarrollo Sostenible" },
 ];
 
 function SeccionISO50001() {
   return (
     <section id="iso-50001" className="py-16 bg-gray-50 scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center gap-4 mb-10">
-          <div className="text-[#ca3517]">
-            <IconoVerificacion />
-          </div>
+
+        {/* ── Encabezado ── */}
+        <div className="flex items-center gap-4 mb-4">
+          <div className="text-[#ca3517]"><IconoVerificacion /></div>
           <div>
-            <h2 className="text-3xl font-bold text-gray-900">ISO 50001</h2>
+            <h2 className="text-3xl font-bold text-gray-900">Gestión Integral para la Sostenibilidad</h2>
             <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
           </div>
         </div>
+        <p className="text-gray-600 text-base leading-relaxed mb-10 max-w-3xl">
+          Sistemas de gestión bajo estándares ISO para integrar eficiencia energética,
+          gestión ambiental y reducción de la huella de carbono.
+        </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Columna izquierda: PHVA */}
-          <div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">Norma PHVA</h3>
-            <p className="text-gray-600 text-sm leading-relaxed mb-8">
-              Equipo especializado en la implementación de sistemas de gestión de
-              la energía bajo el ciclo PHVA (Planificar–Hacer–Verificar–Actuar).
-            </p>
-
-            <div className="grid grid-cols-2 gap-4">
-              {FASES_PHVA.map((fase) => (
-                <div key={fase.letra} className={`${fase.color} text-white rounded-xl p-5`}>
-                  <div className="text-4xl font-black mb-2 opacity-80">{fase.letra}</div>
-                  <h4 className="font-bold text-base mb-2">{fase.nombre}</h4>
-                  <p className="text-white/80 text-xs leading-relaxed">{fase.descripcion}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Columna derecha: Beneficios */}
-          <div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">
-              Beneficios de implementar un SGE
-            </h3>
-            <p className="text-gray-600 text-sm leading-relaxed mb-6">
-              La implementación de un Sistema de Gestión de la Energía (SGE)
-              aporta ventajas tangibles tanto económicas como ambientales:
-            </p>
-
-            <ul className="space-y-3">
-              {BENEFICIOS_SGE.map((beneficio) => (
-                <li
-                  key={beneficio}
-                  className="flex items-start gap-3 bg-white rounded-lg p-4 shadow-sm border border-gray-100"
-                >
-                  <span className="flex-shrink-0 w-5 h-5 bg-[#ca3517] rounded-full flex items-center justify-center mt-0.5">
-                    <svg className="w-3 h-3 text-white" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2 6l3 3 5-5" />
-                    </svg>
-                  </span>
-                  <span className="text-gray-700 text-sm leading-relaxed">{beneficio}</span>
-                </li>
-              ))}
-            </ul>
+        {/* ── Showcase de normas ISO (gradiente rojo, 3 columnas) ── */}
+        <div className="relative rounded-2xl overflow-hidden mb-12">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#ca3517] via-[#b83015] to-[#8a2410]" />
+          <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/20">
+            {NORMAS_ISO.map((norma) => (
+              <div key={norma.codigo} className="p-8 flex flex-col">
+                <div className="text-white mb-5"><norma.Icono /></div>
+                <p className="text-xs font-bold uppercase tracking-widest text-white/50 mb-2">{norma.codigo}</p>
+                <h3 className="text-xl font-bold text-white mb-3">{norma.titulo}</h3>
+                <p className="text-white/75 text-sm leading-relaxed flex-1">{norma.descripcion}</p>
+                <span className="mt-6 self-start text-xs font-bold uppercase tracking-widest text-white/60 border border-white/25 px-3 py-1 rounded-full">
+                  {norma.foco}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
+
+        {/* ── Stats ── */}
+        <div className="grid grid-cols-3 gap-6 mb-8">
+          {STATS_ISO.map((item) => (
+            <div key={item.titulo} className="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm text-center">
+              <div className="text-[#ca3517] font-black text-6xl leading-none mb-2">{item.stat}</div>
+              <div className="w-8 h-0.5 bg-[#ca3517] mx-auto mb-3 rounded" />
+              <p className="font-bold text-gray-900 text-sm mb-1">{item.titulo}</p>
+              <p className="text-gray-500 text-xs leading-relaxed">{item.sub}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Callout: Un enfoque integral ── */}
+        <div className="border-l-4 border-[#ca3517] bg-white pl-8 pr-6 py-6 rounded-r-2xl shadow-sm mb-12">
+          <p className="text-[#ca3517] text-xs font-bold uppercase tracking-widest mb-2">PROPUESTA DE VALOR</p>
+          <h3 className="text-xl font-bold text-gray-900 mb-3">Un enfoque integral</h3>
+          <p className="text-gray-600 text-base leading-relaxed mb-2">
+            Acompañamos a las organizaciones en la implementación y certificación de sistemas
+            de gestión bajo estándares ISO.
+          </p>
+          <p className="text-gray-600 text-base leading-relaxed">
+            Articulamos eficiencia energética, gestión ambiental y reducción de la huella de
+            carbono en una estrategia única, alineada con los Objetivos de Desarrollo Sostenible.
+          </p>
+        </div>
+
+        {/* ── Ciclo PHVA ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 items-start">
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">Ciclo de mejora continua PHVA</h3>
+            <div className="w-16 h-0.5 bg-[#ca3517] mb-4 rounded" />
+            <p className="text-gray-600 text-base leading-relaxed">
+              La metodología Planificar-Hacer-Verificar-Actuar es común a las tres normas y
+              articula un proceso de mejora continua que permite consolidar resultados y elevar
+              progresivamente el desempeño del sistema de gestión.
+            </p>
+          </div>
+          <div className="space-y-3">
+            {FASES_PHVA.map((fase) => (
+              <div key={fase.letra} className="flex items-start gap-4 bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                <div className={`${fase.color} text-white w-12 h-12 rounded-lg flex items-center justify-center font-black text-2xl flex-shrink-0`}>
+                  {fase.letra}
+                </div>
+                <div>
+                  <p className="font-bold text-[#ca3517] text-sm mb-0.5">{fase.nombre}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">{fase.descripcion}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Beneficios ── */}
+        <div>
+          <h3 className="text-2xl font-bold text-gray-900 mb-2">Beneficios para la organización</h3>
+          <div className="w-16 h-0.5 bg-[#ca3517] mb-4 rounded" />
+          <p className="text-gray-600 text-base leading-relaxed mb-8 max-w-3xl">
+            Implementar estos sistemas de gestión genera valor en múltiples dimensiones
+            de la organización.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {BENEFICIOS_SGE.map((beneficio, indice) => (
+              <div
+                key={beneficio.titulo}
+                className="flex items-start gap-3 bg-white rounded-xl p-5 border border-gray-100 shadow-sm"
+              >
+                <span className="flex-shrink-0 w-8 h-8 bg-[#ca3517] rounded-lg flex items-center justify-center text-white font-black text-sm">
+                  {indice + 1}
+                </span>
+                <div className="pt-0.5">
+                  <p className="font-bold text-gray-900 text-sm mb-0.5">{beneficio.titulo}</p>
+                  <p className="text-gray-500 text-xs leading-relaxed">{beneficio.descripcion}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );
