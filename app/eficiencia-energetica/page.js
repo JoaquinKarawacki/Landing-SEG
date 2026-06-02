@@ -80,16 +80,6 @@ function IconoEngranaje() {
   );
 }
 
-function IconoMonitoreo() {
-  return (
-    <svg className="w-8 h-8" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-      <rect x="4" y="8" width="56" height="38" rx="3" />
-      <line x1="22" y1="58" x2="42" y2="58" />
-      <line x1="32" y1="46" x2="32" y2="58" />
-      <polyline points="10,36 20,24 30,30 40,16 54,22" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
 
 function IconoBoltEnergy() {
   return (
@@ -170,7 +160,7 @@ const ANCLAS_INTERNAS = [
   { etiqueta: "Áreas de Estudio", href: "#areas-estudio" },
   { etiqueta: "Metodología", href: "#metodologia" },
   { etiqueta: "Gestión Integral para la Sostenibilidad", href: "#iso-50001" },
-  { etiqueta: "Gestión Remota", href: "#gestion-remota" },
+  { etiqueta: "SEG Smart", href: "#gestion-remota" },
 ];
 
 
@@ -646,77 +636,433 @@ function SeccionISO50001() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   SECCIÓN: SISTEMA DE MONITOREO REMOTO
+   SECCIÓN: SEG SMART
 ══════════════════════════════════════════════════════════════════════════════ */
-function SeccionMonitoreoRemoto() {
+
+const STATS_SMART = [
+  { numero: "141",  unidad: "MWh", descripcion: "Ahorro de energía registrado en un cliente industrial" },
+  { numero: "7898", unidad: "kg",  descripcion: "Reducción de CO₂ validada mediante la plataforma" },
+  { numero: "128",  unidad: "loc", descripcion: "Sucursales monitoreadas en tiempo real" },
+  { numero: "77",   unidad: "%",   descripcion: "Eficiencia de caldera monitoreada vs línea base" },
+];
+
+const TAGS_SMART = [
+  { texto: "Aire comprimido",       destacado: false },
+  { texto: "Vapor y calderas",      destacado: false },
+  { texto: "Energía eléctrica",     destacado: false },
+  { texto: "Agua",                  destacado: false },
+  { texto: "Desarrollo propio SEG", destacado: true  },
+  { texto: "Multi-sucursal",        destacado: false },
+  { texto: "Acceso móvil",          destacado: false },
+  { texto: "Sensores ",             destacado: false },
+  { texto: "Medidores",             destacado: false },
+  { texto: "Controladores inteligentes", destacado: false },
+];
+
+const PANTALLAS_SMART = [
+  "Monitoreo de eficiencia · Aire comprimido",
+  "Potencia, caudal y presión · Tiempo real",
+  "Control de costos y pago · Red multi-sucursal",
+  "Curvas de carga horaria · Distribución por franja",
+];
+
+function IconoModAire() {
+  return (
+    <svg className="w-5 h-5" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+      <rect x="2" y="6" width="14" height="9" rx="2" />
+      <path d="M6 6V4a3 3 0 016 0v2" strokeLinecap="round" />
+      <circle cx="9" cy="11" r="1.5" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function IconoModCaldera() {
+  return (
+    <svg className="w-5 h-5" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+      <path d="M9 2 Q12 6 11 9 Q14 6 13 10 Q15 13 9 16 Q3 13 5 10 Q4 6 7 9 Q6 6 9 2Z" />
+    </svg>
+  );
+}
+
+function IconoModElectrica() {
+  return (
+    <svg className="w-5 h-5" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true">
+      <polygon points="9,2 5,10 8,10 7,16 13,8 10,8" />
+    </svg>
+  );
+}
+
+function IconoModAgua() {
+  return (
+    <svg className="w-5 h-5" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+      <path d="M9 2 Q5 8 5 11 Q5 15 9 15 Q13 15 13 11 Q13 8 9 2Z" />
+    </svg>
+  );
+}
+
+function IconoModMulti() {
+  return (
+    <svg className="w-5 h-5" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">
+      <rect x="2" y="5" width="14" height="9" rx="2" strokeWidth="1.4" />
+      <path d="M6 14v2M12 14v2M4 16h10" strokeLinecap="round" />
+      <rect x="4" y="9" width="2" height="3" rx="1" fill="currentColor" stroke="none" opacity="0.8" />
+      <rect x="8" y="7" width="2" height="5" rx="1" fill="currentColor" stroke="none" opacity="0.8" />
+      <rect x="12" y="8" width="2" height="4" rx="1" fill="currentColor" stroke="none" opacity="0.8" />
+    </svg>
+  );
+}
+
+function IconoModMovil() {
+  return (
+    <svg className="w-5 h-5" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">
+      <circle cx="9" cy="9" r="3" strokeWidth="1.4" />
+      <path d="M9 1v2M9 15v2M1 9h2M15 9h2M3.2 3.2l1.4 1.4M13.4 13.4l1.4 1.4M3.2 14.8l1.4-1.4M13.4 4.6l1.4-1.4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconoModTermico() {
+  return (
+    <svg className="w-5 h-5" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true">
+      <path d="M10 10.5V4a1 1 0 10-2 0v6.5a3 3 0 102 0z" />
+    </svg>
+  );
+}
+
+function IconoModCalefaccion() {
+  return (
+    <svg className="w-5 h-5" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true">
+      <rect x="1" y="6" width="3" height="8" rx="1" />
+      <rect x="5" y="6" width="3" height="8" rx="1" />
+      <rect x="9" y="6" width="3" height="8" rx="1" />
+      <rect x="13" y="4" width="4" height="10" rx="1" />
+      <rect x="1" y="4" width="16" height="3" rx="1" />
+      <rect x="1" y="13" width="16" height="2" rx="1" />
+    </svg>
+  );
+}
+
+const MODULOS_SMART = [
+  {
+    Icono: IconoModAire,
+    nombre: "Aire Comprimido",
+    descripcion: "Controlador maestro que optimiza la operación de todos los compresores en tiempo real, adaptándose a la demanda y minimizando el consumo energético.",
+    items: [
+      "Presión, caudal y potencia en tiempo real",
+      "Optimización automática de compresores",
+      "Detección de fugas y desvíos de eficiencia",
+      "Validación de ahorros con reducción de CO₂",
+    ],
+  },
+  {
+    Icono: IconoModCaldera,
+    nombre: "Calderas y Vapor",
+    descripcion: "Telemetría avanzada de calderas. Análisis continuo de combustión, eficiencia térmica y validación de ahorros frente a línea base.",
+    items: [
+      "Caudal, presión y temperatura de vapor",
+      "Análisis de humos, O₂ y combustión",
+      "Control de purgas y conductividad",
+      "Eficiencia mensual vs línea base",
+    ],
+  },
+  {
+    Icono: IconoModElectrica,
+    nombre: "Energía Eléctrica",
+    descripcion: "Gestión centralizada para redes de sucursales y plantas con control de consumo, costos, curvas de carga y validación de facturas.",
+    items: [
+      "Costos y consumo mensual por sucursal",
+      "Curvas de carga y distribución horaria",
+      "Validación de facturas energéticas",
+      "Rankings y detección de desvíos",
+    ],
+  },
+  {
+    Icono: IconoModAgua,
+    nombre: "Agua",
+    descripcion: "Monitoreo del consumo hídrico en procesos industriales y edificios con detección temprana de fugas y seguimiento de indicadores.",
+    items: [
+      "Caudal y presión en tiempo real",
+      "Detección automática de fugas",
+      "Tendencias e históricos de consumo",
+      "Alertas configurables por umbral",
+    ],
+  },
+  {
+    Icono: IconoModMulti,
+    nombre: "Gestión Multi-sucursal",
+    descripcion: "Centro de control para redes comerciales. Estandariza indicadores, genera reportes automáticos y permite comparativas entre locales.",
+    items: [
+      "KPIs de consumo y costo por m²",
+      "Control y validación de pagos",
+      "Rankings de locales eficientes",
+      "Reportes automáticos transversales",
+    ],
+  },
+  {
+    Icono: IconoModMovil,
+    nombre: "Acceso Móvil y Alarmas",
+    descripcion: "Acceso desde cualquier dispositivo con alarmas automáticas ante desvíos, historial de eventos e indicadores en tiempo real.",
+    items: [
+      "Panel accesible desde móvil y tablet",
+      "Alarmas configurables por umbral",
+      "Históricos y dashboards informativos",
+      "Reportes automáticos programables",
+    ],
+  },
+  {
+    Icono: IconoModTermico,
+    nombre: "Acondicionamiento Térmico",
+    descripcion: "Automatización y optimización de sistemas de climatización. Control inteligente de aires acondicionados y manejadoras para maximizar la eficiencia energética.",
+    items: [
+      "Control automático de aires acondicionados",
+      "Control automático de manejadoras",
+      "Seteo eficiente de temperaturas",
+      "Control de encendido y caudales de aire",
+    ],
+  },
+  {
+    Icono: IconoModCalefaccion,
+    nombre: "Calentamiento de Agua, Piscinas y Calefacción",
+    descripcion: "Implementación de sistemas de agua caliente sanitaria, calefacción y climatización de piscinas. Soluciones a medida con bombas de calor de alta y baja temperatura.",
+    items: [
+      "Implementación de bombas de calor de alta y baja temperatura",
+      "Diseño de soluciones a medida",
+      "Sistema de monitoreo y control para agua caliente sanitaria",
+      "Optimización de temperaturas",
+      "Optimización de horarios y modos de funcionamiento",
+      "Reporte de alarmas",
+    ],
+  },
+];
+
+const PASOS_SMART = [
+  { numero: "01", nombre: "Relevamiento",   descripcion: "Visita técnica, medición y registro de la instalación" },
+  { numero: "02", nombre: "Análisis",        descripcion: "Línea de base, diagnóstico y diseño del algoritmo" },
+  { numero: "03", nombre: "Propuesta",       descripcion: "Informe detallado y estimación de ahorros" },
+  { numero: "04", nombre: "Implementación",  descripcion: "Implementacion de la solución y validación in situ" },
+  { numero: "05", nombre: "Monitoreo",       descripcion: "Analisis y mejora continua de KPI" },
+];
+
+const CLIENTES_SMART = [
+  "Plaza Vea", "Mautone", "Grupo Disco", "Cementos Artigas", "CASMU", "WTC Free Zone", "Traxpalco",
+];
+
+/* ── Hero SEG Smart ── */
+function SeccionSEGSmartHero() {
   return (
     <section id="gestion-remota" className="py-16 bg-white scroll-mt-[160px]">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center gap-4 mb-10">
-          <div className="text-[#ca3517]">
-            <IconoMonitoreo />
-          </div>
-          <div>
-            <span className="inline-block text-[#ca3517] text-xs font-bold uppercase tracking-widest mb-1">
-              SEG Smart
-            </span>
-            <h2 className="text-3xl font-bold text-gray-900">Sistema de Monitoreo Remoto</h2>
-            <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
-          </div>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <p className="text-gray-600 leading-relaxed text-base mb-6">
-              SEG Smart es la plataforma de monitoreo energético remoto de SEG
-              Ingeniería. Permite visualizar en tiempo real el consumo, la demanda
-              y el factor de potencia de cada instalación, detectar desvíos
-              automáticamente y tomar decisiones basadas en datos.
-            </p>
-            <p className="text-gray-600 leading-relaxed text-base mb-8">
-              Clientes y técnicos acceden desde cualquier dispositivo a un
-              dashboard centralizado con históricos, alertas configurables e
-              informes automáticos — sin necesidad de estar en el sitio.
-            </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="https://cmie.segingenieria.com/login"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-[#ca3517] text-white px-7 py-3 rounded-full font-semibold text-sm hover:bg-[#a82d12] transition-colors duration-200"
-              >
-                <IconoMonitoreo />
-                Acceder a Gestión Remota
-              </a>
-              <Link
-                href="/contacto"
-                className="inline-flex items-center justify-center border-2 border-[#ca3517] text-[#ca3517] px-7 py-3 rounded-full font-semibold text-sm hover:bg-[#ca3517] hover:text-white transition-colors duration-200"
-              >
-                Contactar a SEG
-              </Link>
+          {/* Columna izquierda */}
+          <div>
+            <p className="text-[#ca3517] font-bold uppercase tracking-widest text-xs mb-4">
+              Desarrollo propio · SEG Smart
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-black text-gray-900 leading-tight mb-3">
+              Cuadro de Mando Integral<br className="hidden sm:block" /> de{" "}
+              <span className="text-[#ca3517]">Energía</span>
+            </h2>
+            <div className="w-16 h-1 bg-[#ca3517] mb-5 rounded" />
+            <p className="text-gray-500 text-base mb-3 font-medium">Todo el control en un solo lugar.</p>
+            <p className="text-gray-600 text-sm leading-relaxed mb-8">
+              SEG Smart es una plataforma de desarrollo propio que permite controlar, optimizar
+              y gestionar todos los energéticos de su organización desde una interfaz única.
+              A través de sensores y medidores inteligentes, la información se concentra en
+              tiempo real generando reportes, alarmas y KPIs para una gestión proactiva.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {TAGS_SMART.map((tag) => (
+                <span
+                  key={tag.texto}
+                  className={`rounded-full px-4 py-1.5 text-xs font-semibold border ${
+                    tag.destacado
+                      ? "bg-[#ca3517]/10 border-[#ca3517]/30 text-[#ca3517]"
+                      : "bg-white border-gray-200 text-gray-600"
+                  }`}
+                >
+                  {tag.texto}
+                </span>
+              ))}
             </div>
           </div>
 
-          {/* Panel visual representativo del monitoreo */}
-          <div className="bg-gray-900 rounded-xl p-6 text-green-400 font-mono text-sm shadow-2xl">
-            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-700">
-              <div className="w-3 h-3 rounded-full bg-red-500" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500" />
-              <div className="w-3 h-3 rounded-full bg-green-500" />
-              <span className="text-gray-400 text-xs ml-2">CMIE · Monitoreo Energético</span>
+          {/* Columna derecha: stats + badge */}
+          <div className="flex flex-col gap-4">
+            <div className="grid grid-cols-2 gap-4">
+              {STATS_SMART.map((stat) => (
+                <div key={stat.numero} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                  <div className="text-2xl font-black text-gray-900 leading-none mb-1">
+                    {stat.numero}
+                    <span className="text-[#ca3517] text-lg ml-0.5">{stat.unidad}</span>
+                  </div>
+                  <p className="text-gray-500 text-xs leading-relaxed">{stat.descripcion}</p>
+                </div>
+              ))}
             </div>
-            <div className="space-y-2 text-xs">
-              <p><span className="text-gray-500">›</span> Consumo actual: <span className="text-white font-bold">148.3 kWh</span></p>
-              <p><span className="text-gray-500">›</span> Demanda pico:   <span className="text-white font-bold">22.7 kW</span></p>
-              <p><span className="text-gray-500">›</span> Factor de potencia: <span className="text-green-400 font-bold">0.97</span></p>
-              <p><span className="text-gray-500">›</span> Ahorro acumulado: <span className="text-[#ca3517] font-bold">-18.4%</span></p>
-              <div className="mt-4 pt-3 border-t border-gray-700">
-                <p className="text-gray-400">Última lectura: <span className="text-white">hace 2 min</span></p>
-                <p className="text-gray-400">Estado del sistema: <span className="text-green-400">● Activo</span></p>
+            <div className="bg-white border border-gray-200 rounded-xl p-4 flex items-center gap-3 shadow-sm">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#ca3517] flex-shrink-0" />
+              <p className="text-gray-600 text-sm leading-relaxed">
+                <strong className="text-gray-900">Compatible con múltiples marcas y modelos.</strong>{" "}
+                Arquitectura escalable que se adapta a cualquier instalación industrial o comercial.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Pantallas SEG Smart ── */
+function SeccionSEGSmartPantallas() {
+  return (
+    <section className="py-16 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4">
+        <p className="text-[#ca3517] font-bold uppercase tracking-widest text-xs mb-2">
+          La plataforma en acción
+        </p>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">La plataforma en operación</h3>
+        <div className="w-16 h-0.5 bg-[#ca3517] mb-3 rounded" />
+        <p className="text-gray-500 text-sm mb-8">
+          Dashboards reales en operación — aire comprimido, calderas y gestión energética multi-sucursal.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {PANTALLAS_SMART.map((label) => (
+            <div key={label} className="rounded-xl overflow-hidden border border-gray-200 shadow-sm bg-white">
+              <div className="bg-gray-100 px-3 py-2 flex items-center gap-1.5 border-b border-gray-200">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#ca3517]" />
+                <div className="w-2.5 h-2.5 rounded-full bg-gray-300" />
+                <div className="w-2.5 h-2.5 rounded-full bg-gray-300" />
+              </div>
+              <div className="h-52 bg-gray-200 flex flex-col items-center justify-center gap-2">
+                <svg className="w-8 h-8 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <path d="M21 15l-5-5L5 21" />
+                </svg>
+                <p className="text-gray-400 text-xs">Imagen pendiente</p>
+              </div>
+              <div className="px-4 py-3 bg-white">
+                <p className="text-gray-500 text-xs">{label}</p>
               </div>
             </div>
-          </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Módulos SEG Smart ── */
+function SeccionSEGSmartModulos() {
+  return (
+    <section className="py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <p className="text-[#ca3517] font-bold uppercase tracking-widest text-xs mb-2">
+          Módulos de la plataforma
+        </p>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">Un sistema, múltiples energéticos</h3>
+        <div className="w-16 h-0.5 bg-[#ca3517] mb-4 rounded" />
+        <p className="text-gray-600 text-sm leading-relaxed mb-10 max-w-2xl">
+          Cada módulo diseñado por ingenieros especializados. No es solo monitoreo: es optimización
+          activa con algoritmos desarrollados a partir de años de experiencia en campo.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {MODULOS_SMART.map((modulo) => (
+            <article key={modulo.nombre} className="rounded-xl border border-gray-100 overflow-hidden">
+              <div className="bg-[#1a1a1a] px-5 py-4 flex items-center gap-3">
+                <div className="w-9 h-9 bg-[#ca3517] rounded-lg flex items-center justify-center flex-shrink-0 text-white">
+                  <modulo.Icono />
+                </div>
+                <h4 className="text-sm font-bold text-white">{modulo.nombre}</h4>
+              </div>
+              <div className="bg-white p-5">
+                <p className="text-gray-600 text-xs leading-relaxed mb-4">{modulo.descripcion}</p>
+                <ul className="space-y-1.5">
+                  {modulo.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-xs text-gray-600">
+                      <span className="text-[#ca3517] font-bold flex-shrink-0 mt-px">›</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Proceso de implementación ── */
+function SeccionSEGSmartProceso() {
+  return (
+    <section className="py-16 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4">
+        <p className="text-[#ca3517] font-bold uppercase tracking-widest text-xs mb-2">
+          Proceso de implementación
+        </p>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">Del diagnóstico al ahorro en 5 pasos</h3>
+        <div className="w-16 h-0.5 bg-[#ca3517] mb-4 rounded" />
+        <p className="text-gray-600 text-sm leading-relaxed mb-10 max-w-2xl">
+          Un proceso estructurado y validado en campo que garantiza resultados medibles
+          desde el primer mes de operación.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+          {PASOS_SMART.map((paso, indice) => (
+            <div key={paso.numero} className="relative">
+              {indice < PASOS_SMART.length - 1 && (
+                <div
+                  className="hidden lg:block absolute top-5 left-full h-0.5 bg-[#ca3517]/20 z-0"
+                  style={{ width: "calc(100% - 1.5rem)" }}
+                />
+              )}
+              <div className="relative z-10 bg-white rounded-xl p-5 border border-gray-100 text-center h-full">
+                <div className="w-10 h-10 bg-[#ca3517] rounded-full flex items-center justify-center text-white font-black text-sm mx-auto mb-3">
+                  {indice + 1}
+                </div>
+                <h4 className="font-bold text-gray-900 text-sm mb-2">{paso.nombre}</h4>
+                <p className="text-gray-500 text-xs leading-relaxed">{paso.descripcion}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Clientes SEG Smart (ticker automático) ── */
+function SeccionSEGSmartClientes() {
+  const items = [...CLIENTES_SMART, ...CLIENTES_SMART];
+  return (
+    <section className="py-10 bg-white border-t border-gray-100">
+      <style>{`
+        @keyframes seg-marquee {
+          from { transform: translateX(0) }
+          to   { transform: translateX(-50%) }
+        }
+        .seg-marquee { animation: seg-marquee 22s linear infinite; }
+        .seg-marquee:hover { animation-play-state: paused; }
+      `}</style>
+      <p className="text-xs font-bold uppercase tracking-widest text-gray-400 text-center mb-6">
+        Clientes que confían en SEG Smart
+      </p>
+      <div className="overflow-hidden">
+        <div className="seg-marquee flex items-center gap-6" style={{ width: "max-content" }}>
+          {items.map((nombre, i) => (
+            <div
+              key={i}
+              className="flex-shrink-0 bg-white border border-gray-200 rounded-lg px-6 py-3 min-w-[130px] flex items-center justify-center"
+            >
+              <span className="text-xs font-bold text-gray-400 uppercase tracking-wide whitespace-nowrap">
+                {nombre}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -735,7 +1081,11 @@ export default function PaginaEficienciaEnergetica() {
       <SeccionAreasEstudio />
       <SeccionMetodologia />
       <SeccionISO50001 />
-      <SeccionMonitoreoRemoto />
+      <SeccionSEGSmartHero />
+      <SeccionSEGSmartPantallas />
+      <SeccionSEGSmartModulos />
+      <SeccionSEGSmartProceso />
+      <SeccionSEGSmartClientes />
     </>
   );
 }

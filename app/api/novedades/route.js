@@ -32,13 +32,13 @@ export async function POST(request) {
     }   
     const articulo = await request.json();
     const articulos = leer();
-    if(articulos.length < 6) {
+    if(articulos.length < 12) {
         articulo.id = Date.now();
         articulos.unshift(articulo);
         guardar(articulos);
         return Response.json(articulo, { status: 201 });
     }else {
-        return Response.json({ error: "Máximo 6 artículos permitidos" }, { status: 400 });
+        return Response.json({ error: "Máximo 12 artículos permitidos" }, { status: 400 });
     }   
 }
 

@@ -29,7 +29,7 @@ export async function POST(request) {
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <div style="background: #ca3517; padding: 24px 32px;">
-        <h1 style="color: white; margin: 0; font-size: 20px;">Nueva suscripción a Indicadores Energéticos — SEG Ingeniería</h1>
+        <h1 style="color: white; margin: 0; font-size: 20px;">Nueva suscripción a Indicadores energéticos — SEG Ingeniería</h1>
       </div>
       <div style="padding: 32px; background: #f9f9f9; border: 1px solid #e5e5e5;">
         <table style="width: 100%; border-collapse: collapse;">
@@ -48,7 +48,7 @@ export async function POST(request) {
   try {
     await sendMail({
       to: process.env.MAIL_TO || "uruguay@segingenieria.com",
-      subject: `[Suscripción] Indicadores Energéticos — ${nombre.trim()}`,
+      subject: `[Suscripción] Indicadores energéticos — ${nombre.trim()}`,
       html,
       replyTo: email.trim(),
     });

@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: "Notas Metodológicas | SEG Ingeniería",
   description:
-    "Documentación técnica sobre la metodología de cálculo de los Indicadores Energéticos elaborados por SEG Ingeniería.",
+    "Documentación técnica sobre la metodología de cálculo de los Indicadores energéticos elaborados por SEG Ingeniería.",
 };
 
 /* --- Ícono documento ------------------------------------------------------- */
@@ -35,7 +35,7 @@ function SeccionHero() {
         <nav className="mb-6 text-sm text-gray-400">
           <Link href="/" className="hover:text-[#ca3517] transition-colors">Home</Link>
           <span className="mx-2 text-gray-600">›</span>
-          <Link href="/indicadores" className="hover:text-[#ca3517] transition-colors">Indicadores Energéticos</Link>
+          <Link href="/indicadores" className="hover:text-[#ca3517] transition-colors">Indicadores energéticos</Link>
           <span className="mx-2 text-gray-600">›</span>
           <span className="text-white">Notas Metodológicas</span>
         </nav>
@@ -44,12 +44,12 @@ function SeccionHero() {
           <span className="text-[#ca3517]">Metodológicas</span>
         </h1>
         <p className="text-xl sm:text-2xl text-gray-300 font-light mb-8">
-          Criterios y fuentes detrás de los Indicadores Energéticos
+          Criterios y fuentes detrás de los Indicadores energéticos
         </p>
         <div className="inline-block border-l-4 border-[#ca3517] pl-5 py-2">
           <p className="text-base sm:text-lg text-gray-200 leading-relaxed max-w-2xl">
             Documentación técnica sobre los índices, fuentes de datos y criterios de cálculo
-            utilizados en la elaboración mensual de los Indicadores Energéticos de SEG Ingeniería.
+            utilizados en la elaboración mensual de los Indicadores energéticos de SEG Ingeniería.
           </p>
         </div>
       </div>
@@ -147,7 +147,7 @@ function SeccionCTA() {
         <p className="text-white/50 uppercase text-xs tracking-widest mb-4">SEG Ingeniería</p>
         <h2 className="text-3xl font-bold mb-4">¿Querés recibir los indicadores cada mes?</h2>
         <p className="text-gray-400 leading-relaxed mb-8">
-          Suscribite para recibir el informe mensual de Indicadores Energéticos
+          Suscribite para recibir el informe mensual de Indicadores energéticos
           directamente en tu correo.
         </p>
         <Link

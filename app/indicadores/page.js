@@ -1,13 +1,13 @@
 ﻿import { readFileSync } from "fs";
 import { join } from "path";
 import Link from "next/link";
-import Image from "next/image";
+import IndicadoresGrid from "@/components/IndicadoresGrid";
 
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Indicadores Energéticos | SEG Ingeniería",
+  title: "Indicadores energéticos | SEG Ingeniería",
   description:
     "Análisis mensuales sobre el sector energético en Uruguay y la región. Tendencias, consumo, renovables y eficiencia energética.",
 };
@@ -25,19 +25,6 @@ function IconoIndicadores() {
   );
 }
 
-/* --- Ícono calendario -------------------------------------------------------- */
-function IconoCalendario() {
-  return (
-    <svg className="w-4 h-4" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
-      <rect x="4" y="12" width="56" height="48" rx="4" fillOpacity="0.15" />
-      <rect x="4" y="12" width="56" height="48" rx="4" stroke="currentColor" strokeWidth="4" fill="none" />
-      <rect x="4" y="22" width="56" height="4" />
-      <rect x="18" y="4" width="4" height="16" rx="2" />
-      <rect x="42" y="4" width="4" height="16" rx="2" />
-    </svg>
-  );
-}
-
 /* --- Hero -------------------------------------------------------------------- */
 function SeccionHero() {
   return (
@@ -48,11 +35,11 @@ function SeccionHero() {
         <nav className="mb-6 text-sm text-gray-400">
           <Link href="/" className="hover:text-[#ca3517] transition-colors">Home</Link>
           <span className="mx-2 text-gray-600">›</span>
-          <span className="text-white">Indicadores Energéticos</span>
+          <span className="text-white">Indicadores energéticos</span>
         </nav>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-5 leading-tight">
           Indicadores<br />
-          <span className="text-[#ca3517]">Energéticos</span>
+          <span className="text-[#ca3517]">energéticos</span>
         </h1>
         <p className="text-xl sm:text-2xl text-gray-300 font-light mb-8">
           Análisis mensuales del sector energético en Uruguay y la región
@@ -63,66 +50,16 @@ function SeccionHero() {
             energéticos: consumo, generación renovable, tarifas y tendencias del mercado.
           </p>
         </div>
+        <div className="mt-8">
+          <Link
+            href="/notas"
+            className="inline-block border-2 border-white/60 text-white font-semibold px-7 py-2.5 rounded-full text-sm hover:bg-white hover:text-[#ca3517] hover:border-white transition-colors duration-200"
+          >
+            Ver Notas Meteorológicas →
+          </Link>
+        </div>
       </div>
     </section>
-  );
-}
-
-/* --- Artículo card ----------------------------------------------------------- */
-function CardArticulo({ articulo }) {
-  return (
-    <article className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition-shadow duration-200">
-      {articulo.imagen ? (
-        <div className="h-44 relative overflow-hidden">
-          <Image
-            src={articulo.imagen}
-            alt={articulo.titulo}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className={`object-cover ${articulo.posicion || "object-center"}`}
-          />
-        </div>
-      ) : (
-        <div className="bg-gray-200 h-44 flex items-center justify-center">
-          <div className="text-[#ca3517]">
-            <IconoIndicadores />
-          </div>
-        </div>
-      )}
-      <div className="p-5 flex flex-col flex-1">
-        <span className="text-[#ca3517] text-xs font-bold uppercase tracking-wide mb-2">
-          Indicadores Energéticos
-        </span>
-        <h3 className="font-bold text-gray-900 text-base leading-snug mb-3">
-          <a href={articulo.href} className="hover:text-[#ca3517] transition-colors">
-            {articulo.titulo}
-          </a>
-        </h3>
-        <div className="flex items-center gap-1.5 text-gray-400 text-xs mb-3">
-          <IconoCalendario />
-          <time>{articulo.fecha}</time>
-        </div>
-        <p className="text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-3">
-          {articulo.descripcion}
-        </p>
-        {articulo.pdf && (
-          <a
-            href={articulo.pdf}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 text-[#ca3517] text-sm font-semibold hover:underline"
-          >
-            <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="12" y1="18" x2="12" y2="12" />
-              <line x1="9" y1="15" x2="15" y2="15" />
-            </svg>
-            Ver informe completo
-          </a>
-        )}
-      </div>
-    </article>
   );
 }
 
@@ -144,11 +81,7 @@ function SeccionArticulos() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {ARTICULOS.map((articulo) => (
-            <CardArticulo key={articulo.id} articulo={articulo} />
-          ))}
-        </div>
+        <IndicadoresGrid articulos={ARTICULOS} />
       </div>
     </section>
   );
@@ -167,7 +100,7 @@ function SeccionSuscripcion() {
         </h2>
         <div className="w-16 h-1 bg-[#ca3517] mx-auto mb-6 rounded" />
         <p className="text-gray-600 leading-relaxed mb-8">
-          Recibí cada mes en tu correo el informe de Indicadores Energéticos
+          Recibí cada mes en tu correo el informe de Indicadores energéticos
           elaborado por el equipo técnico de SEG Ingeniería.
         </p>
         <Link

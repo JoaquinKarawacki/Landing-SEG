@@ -6,7 +6,7 @@ import NavegacionSeccion from "@/components/NavegacionSeccion";
 export const metadata = {
   title: "Contacto — SEG Ingeniería",
   description:
-    "Contáctenos en nuestras oficinas de Uruguay y Chile. Suscripción a Indicadores Energéticos y oportunidades de trabajo en SEG Ingeniería.",
+    "Contáctenos en nuestras oficinas de Uruguay y Chile. Suscripción a Indicadores energéticos y oportunidades de trabajo en SEG Ingeniería.",
 };
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -112,7 +112,7 @@ function SeccionHero() {
 ══════════════════════════════════════════════════════════════════════════════ */
 const ANCLAS = [
   { etiqueta: "Formulario de Contacto", href: "#formulario"  },
-  { etiqueta: "Indicadores Energéticos", href: "#indicadores" },
+  { etiqueta: "Indicadores energéticos", href: "#indicadores" },
   { etiqueta: "Trabajar en SEG",         href: "#trabaja"     },
 ];
 
@@ -271,13 +271,13 @@ function SeccionIndicadores() {
                 <IconoIndicadores className="w-8 h-8" />
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-gray-900">Indicadores Energéticos</h2>
+                <h2 className="text-3xl font-bold text-gray-900">Indicadores energéticos</h2>
                 <div className="w-16 h-1 bg-[#ca3517] mt-2 rounded" />
               </div>
             </div>
 
             <p className="text-gray-600 leading-relaxed text-base mb-6">
-              ¿Desea recibir en su correo electrónico nuestros Indicadores Energéticos?
+              ¿Desea recibir en su correo electrónico nuestros Indicadores energéticos?
             </p>
             <p className="text-gray-600 leading-relaxed text-base mb-6">
               Complete el siguiente formulario para sumarse a nuestra base de

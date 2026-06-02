@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 
@@ -241,13 +241,13 @@ const campos = pestaña === "indicadores" ? CAMPOS_INDICADORES : pestaña === "n
           onClick={() => setPestaña("indicadores")}
           className={`px-6 py-2 rounded-full font-semibold text-sm ${pestaña === "indicadores" ? "bg-[#ca3517] text-white" : "bg-gray-100 text-gray-700"}`}
         >
-          Indicadores ({indicadores.length}/6)
+          Indicadores ({indicadores.length}/12)
         </button>
         <button
           onClick={() => setPestaña("novedades")}
           className={`px-6 py-2 rounded-full font-semibold text-sm ${pestaña === "novedades" ? "bg-[#ca3517] text-white" : "bg-gray-100 text-gray-700"}`}
         >
-          Novedades ({novedades.length}/6)
+          Novedades ({novedades.length}/12)
         </button>
          <button
           onClick={() => setPestaña("notas")}
@@ -260,7 +260,7 @@ const campos = pestaña === "indicadores" ? CAMPOS_INDICADORES : pestaña === "n
       <FormularioNuevo
         key={pestaña}
         campos={campos}
-        limite={6 - articulos.length}
+        limite={12 - articulos.length}
         onAgregar={datos => agregar(pestaña, datos)}
         onSubir={subir}
       />

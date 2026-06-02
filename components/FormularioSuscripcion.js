@@ -51,7 +51,7 @@ export default function FormularioSuscripcion() {
         </div>
         <h3 className="text-xl font-bold text-gray-900">¡Suscripción registrada!</h3>
         <p className="text-gray-600 text-sm max-w-xs">
-          Te sumaremos a la lista de distribución de Indicadores Energéticos.
+          Te sumaremos a la lista de distribución de Indicadores energéticos.
         </p>
       </div>
     );

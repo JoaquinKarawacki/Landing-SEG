@@ -53,7 +53,7 @@ const COLUMNAS_NAV = [
     id: "articulos",
     titulo: "Artículos",
     links: [
-      { etiqueta: "Indicadores Energéticos", href: "/indicadores" },
+      { etiqueta: "Indicadores energéticos", href: "/indicadores" },
       { etiqueta: "Novedades", href: "/novedades" },
       { etiqueta: "Notas metodológicas", href: "/notas" },
       { etiqueta: "Prensa", href: "/prensa" },

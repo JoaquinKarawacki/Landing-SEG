@@ -152,13 +152,13 @@ export default function SobreYIndicadores() {
                     <span className="text-[#ca3517] text-xs font-bold uppercase tracking-wide mb-1">
                       {articulo.periodo}
                     </span>
-                    <h3 className="font-bold text-gray-900 text-sm leading-snug mb-1.5">
+                    <h3 className="font-bold text-gray-900 text-lg leading-snug mb-1.5">
                       <Link
                         href={articulo.href} className="hover:text-[#ca3517] transition-colors">
                         {articulo.titulo}
                       </Link>
                     </h3>
-                    <p className="text-gray-500 text-xs leading-relaxed">
+                    <p className="text-gray-600 text-base leading-relaxed line-clamp-2">
                       {articulo.descripcion}
                     </p>
                   </div>
