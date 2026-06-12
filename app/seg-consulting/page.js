@@ -117,7 +117,6 @@ const ANCLAS = [
   { etiqueta: "Propuesta de valor", href: "#propuesta-valor" },
   { etiqueta: "Servicios",          href: "#servicios"        },
   { etiqueta: "Experiencia",        href: "#experiencia"      },
-  { etiqueta: "Clientes y socios",  href: "#clientes"         },
   { etiqueta: "Contacto",           href: "#contacto"         },
 ];
 
@@ -193,7 +192,7 @@ const AREAS_EMERGENTES = [
     Icono: IconoMovilidad,
     titulo: "Movilidad Sostenible",
     descripcion: "Apoyo técnico, regulatorio y financiero a iniciativas de descarbonización del transporte — flotas, transporte público, vehículos pesados e infraestructura de carga.",
-    nota: "Proyecto actual: Política Nacional de Movilidad Urbana — Grupo de Trabajo con 4 Ministerios",
+    nota: null,
   },
   {
     id: "duediligence",
@@ -660,7 +659,6 @@ export default function PaginaSEGConsulting() {
       <SeccionServicios />
       <SeccionExperiencia />
       <SeccionMetricas />
-      <SeccionClientes />
       <SeccionContacto />
       <SeccionCTA />
     </>
