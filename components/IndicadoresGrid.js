@@ -61,22 +61,12 @@ function CardArticulo({ articulo }) {
         <p className="text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-3">
           {articulo.descripcion}
         </p>
-        {articulo.pdf && (
-          <a
-            href={articulo.pdf}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 text-[#ca3517] text-sm font-semibold hover:underline"
-          >
-            <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="12" y1="18" x2="12" y2="12" />
-              <line x1="9" y1="15" x2="15" y2="15" />
-            </svg>
-            Descargar el reporte
-          </a>
-        )}
+        <a
+          href={articulo.href}
+          className="mt-4 inline-flex items-center gap-1 text-[#ca3517] text-sm font-semibold hover:underline"
+        >
+          Ver reporte →
+        </a>
       </div>
     </article>
   );

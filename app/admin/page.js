@@ -3,12 +3,12 @@
 import { useState } from "react";
 
 const CAMPOS_INDICADORES = [
-  { name: "titulo",      label: "Título",      type: "text" },
-  { name: "fecha",       label: "Fecha",       type: "text",     placeholder: "26/04/2026" },
-  { name: "mes",         label: "Mes",         type: "text",     placeholder: "Abril 2026" },
-  { name: "descripcion", label: "Descripción", type: "textarea" },
-  { name: "pdf",         label: "PDF",         type: "file",     accept: ".pdf", fileType: "pdf" },
-  { name: "imagen",      label: "Imagen",      type: "file",     accept: "image/*", fileType: "imagen" },
+  { name: "mes",         label: "Mes de edición",        type: "text",     placeholder: "Abril 2026", hint: "Genera la URL: /indicadores/abril-2026" },
+  { name: "titulo",      label: "Título del comentario", type: "text" },
+  { name: "fecha",       label: "Fecha de publicación",  type: "text",     placeholder: "26/04/2026" },
+  { name: "descripcion", label: "Primer párrafo",        type: "textarea" },
+  { name: "imagen",      label: "Imagen de portada",     type: "file",     accept: "image/*", fileType: "imagen" },
+  { name: "pdf",         label: "PDF del reporte",       type: "file",     accept: ".pdf", fileType: "pdf" },
 ];
 
 const CAMPOS_NOVEDADES = [
@@ -68,6 +68,7 @@ function FormularioNuevo({ campos, onAgregar, onSubir, limite }) {
       {campos.map(c => (
         <div key={c.name}>
           <label className="block text-xs font-semibold text-gray-600 mb-1">{c.label}</label>
+          {c.hint && <p className="text-xs text-gray-400 mb-1">{c.hint}</p>}
           {c.type === "textarea" ? (
             <textarea
               value={form[c.name]}
