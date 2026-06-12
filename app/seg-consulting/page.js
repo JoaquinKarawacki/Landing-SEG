@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import NavegacionSeccion from "@/components/NavegacionSeccion";
 import ExperienciaGrid from "./ExperienciaGrid";
 import FormularioConsulting from "./FormularioConsulting";
@@ -530,18 +529,15 @@ function SeccionExperiencia() {
           </div>
         </div>
 
-        {/* Mapa de presencia */}
-        <div className="mb-10 flex flex-col items-center">
-          <div className="relative w-full max-w-2xl rounded-xl overflow-hidden border border-gray-100 shadow-sm">
-            <Image
-              src="/img/consulting.png"
-              alt="Presencia de SEG Consulting en América Latina y el Caribe"
-              width={800}
-              height={360}
-              className="w-full object-cover"
-            />
+        {/* Presencia regional */}
+        <div className="mb-10 bg-gray-900 rounded-xl px-8 py-7 text-white">
+          <p className="text-[#ca3517] font-bold uppercase tracking-widest text-xs mb-3">Presencia regional</p>
+          <p className="text-white font-bold text-lg mb-4">13+ países en América Latina y el Caribe</p>
+          <div className="flex flex-wrap gap-2">
+            {["Uruguay","Argentina","Rep. Dominicana","Belice","Guyana","Granada","Santa Lucía","Brasil","Chile","Colombia","Perú","México","Paraguay"].map(p => (
+              <span key={p} className="border border-white/20 text-white/80 text-xs font-medium px-3 py-1 rounded-full">{p}</span>
+            ))}
           </div>
-          <p className="text-gray-400 text-xs mt-2">Presencia en 13+ países de América Latina y el Caribe</p>
         </div>
 
         <ExperienciaGrid proyectos={PROYECTOS} />
