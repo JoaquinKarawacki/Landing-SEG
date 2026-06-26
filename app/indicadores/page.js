@@ -1,5 +1,5 @@
 ﻿import { readFileSync } from "fs";
-import { join } from "path";
+import { getDataFile } from "@/lib/storage";
 import Link from "next/link";
 import IndicadoresGrid from "@/components/IndicadoresGrid";
 
@@ -66,7 +66,7 @@ function SeccionHero() {
 /* --- Sección listado de artículos ------------------------------------------- */
 function SeccionArticulos() {
   const ARTICULOS = JSON.parse(
-    readFileSync(join(process.cwd(), "data/indicadores.json"), "utf-8")
+    readFileSync(getDataFile("indicadores.json"), "utf-8")
   );
   return (
     <section className="py-16 bg-white">

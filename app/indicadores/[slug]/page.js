@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import { join } from "path";
+import { getDataFile } from "@/lib/storage";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,7 +7,7 @@ import Image from "next/image";
 export const dynamic = "force-dynamic";
 
 function leerIndicadores() {
-  return JSON.parse(readFileSync(join(process.cwd(), "data/indicadores.json"), "utf-8"));
+  return JSON.parse(readFileSync(getDataFile("indicadores.json"), "utf-8"));
 }
 
 export async function generateMetadata({ params }) {

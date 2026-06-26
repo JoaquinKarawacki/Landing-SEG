@@ -1,5 +1,5 @@
 ﻿import { readFileSync } from "fs";
-import { join } from "path";
+import { getDataFile } from "@/lib/storage";
 import Link from "next/link";
 import NovedadesGrid from "@/components/NovedadesGrid";
 
@@ -59,7 +59,7 @@ function SeccionHero() {
 /* --- Sección listado --------------------------------------------------------- */
 function SeccionArticulos() {
   const ARTICULOS = JSON.parse(
-    readFileSync(join(process.cwd(), "data/novedades.json"), "utf-8")
+    readFileSync(getDataFile("novedades.json"), "utf-8")
   );
   return (
     <section className="py-16 bg-white">

@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from "fs";
-import { join } from "path";
+import { getDataFile } from "@/lib/storage";
 
 
 function validarToken(request) {
@@ -8,15 +8,11 @@ function validarToken(request) {
 }   
 
 function leer(){
-    const ARTICULOS = JSON.parse(
-    readFileSync(join(process.cwd(), "data/novedades.json"), "utf-8")
-    );
-
-    return ARTICULOS;
+    return JSON.parse(readFileSync(getDataFile("novedades.json"), "utf-8"));
 }
 
 function guardar(articulos) {
-    writeFileSync(join(process.cwd(), "data/novedades.json"), JSON.stringify(articulos), "utf-8");
+    writeFileSync(getDataFile("novedades.json"), JSON.stringify(articulos), "utf-8");
 }
 
 export function GET(request) {

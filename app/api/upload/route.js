@@ -1,5 +1,5 @@
-import { writeFileSync, mkdirSync } from "fs";
-import { join } from "path";
+import { writeFileSync } from "fs";
+import { getUploadDir } from "@/lib/storage";
 
 export async function POST(request) {
   const token = request.headers.get("x-admin-token");
@@ -23,19 +23,15 @@ export async function POST(request) {
   const buffer = Buffer.from(bytes);
   const nombre = archivo.name.replace(/[^a-zA-Z0-9._-]/g, "_");
 
-  const esPdf = archivo.type === "application/pdf" || archivo.name.endsWith(".pdf");
-  const carpeta = esPdf ? "public" : "public/uploads";
-  const rutaFisica = join(process.cwd(), carpeta, nombre);
+  const rutaFisica = `${getUploadDir()}/${nombre}`;
 
   try {
-    mkdirSync(join(process.cwd(), carpeta), { recursive: true });
     writeFileSync(rutaFisica, buffer);
   } catch (err) {
     console.error("Error guardando archivo:", err);
     return Response.json({ error: "No se pudo guardar el archivo." }, { status: 500 });
   }
 
-  const rutaPublica = esPdf ? `/${nombre}` : `/uploads/${nombre}`;
-  return Response.json({ ruta: rutaPublica });
+  return Response.json({ ruta: `/api/archivos/uploads/${nombre}` });
 }
 

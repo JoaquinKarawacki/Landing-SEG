@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from "fs";
-import { join } from "path";
+import { getDataFile } from "@/lib/storage";
 
 function validarToken(request) {
     const token = request.headers.get("x-admin-token");
@@ -16,11 +16,11 @@ function generarSlug(mes) {
 }
 
 function leer() {
-    return JSON.parse(readFileSync(join(process.cwd(), "data/indicadores.json"), "utf-8"));
+    return JSON.parse(readFileSync(getDataFile("indicadores.json"), "utf-8"));
 }
 
 function guardar(articulos) {
-    writeFileSync(join(process.cwd(), "data/indicadores.json"), JSON.stringify(articulos), "utf-8");
+    writeFileSync(getDataFile("indicadores.json"), JSON.stringify(articulos), "utf-8");
 }
 
 export function GET(request) {

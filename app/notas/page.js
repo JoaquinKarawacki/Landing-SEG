@@ -1,5 +1,5 @@
 import { readFileSync } from "fs";
-import { join } from "path";
+import { getDataFile } from "@/lib/storage";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -114,7 +114,7 @@ function CardNota({ nota }) {
 
 function SeccionNotas() {
     const NOTAS = JSON.parse(
-    readFileSync(join(process.cwd(), "data/notas.json"), "utf-8")
+    readFileSync(getDataFile("notas.json"), "utf-8")
   );
   return (
     <section className="py-16 bg-white">
