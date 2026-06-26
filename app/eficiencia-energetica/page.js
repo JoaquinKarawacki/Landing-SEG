@@ -660,10 +660,10 @@ const TAGS_SMART = [
 ];
 
 const PANTALLAS_SMART = [
-  { label: "Monitoreo de eficiencia · Aire comprimido", src: "/img/seg-smart/image1.jpg" },
-  { label: "Potencia, caudal y presión · Tiempo real", src: "/img/seg-smart/image2.jpg" },
-  { label: "Control de costos y pago · Red multi-sucursal", src: "/img/seg-smart/image3.jpg" },
-  { label: "Curvas de carga horaria · Distribución por franja", src: "/img/seg-smart/image4.jpg" },
+  { label: "Presión y volumen diario · Aire comprimido", src: "/img/seg-smart/image1.jpg" },
+  { label: "Diagrama de red · Estado de compresores en tiempo real", src: "/img/seg-smart/image2.jpg" },
+  { label: "Potencia y caudal instantáneo · Análisis en tiempo real", src: "/img/seg-smart/image3.jpg" },
+  { label: "KPIs de eficiencia · Ahorro energético y reducción de CO₂", src: "/img/seg-smart/image4.jpg" },
 ];
 
 function IconoModAire() {
