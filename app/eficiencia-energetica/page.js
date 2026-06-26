@@ -660,10 +660,10 @@ const TAGS_SMART = [
 ];
 
 const PANTALLAS_SMART = [
-  "Monitoreo de eficiencia · Aire comprimido",
-  "Potencia, caudal y presión · Tiempo real",
-  "Control de costos y pago · Red multi-sucursal",
-  "Curvas de carga horaria · Distribución por franja",
+  { label: "Monitoreo de eficiencia · Aire comprimido", src: "/img/seg-smart/image1.jpg" },
+  { label: "Potencia, caudal y presión · Tiempo real", src: "/img/seg-smart/image2.jpg" },
+  { label: "Control de costos y pago · Red multi-sucursal", src: "/img/seg-smart/image3.jpg" },
+  { label: "Curvas de carga horaria · Distribución por franja", src: "/img/seg-smart/image4.jpg" },
 ];
 
 function IconoModAire() {
@@ -929,20 +929,15 @@ function SeccionSEGSmartPantallas() {
           Dashboards reales en operación — aire comprimido, calderas y gestión energética multi-sucursal.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {PANTALLAS_SMART.map((label) => (
+          {PANTALLAS_SMART.map(({ label, src }) => (
             <div key={label} className="rounded-xl overflow-hidden border border-gray-200 shadow-sm bg-white">
               <div className="bg-gray-100 px-3 py-2 flex items-center gap-1.5 border-b border-gray-200">
                 <div className="w-2.5 h-2.5 rounded-full bg-[#ca3517]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-gray-300" />
                 <div className="w-2.5 h-2.5 rounded-full bg-gray-300" />
               </div>
-              <div className="h-52 bg-gray-200 flex flex-col items-center justify-center gap-2">
-                <svg className="w-8 h-8 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                  <circle cx="8.5" cy="8.5" r="1.5" />
-                  <path d="M21 15l-5-5L5 21" />
-                </svg>
-                <p className="text-gray-400 text-xs">Imagen pendiente</p>
+              <div className="h-52 relative overflow-hidden">
+                <img src={src} alt={label} className="w-full h-full object-cover" />
               </div>
               <div className="px-4 py-3 bg-white">
                 <p className="text-gray-500 text-xs">{label}</p>
