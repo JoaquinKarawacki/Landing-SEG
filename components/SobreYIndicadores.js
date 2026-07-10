@@ -1,5 +1,5 @@
 ﻿import { readFileSync } from "fs";
-import { join } from "path";
+import { getDataFile } from "@/lib/storage";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -79,7 +79,7 @@ function PlaceholderImagen({ descripcion, className }) {
 /* --- Sección "Sobre SEG" + "Indicadores energéticos" (2 columnas) ----------- */
 export default function SobreYIndicadores() {
    const ARTICULOS_INDICADORES = JSON.parse(
-        readFileSync(join(process.cwd(), "data/indicadores.json"), "utf-8"));
+        readFileSync(getDataFile("indicadores.json"), "utf-8"));
   return (
     <section className="py-16 bg-white" aria-label="Sobre SEG e Indicadores">
       <div className="max-w-7xl mx-auto px-4">
@@ -143,14 +143,14 @@ export default function SobreYIndicadores() {
                     </Link>
                   ) : (
                     <PlaceholderImagen
-                      descripcion={`Imagen\n${articulo.periodo}`}
+                      descripcion={`Imagen\n${articulo.mes}`}
                       className="flex-shrink-0 w-24 h-20"
                     />
                   )}
 
                   <div className="flex flex-col justify-center">
                     <span className="text-[#ca3517] text-xs font-bold uppercase tracking-wide mb-1">
-                      {articulo.periodo}
+                      {articulo.mes}
                     </span>
                     <h3 className="font-bold text-gray-900 text-lg leading-snug mb-1.5">
                       <Link

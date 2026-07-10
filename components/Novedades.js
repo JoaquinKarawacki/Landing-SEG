@@ -1,5 +1,5 @@
 ﻿import { readFileSync } from "fs";
-import { join } from "path";
+import { getDataFile } from "@/lib/storage";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -62,7 +62,7 @@ function CardNovedad({ novedad }) {
 /* --- Sección Últimas Novedades ---------------------------------------------- */
 export default function Novedades() {
     const NOVEDADES = JSON.parse(
-    readFileSync(join(process.cwd(), "data/novedades.json"), "utf-8")
+    readFileSync(getDataFile("novedades.json"), "utf-8")
   );
   return (
     <section className="py-16 relative overflow-hidden" aria-label="Últimas novedades">
