@@ -1,6 +1,6 @@
 import { readFileSync, existsSync } from "fs";
 import { join, extname } from "path";
-import { getUploadDir } from "@/lib/storage";
+import { getStorageRoot } from "@/lib/storage";
 
 const MIME = {
   ".pdf": "application/pdf",
@@ -12,7 +12,7 @@ const MIME = {
 
 export async function GET(request, { params }) {
   const segments = (await params).path;
-  const filePath = join(getUploadDir(), ...segments);
+  const filePath = join(getStorageRoot(), ...segments);
 
   if (!existsSync(filePath)) {
     return new Response("No encontrado", { status: 404 });
