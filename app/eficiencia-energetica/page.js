@@ -639,11 +639,11 @@ function SeccionISO50001() {
    SECCIÓN: SEG SMART
 ══════════════════════════════════════════════════════════════════════════════ */
 
-const STATS_SMART = [
-  { numero: "141",  unidad: "MWh", descripcion: "Ahorro de energía registrado en un cliente industrial" },
-  { numero: "7898", unidad: "kg",  descripcion: "Reducción de CO₂ validada mediante la plataforma" },
-  { numero: "128",  unidad: "loc", descripcion: "Sucursales monitoreadas en tiempo real" },
-  { numero: "77",   unidad: "%",   descripcion: "Eficiencia de caldera monitoreada vs línea base" },
+const CAPACIDADES_SMART = [
+  { titulo: "Tiempo real",       descripcion: "Monitoreo continuo 24/7 de todos los energéticos" },
+  { titulo: "Multi-sucursal",    descripcion: "Gestión centralizada de múltiples ubicaciones desde una sola interfaz" },
+  { titulo: "Alertas automáticas", descripcion: "Notificaciones ante desvíos, fallas o consumos anómalos" },
+  { titulo: "Reportes y KPIs",   descripcion: "Indicadores de eficiencia y evolución del consumo" },
 ];
 
 const TAGS_SMART = [
@@ -891,13 +891,12 @@ function SeccionSEGSmartHero() {
           {/* Columna derecha: stats + badge */}
           <div className="flex flex-col gap-4">
             <div className="grid grid-cols-2 gap-4">
-              {STATS_SMART.map((stat) => (
-                <div key={stat.numero} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
-                  <div className="text-2xl font-black text-gray-900 leading-none mb-1">
-                    {stat.numero}
-                    <span className="text-[#ca3517] text-lg ml-0.5">{stat.unidad}</span>
+              {CAPACIDADES_SMART.map((cap) => (
+                <div key={cap.titulo} className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+                  <div className="text-base font-black text-[#ca3517] leading-none mb-2">
+                    {cap.titulo}
                   </div>
-                  <p className="text-gray-500 text-xs leading-relaxed">{stat.descripcion}</p>
+                  <p className="text-gray-500 text-xs leading-relaxed">{cap.descripcion}</p>
                 </div>
               ))}
             </div>
