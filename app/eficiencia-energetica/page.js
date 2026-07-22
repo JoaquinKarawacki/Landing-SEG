@@ -651,6 +651,7 @@ const TAGS_SMART = [
   { texto: "Vapor y calderas",      destacado: false },
   { texto: "Energía eléctrica",     destacado: false },
   { texto: "Agua",                  destacado: false },
+  { texto: "HVAC",                  destacado: false },
   { texto: "Desarrollo propio SEG", destacado: true  },
   { texto: "Multi-sucursal",        destacado: false },
   { texto: "Acceso móvil",          destacado: false },
@@ -1044,7 +1045,7 @@ function SeccionSEGSmartClientes() {
         .seg-marquee:hover { animation-play-state: paused; }
       `}</style>
       <p className="text-xs font-bold uppercase tracking-widest text-gray-400 text-center mb-6">
-        Clientes que confían en SEG Smart
+        Clientes que confían en SEG Ingeniería
       </p>
       <div className="overflow-hidden">
         <div className="seg-marquee flex items-center gap-6" style={{ width: "max-content" }}>
