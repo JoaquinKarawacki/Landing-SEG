@@ -1,5 +1,6 @@
 ﻿import { readFileSync } from "fs";
 import { getDataFile } from "@/lib/storage";
+import { ordenarPorFecha } from "@/lib/indicadores";
 import Link from "next/link";
 import IndicadoresGrid from "@/components/IndicadoresGrid";
 
@@ -65,8 +66,8 @@ function SeccionHero() {
 
 /* --- Sección listado de artículos ------------------------------------------- */
 function SeccionArticulos() {
-  const ARTICULOS = JSON.parse(
-    readFileSync(getDataFile("indicadores.json"), "utf-8")
+  const ARTICULOS = ordenarPorFecha(
+    JSON.parse(readFileSync(getDataFile("indicadores.json"), "utf-8"))
   );
   return (
     <section className="py-16 bg-white">

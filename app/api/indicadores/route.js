@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from "fs";
 import { getDataFile } from "@/lib/storage";
+import { ordenarPorFecha } from "@/lib/indicadores";
 
 function validarToken(request) {
     const token = request.headers.get("x-admin-token");
@@ -24,7 +25,7 @@ function guardar(articulos) {
 }
 
 export function GET(request) {
-    return Response.json(leer());
+    return Response.json(ordenarPorFecha(leer()));
 }
 
 export async function POST(request) {
