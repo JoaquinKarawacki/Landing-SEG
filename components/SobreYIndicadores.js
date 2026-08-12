@@ -1,5 +1,6 @@
 ﻿import { readFileSync } from "fs";
 import { getDataFile } from "@/lib/storage";
+import { ordenarPorFecha } from "@/lib/indicadores";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -78,8 +79,8 @@ function PlaceholderImagen({ descripcion, className }) {
 
 /* --- Sección "Sobre SEG" + "Indicadores energéticos" (2 columnas) ----------- */
 export default function SobreYIndicadores() {
-   const ARTICULOS_INDICADORES = JSON.parse(
-        readFileSync(getDataFile("indicadores.json"), "utf-8"));
+   const ARTICULOS_INDICADORES = ordenarPorFecha(
+        JSON.parse(readFileSync(getDataFile("indicadores.json"), "utf-8")));
   return (
     <section className="py-16 bg-white" aria-label="Sobre SEG e Indicadores">
       <div className="max-w-7xl mx-auto px-4">
