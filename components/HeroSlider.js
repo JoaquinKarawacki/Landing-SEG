@@ -317,8 +317,8 @@ function PanelDecorativo({ slide }) {
   return (
     <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
       <FondoDecorativo variante={slide.id} />
-      <Icono className="relative z-[1] w-24 h-24 md:w-36 md:h-36 text-white/[0.07]" />
-      <div className="absolute bottom-3 right-3 md:bottom-6 md:right-4 text-7xl md:text-[150px] font-black text-white/[0.04] tracking-tighter leading-none">
+      <Icono className="relative z-[1] w-20 h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 text-white/[0.07]" />
+      <div className="absolute bottom-2 right-2 md:bottom-4 md:right-3 lg:bottom-6 lg:right-4 text-6xl md:text-8xl lg:text-[150px] font-black text-white/[0.04] tracking-tighter leading-none">
         {slide.bigLabel}
       </div>
     </div>
@@ -328,13 +328,13 @@ function PanelDecorativo({ slide }) {
 function ContenidoSlide({ slide }) {
   return (
     <div className="flex flex-col justify-center h-full px-6 pt-8 pb-20 sm:px-12 sm:py-10 md:px-16 md:py-12">
-      <div className="flex items-center gap-2 sm:gap-3 mb-2.5 sm:mb-5">
-        <span className="text-[10px] sm:text-xs font-bold tracking-[2px] sm:tracking-[2.5px] uppercase text-white/40">{slide.unidad}</span>
-        <span className="w-px h-3 sm:h-4 bg-white/20" />
-        <span className="text-[10px] sm:text-xs font-bold tracking-[1.5px] sm:tracking-[2px] uppercase text-[#ff8a70]/85">{slide.subtag}</span>
+      <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 sm:gap-3 mb-4 sm:mb-5 md:mb-6">
+        <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-[2px] sm:tracking-[2.5px] uppercase text-white/40">{slide.unidad}</span>
+        <span className="hidden sm:block w-px h-4 bg-white/20" />
+        <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-[1.5px] sm:tracking-[2px] uppercase text-[#ff8a70]/85">{slide.subtag}</span>
       </div>
-      <p className="text-[11px] sm:text-sm font-semibold tracking-[1.5px] sm:tracking-[2px] uppercase text-white/25 mb-1 sm:mb-2">{slide.pretitulo}</p>
-      <h2 className="text-3xl sm:text-4xl md:text-[62px] lg:text-[76px] font-black uppercase leading-[0.97] sm:leading-[0.95] tracking-tight text-white mb-3 sm:mb-6">
+      <p className="text-[11px] sm:text-sm md:text-base font-semibold tracking-[1.5px] sm:tracking-[2px] uppercase text-white/25 mb-2.5 sm:mb-2.5 md:mb-3">{slide.pretitulo}</p>
+      <h2 className="text-3xl sm:text-4xl md:text-[62px] lg:text-[76px] font-black uppercase leading-[0.97] sm:leading-[0.95] tracking-tight text-white mb-3 sm:mb-4 md:mb-6">
         {slide.titulo}
         {slide.tituloRojo && (
           <>
@@ -343,12 +343,12 @@ function ContenidoSlide({ slide }) {
           </>
         )}
       </h2>
-      <p className="text-sm sm:text-base md:text-lg font-light text-white/45 leading-relaxed mb-4 sm:mb-7 max-w-[480px]">{slide.subtitulo}</p>
-      <div className="flex flex-wrap gap-1.5 sm:gap-2.5">
+      <p className="text-sm sm:text-base md:text-lg font-light text-white/45 leading-relaxed mb-4 sm:mb-5 md:mb-7 max-w-[480px] md:max-w-[560px]">{slide.subtitulo}</p>
+      <div className="flex flex-wrap gap-1.5 sm:gap-2 md:gap-2.5">
         {slide.pills.map((pill) => (
           <span
             key={pill}
-            className="text-[10px] sm:text-xs font-semibold tracking-[0.3px] px-3 py-1 sm:px-4 sm:py-1.5 rounded-full border border-[#ca3517]/35 text-[#f3a08e] bg-[#ca3517]/[0.07] whitespace-nowrap"
+            className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.3px] px-3 py-1 sm:px-3.5 sm:py-1.5 md:px-4 rounded-full border border-[#ca3517]/35 text-[#f3a08e] bg-[#ca3517]/[0.07] whitespace-nowrap"
           >
             {pill}
           </span>
@@ -391,26 +391,26 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative bg-[#111] overflow-hidden min-h-[420px] md:min-h-0 md:h-[680px]"
+      className="relative bg-[#111] overflow-hidden min-h-[420px] md:min-h-[480px] lg:min-h-0 lg:h-[680px]"
       aria-label="Slider de unidades de negocio"
     >
       {SLIDES.map((s, indice) => {
         const esActual = indice === indiceActual;
         const contenido = (
-          <div className="flex flex-col md:flex-row w-full h-full">
-            <div className="flex-1 md:flex-[0_0_62%] bg-[#111] relative z-[2]">
+          <div className="flex flex-col lg:flex-row w-full h-full">
+            <div className="flex-1 lg:flex-[0_0_62%] bg-[#111] relative z-[2]">
               <ContenidoSlide slide={s} />
             </div>
-            <div className="hidden sm:block h-24 md:h-auto md:flex-1 relative">
+            <div className="hidden sm:block h-24 md:h-40 lg:h-auto lg:flex-1 relative">
               <PanelDecorativo slide={s} />
             </div>
           </div>
         );
 
-        /* Mobile: solo el slide activo se renderiza en flujo normal (alto según contenido).
-           Desktop (md+): los 10 quedan apilados en absoluto para el crossfade. */
-        const claseWrapper = `${esActual ? "block" : "hidden"} md:block md:absolute md:inset-0 w-full md:h-full transition-opacity md:duration-500 ${
-          esActual ? "md:opacity-100 md:pointer-events-auto" : "md:opacity-0 md:pointer-events-none"
+        /* Mobile/tablet (<lg): solo el slide activo se renderiza en flujo normal (alto según contenido).
+           Desktop (lg+): los 10 quedan apilados en absoluto para el crossfade de dos columnas. */
+        const claseWrapper = `${esActual ? "block" : "hidden"} lg:block lg:absolute lg:inset-0 w-full lg:h-full transition-opacity lg:duration-500 ${
+          esActual ? "lg:opacity-100 lg:pointer-events-auto" : "lg:opacity-0 lg:pointer-events-none"
         }`;
 
         return s.href ? (
