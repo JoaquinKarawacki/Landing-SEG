@@ -327,14 +327,14 @@ function PanelDecorativo({ slide }) {
 
 function ContenidoSlide({ slide }) {
   return (
-    <div className="flex flex-col justify-center h-full px-8 py-10 sm:px-12 md:px-16 md:py-12">
-      <div className="flex items-center gap-3 mb-5">
-        <span className="text-xs font-bold tracking-[2.5px] uppercase text-white/40">{slide.unidad}</span>
-        <span className="w-px h-4 bg-white/20" />
-        <span className="text-xs font-bold tracking-[2px] uppercase text-[#ff8a70]/85">{slide.subtag}</span>
+    <div className="flex flex-col justify-center h-full px-6 pt-8 pb-20 sm:px-12 sm:py-10 md:px-16 md:py-12">
+      <div className="flex items-center gap-2 sm:gap-3 mb-2.5 sm:mb-5">
+        <span className="text-[10px] sm:text-xs font-bold tracking-[2px] sm:tracking-[2.5px] uppercase text-white/40">{slide.unidad}</span>
+        <span className="w-px h-3 sm:h-4 bg-white/20" />
+        <span className="text-[10px] sm:text-xs font-bold tracking-[1.5px] sm:tracking-[2px] uppercase text-[#ff8a70]/85">{slide.subtag}</span>
       </div>
-      <p className="text-sm font-semibold tracking-[2px] uppercase text-white/25 mb-2">{slide.pretitulo}</p>
-      <h2 className="text-4xl sm:text-5xl md:text-[62px] lg:text-[76px] font-black uppercase leading-[0.95] tracking-tight text-white mb-6">
+      <p className="text-[11px] sm:text-sm font-semibold tracking-[1.5px] sm:tracking-[2px] uppercase text-white/25 mb-1 sm:mb-2">{slide.pretitulo}</p>
+      <h2 className="text-3xl sm:text-4xl md:text-[62px] lg:text-[76px] font-black uppercase leading-[0.97] sm:leading-[0.95] tracking-tight text-white mb-3 sm:mb-6">
         {slide.titulo}
         {slide.tituloRojo && (
           <>
@@ -343,12 +343,12 @@ function ContenidoSlide({ slide }) {
           </>
         )}
       </h2>
-      <p className="text-base md:text-lg font-light text-white/45 leading-relaxed mb-7 max-w-[480px]">{slide.subtitulo}</p>
-      <div className="flex flex-wrap gap-2.5">
+      <p className="text-sm sm:text-base md:text-lg font-light text-white/45 leading-relaxed mb-4 sm:mb-7 max-w-[480px]">{slide.subtitulo}</p>
+      <div className="flex flex-wrap gap-1.5 sm:gap-2.5">
         {slide.pills.map((pill) => (
           <span
             key={pill}
-            className="text-xs font-semibold tracking-[0.3px] px-4 py-1.5 rounded-full border border-[#ca3517]/35 text-[#f3a08e] bg-[#ca3517]/[0.07]"
+            className="text-[10px] sm:text-xs font-semibold tracking-[0.3px] px-3 py-1 sm:px-4 sm:py-1.5 rounded-full border border-[#ca3517]/35 text-[#f3a08e] bg-[#ca3517]/[0.07] whitespace-nowrap"
           >
             {pill}
           </span>
@@ -391,17 +391,13 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative bg-[#111] overflow-hidden min-h-[720px] md:min-h-0 md:h-[680px]"
+      className="relative bg-[#111] overflow-hidden min-h-[420px] md:min-h-0 md:h-[680px]"
       aria-label="Slider de unidades de negocio"
     >
       {SLIDES.map((s, indice) => {
         const esActual = indice === indiceActual;
         const contenido = (
-          <div
-            className={`absolute inset-0 flex flex-col md:flex-row transition-opacity duration-500 ${
-              esActual ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-            }`}
-          >
+          <div className="flex flex-col md:flex-row w-full h-full">
             <div className="flex-1 md:flex-[0_0_62%] bg-[#111] relative z-[2]">
               <ContenidoSlide slide={s} />
             </div>
@@ -411,12 +407,26 @@ export default function HeroSlider() {
           </div>
         );
 
+        /* Mobile: solo el slide activo se renderiza en flujo normal (alto según contenido).
+           Desktop (md+): los 10 quedan apilados en absoluto para el crossfade. */
+        const claseWrapper = `${esActual ? "block" : "hidden"} md:block md:absolute md:inset-0 w-full md:h-full transition-opacity md:duration-500 ${
+          esActual ? "md:opacity-100 md:pointer-events-auto" : "md:opacity-0 md:pointer-events-none"
+        }`;
+
         return s.href ? (
-          <Link key={s.id} href={s.href} aria-label={`Ver ${s.unidad} — ${s.subtag}`} tabIndex={esActual ? 0 : -1}>
+          <Link
+            key={s.id}
+            href={s.href}
+            aria-label={`Ver ${s.unidad} — ${s.subtag}`}
+            tabIndex={esActual ? 0 : -1}
+            className={claseWrapper}
+          >
             {contenido}
           </Link>
         ) : (
-          <div key={s.id}>{contenido}</div>
+          <div key={s.id} className={claseWrapper}>
+            {contenido}
+          </div>
         );
       })}
 
