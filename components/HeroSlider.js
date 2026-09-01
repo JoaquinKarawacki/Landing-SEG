@@ -328,13 +328,13 @@ function PanelDecorativo({ slide }) {
 function ContenidoSlide({ slide }) {
   return (
     <div className="flex flex-col justify-center h-full px-6 pt-8 pb-20 sm:px-12 sm:py-10 md:px-16 md:py-12">
-      <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 sm:gap-3 mb-4 sm:mb-5 md:mb-6">
-        <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-[2px] sm:tracking-[2.5px] uppercase text-white/40">{slide.unidad}</span>
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 sm:gap-3 mb-5 sm:mb-6 md:mb-7">
+        <span className="text-xs sm:text-sm md:text-base font-bold tracking-[2px] sm:tracking-[2.5px] uppercase text-white/40">{slide.unidad}</span>
         <span className="hidden sm:block w-px h-4 bg-white/20" />
-        <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-[1.5px] sm:tracking-[2px] uppercase text-[#ff8a70]/85">{slide.subtag}</span>
+        <span className="text-xs sm:text-sm md:text-base font-bold tracking-[1.5px] sm:tracking-[2px] uppercase text-[#ff8a70]/85">{slide.subtag}</span>
       </div>
-      <p className="text-[11px] sm:text-sm md:text-base font-semibold tracking-[1.5px] sm:tracking-[2px] uppercase text-white/25 mb-2.5 sm:mb-2.5 md:mb-3">{slide.pretitulo}</p>
-      <h2 className="text-3xl sm:text-4xl md:text-[62px] lg:text-[76px] font-black uppercase leading-[0.97] sm:leading-[0.95] tracking-tight text-white mb-3 sm:mb-4 md:mb-6">
+      <p className="text-xs sm:text-base md:text-lg font-semibold tracking-[1.5px] sm:tracking-[2px] uppercase text-white/25 mb-3 sm:mb-3 md:mb-4">{slide.pretitulo}</p>
+      <h2 className="text-4xl sm:text-5xl md:text-[70px] lg:text-[76px] font-black uppercase leading-[0.97] sm:leading-[0.95] tracking-tight text-white mb-4 sm:mb-5 md:mb-7">
         {slide.titulo}
         {slide.tituloRojo && (
           <>
@@ -343,12 +343,12 @@ function ContenidoSlide({ slide }) {
           </>
         )}
       </h2>
-      <p className="text-sm sm:text-base md:text-lg font-light text-white/45 leading-relaxed mb-4 sm:mb-5 md:mb-7 max-w-[480px] md:max-w-[560px]">{slide.subtitulo}</p>
-      <div className="flex flex-wrap gap-1.5 sm:gap-2 md:gap-2.5">
+      <p className="text-base sm:text-lg md:text-xl font-light text-white/45 leading-relaxed mb-5 sm:mb-6 md:mb-8 max-w-[480px] md:max-w-[560px]">{slide.subtitulo}</p>
+      <div className="flex flex-wrap gap-2 sm:gap-2.5 md:gap-3">
         {slide.pills.map((pill) => (
           <span
             key={pill}
-            className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.3px] px-3 py-1 sm:px-3.5 sm:py-1.5 md:px-4 rounded-full border border-[#ca3517]/35 text-[#f3a08e] bg-[#ca3517]/[0.07] whitespace-nowrap"
+            className="text-xs sm:text-sm md:text-base font-semibold tracking-[0.3px] px-3.5 py-1.5 sm:px-4 sm:py-2 md:px-5 rounded-full border border-[#ca3517]/35 text-[#f3a08e] bg-[#ca3517]/[0.07] whitespace-nowrap"
           >
             {pill}
           </span>
@@ -391,7 +391,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative bg-[#111] overflow-hidden min-h-[420px] md:min-h-[480px] lg:min-h-0 lg:h-[680px]"
+      className="relative bg-[#111] overflow-hidden min-h-[600px] md:min-h-[680px] lg:min-h-0 lg:h-[680px]"
       aria-label="Slider de unidades de negocio"
     >
       {SLIDES.map((s, indice) => {
@@ -467,11 +467,6 @@ export default function HeroSlider() {
             <path d="M9 18l6-6-6-6" />
           </svg>
         </button>
-      </div>
-
-      {/* Contador */}
-      <div className="absolute top-4 right-5 text-[9px] font-bold tracking-[2px] text-white/[0.18] z-10">
-        {indiceActual + 1} / {SLIDES.length}
       </div>
     </section>
   );
