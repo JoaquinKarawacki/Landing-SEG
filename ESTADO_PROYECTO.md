@@ -1,7 +1,7 @@
 # Estado del Proyecto — SEG Ingeniería Landing
 
 > Archivo de memoria para retomar el desarrollo en cualquier momento.
-> Última actualización: mayo 2026
+> Última actualización: septiembre 2026
 
 ---
 
@@ -9,11 +9,14 @@
 
 | Herramienta | Versión |
 |---|---|
-| Next.js | 16.2.5 (App Router) |
+| Next.js | 16.2.6 (App Router) |
 | React | 19.2.4 |
 | Tailwind CSS | v4 |
 | TypeScript | ❌ No usa |
+| React Compiler | ✅ activado (`reactCompiler: true` en `next.config.mjs`) |
 | Font | Red Hat Display via `next/font/google` |
+
+**Deploy:** el proyecto ya está en producción en `https://www.segingenieria.com` (redirect forzado a HTTPS + security headers en `next.config.mjs`), sobre un host con filesystem persistente tipo Railway (`RAILWAY_VOLUME_MOUNT_PATH`).
 
 ---
 
@@ -32,6 +35,43 @@
 | `/indicadores` | `app/indicadores/page.js` | Artículos (5 publicaciones), Suscripcion, CTA | ✅ |
 | `/novedades` | `app/novedades/page.js` | Artículos (5 novedades), Destacados, CTA | ✅ |
 | `/prensa` | `app/prensa/page.js` | Materiales, SobreSEG, ContactoPrensa, CTA | ✅ |
+| `/notas` | `app/notas/page.js` | Listado de notas (contenido editable desde admin) | ✅ |
+| `/indicadores/[slug]` | `app/indicadores/[slug]/page.js` | Página individual por reporte de indicador energético | ✅ |
+| `/admin` | `app/admin/page.js` | Panel de administración (protegido) | ✅ |
+
+---
+
+## Backend y panel de administración
+
+El proyecto **sí tiene backend** (esto no estaba reflejado en versiones previas de este documento). Es un backend minimalista sin base de datos real, pensado para un host con disco persistente (no serverless puro tipo Vercel Functions).
+
+### Auth admin
+Token estático (`ADMIN_TOKEN` en `.env.local`) comparado en `app/api/auth/route.js`, enviado como header `x-admin-token` desde `app/admin/page.js`. No hay sesiones ni usuarios — un solo secreto compartido para todo el equipo.
+
+### Panel `/admin` (`app/admin/page.js`, 289 líneas)
+Login con el token, luego pestañas para gestionar **indicadores**, **novedades** y **notas**: alta/edición/borrado y subida de archivos (imágenes/PDFs) para cada uno vía `fetch` a las API routes correspondientes.
+
+### API routes (`app/api/`)
+| Ruta | Qué hace |
+|---|---|
+| `auth/route.js` | Valida el `x-admin-token` |
+| `indicadores/route.js` | CRUD de indicadores energéticos (JSON) |
+| `novedades/route.js` | CRUD de novedades (JSON) |
+| `notas/route.js` | CRUD de notas (JSON) |
+| `consulting/route.js` | Datos de SEG Consulting |
+| `upload/route.js` | Recibe archivos subidos desde el admin |
+| `archivos/[...path]/route.js` | Sirve los archivos subidos |
+| `contacto/route.js` | Envía el formulario de contacto por mail |
+| `suscripcion/route.js` | Alta de suscripción a indicadores por mail |
+
+### "Base de datos": JSON planos
+`data/indicadores.json`, `data/notas.json`, `data/novedades.json`. En el primer uso se copian al storage persistente vía `lib/storage.js::getDataFile()`. Las API routes leen/escriben esos archivos directamente — no hay ORM ni DB real. Cualquier feature nueva de "contenido editable" debería seguir el mismo patrón salvo que se decida migrar a una DB real.
+
+### Storage de archivos subidos
+`lib/storage.js::getUploadDir()` — usa `RAILWAY_VOLUME_MOUNT_PATH` / `VOLUME_MOUNT_PATH` si están seteados (volumen persistente), si no cae a `./local-storage/uploads`. Se sirve de vuelta vía `app/api/archivos/[...path]/route.js`.
+
+### Email
+`lib/sendMail.js` usa Microsoft Graph API (OAuth2 client_credentials contra un tenant Azure) en vez de un proveedor tipo Resend/Sendgrid. Variables en `.env.local`: `AZURE_TENANT_ID`, `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `MAIL_FROM`, `MAIL_TO`. Se usa para el formulario de contacto (`/api/contacto`) y la suscripción a indicadores (`/api/suscripcion`).
 
 ---
 
@@ -128,12 +168,9 @@ const { idioma } = useIdioma();
 
 ---
 
-## Formularios — pendiente backend
+## Formularios
 
-Los formularios en `/contacto` (contacto + suscripción indicadores) usan `action="#"` y no tienen backend. Para producción conectar con uno de:
-- **Formspree** — servicio externo, sin backend propio
-- **Resend** — envío de emails via API, requiere Server Action en Next.js
-- **Next.js Server Action** — función `async` marcada con `"use server"`
+Los formularios en `/contacto` (contacto + suscripción indicadores) **ya tienen backend real**: pegan a `app/api/contacto/route.js` y `app/api/suscripcion/route.js`, que envían mail vía Microsoft Graph API (`lib/sendMail.js`). Ver sección "Backend y panel de administración" arriba.
 
 ---
 
@@ -149,12 +186,11 @@ Los formularios en `/contacto` (contacto + suscripción indicadores) usan `actio
 
 ## Pendientes / próximos pasos sugeridos
 
-- [ ] **Formularios con backend** — conectar `/contacto` a Formspree o Resend
 - [ ] **Traducciones EN** — agregar textos en inglés a las páginas interiores (infraestructura lista)
-- [ ] **Artículos con contenido real** — `/indicadores`, `/novedades`, `/prensa` tienen datos placeholder; reemplazar con CMS o datos reales
-- [ ] **Imágenes reales** — todos los placeholders de imagen (`bg-gray-200`) deben reemplazarse con fotos reales del cliente
+- [ ] **Prensa con contenido real** — `/prensa` tiene datos placeholder; indicadores y novedades ya se gestionan desde `/admin`
+- [ ] **Imágenes reales** — revisar placeholders de imagen (`bg-gray-200`) pendientes y reemplazarlos con fotos reales del cliente
 - [ ] **SEO** — revisar `metadata` en cada `page.js` y agregar `og:image` para compartir en redes
-- [ ] **Deploy** — el proyecto no ha sido deployado todavía
+- [ ] **Auth admin más robusta** — hoy es un único token compartido sin sesiones ni usuarios; evaluar si alcanza a mediano plazo
 
 ---
 
