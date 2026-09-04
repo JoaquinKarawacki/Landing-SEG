@@ -317,8 +317,8 @@ function PanelDecorativo({ slide }) {
   return (
     <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
       <FondoDecorativo variante={slide.id} />
-      <Icono className="relative z-[1] w-20 h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 text-white/[0.07]" />
-      <div className="absolute bottom-2 right-2 md:bottom-4 md:right-3 lg:bottom-6 lg:right-4 text-6xl md:text-8xl lg:text-[150px] font-black text-white/[0.04] tracking-tighter leading-none">
+      <Icono className="relative z-[1] w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 text-white/[0.07]" />
+      <div className="absolute bottom-1 right-1 md:bottom-2 md:right-2 lg:bottom-3 lg:right-3 text-3xl md:text-5xl lg:text-[72px] font-black text-white/[0.04] tracking-tighter leading-none">
         {slide.bigLabel}
       </div>
     </div>
@@ -327,14 +327,14 @@ function PanelDecorativo({ slide }) {
 
 function ContenidoSlide({ slide }) {
   return (
-    <div className="flex flex-col justify-center h-full px-6 pt-8 pb-20 sm:px-12 sm:py-10 md:px-16 md:py-12">
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 sm:gap-3 mb-5 sm:mb-6 md:mb-7">
-        <span className="text-xs sm:text-sm md:text-base font-bold tracking-[2px] sm:tracking-[2.5px] uppercase text-white/40">{slide.unidad}</span>
+    <div className="flex flex-col justify-center h-full px-4 pt-3 pb-8 sm:px-6 sm:py-5 md:px-8 md:py-6">
+      <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1 sm:gap-2 mb-2 sm:mb-2 md:mb-2.5">
+        <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-[2px] sm:tracking-[2.5px] uppercase text-white/40">{slide.unidad}</span>
         <span className="hidden sm:block w-px h-4 bg-white/20" />
-        <span className="text-xs sm:text-sm md:text-base font-bold tracking-[1.5px] sm:tracking-[2px] uppercase text-[#ff8a70]/85">{slide.subtag}</span>
+        <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-[1.5px] sm:tracking-[2px] uppercase text-[#ff8a70]/85">{slide.subtag}</span>
       </div>
-      <p className="text-xs sm:text-base md:text-lg font-semibold tracking-[1.5px] sm:tracking-[2px] uppercase text-white/25 mb-3 sm:mb-3 md:mb-4">{slide.pretitulo}</p>
-      <h2 className="text-4xl sm:text-5xl md:text-[70px] lg:text-[76px] font-black uppercase leading-[0.97] sm:leading-[0.95] tracking-tight text-white mb-4 sm:mb-5 md:mb-7">
+      <p className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[1.5px] sm:tracking-[2px] uppercase text-white/25 mb-1 sm:mb-1 md:mb-1.5">{slide.pretitulo}</p>
+      <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black uppercase leading-[0.97] sm:leading-[0.95] tracking-tight text-white mb-1.5 sm:mb-2 md:mb-2.5">
         {slide.titulo}
         {slide.tituloRojo && (
           <>
@@ -343,12 +343,12 @@ function ContenidoSlide({ slide }) {
           </>
         )}
       </h2>
-      <p className="text-base sm:text-lg md:text-xl font-light text-white/45 leading-relaxed mb-5 sm:mb-6 md:mb-8 max-w-[480px] md:max-w-[560px]">{slide.subtitulo}</p>
-      <div className="flex flex-wrap gap-2 sm:gap-2.5 md:gap-3">
+      <p className="text-xs sm:text-sm md:text-base font-light text-white/45 leading-relaxed mb-2 sm:mb-2.5 md:mb-3 max-w-[380px] md:max-w-[460px]">{slide.subtitulo}</p>
+      <div className="flex flex-wrap gap-1.5 sm:gap-2 md:gap-2.5">
         {slide.pills.map((pill) => (
           <span
             key={pill}
-            className="text-xs sm:text-sm md:text-base font-semibold tracking-[0.3px] px-3.5 py-1.5 sm:px-4 sm:py-2 md:px-5 rounded-full border border-[#ca3517]/35 text-[#f3a08e] bg-[#ca3517]/[0.07] whitespace-nowrap"
+            className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.3px] px-2.5 py-1 sm:px-3 sm:py-1.5 md:px-3.5 rounded-full border border-[#ca3517]/35 text-[#f3a08e] bg-[#ca3517]/[0.07] whitespace-nowrap"
           >
             {pill}
           </span>
@@ -391,7 +391,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative bg-[#111] overflow-hidden min-h-[600px] md:min-h-[680px] lg:min-h-0 lg:h-[680px]"
+      className="relative bg-[#111] overflow-hidden min-h-[300px] md:min-h-[340px] lg:min-h-0 lg:h-[340px]"
       aria-label="Slider de unidades de negocio"
     >
       {SLIDES.map((s, indice) => {
@@ -401,7 +401,7 @@ export default function HeroSlider() {
             <div className="flex-1 lg:flex-[0_0_62%] bg-[#111] relative z-[2]">
               <ContenidoSlide slide={s} />
             </div>
-            <div className="hidden sm:block h-24 md:h-40 lg:h-auto lg:flex-1 relative">
+            <div className="hidden sm:block h-12 md:h-20 lg:h-auto lg:flex-1 relative">
               <PanelDecorativo slide={s} />
             </div>
           </div>
@@ -434,7 +434,7 @@ export default function HeroSlider() {
       <div className="absolute bottom-0 left-0 h-[3px] bg-[#ca3517] z-10" style={{ width: `${progreso}%` }} />
 
       {/* Dots de navegación */}
-      <div className="absolute bottom-4 left-6 sm:left-10 md:left-12 flex gap-1.5 z-10">
+      <div className="absolute bottom-2 left-4 sm:left-6 md:left-8 flex gap-1.5 z-10">
         {SLIDES.map((s, indice) => (
           <button
             key={s.id}
@@ -448,22 +448,22 @@ export default function HeroSlider() {
       </div>
 
       {/* Flechas prev/next */}
-      <div className="absolute bottom-3 right-4 sm:right-8 md:right-11 flex gap-1.5 z-10">
+      <div className="absolute bottom-2 right-3 sm:right-5 md:right-7 flex gap-1.5 z-10">
         <button
           onClick={() => irADiapositiva(indiceActual - 1)}
           aria-label="Slide anterior"
-          className="w-[30px] h-[30px] rounded-full border border-white/[0.18] bg-white/[0.04] text-white/55 flex items-center justify-center hover:bg-white/[0.12] transition-colors"
+          className="w-[24px] h-[24px] rounded-full border border-white/[0.18] bg-white/[0.04] text-white/55 flex items-center justify-center hover:bg-white/[0.12] transition-colors"
         >
-          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M15 18l-6-6 6-6" />
           </svg>
         </button>
         <button
           onClick={() => irADiapositiva(indiceActual + 1)}
           aria-label="Slide siguiente"
-          className="w-[30px] h-[30px] rounded-full border border-white/[0.18] bg-white/[0.04] text-white/55 flex items-center justify-center hover:bg-white/[0.12] transition-colors"
+          className="w-[24px] h-[24px] rounded-full border border-white/[0.18] bg-white/[0.04] text-white/55 flex items-center justify-center hover:bg-white/[0.12] transition-colors"
         >
-          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M9 18l6-6-6-6" />
           </svg>
         </button>
