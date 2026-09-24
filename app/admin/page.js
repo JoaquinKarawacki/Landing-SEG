@@ -127,6 +127,7 @@ export default function PaginaAdmin() {
   const [indicadores, setIndicadores] = useState([]);
   const [novedades, setNovedades] = useState([]);
   const [notas, setNotas] = useState([]);
+  const [suscriptores, setSuscriptores] = useState([]);
   const [token, setToken] = useState("");
   const [autenticado, setAutenticado] = useState(false);
   const [errorLogin, setErrorLogin] = useState("");
@@ -143,6 +144,7 @@ export default function PaginaAdmin() {
       fetch("/api/indicadores").then(r => r.json()).then(setIndicadores);
       fetch("/api/novedades").then(r => r.json()).then(setNovedades);
       fetch("/api/notas").then(r => r.json()).then(setNotas);
+      fetch("/api/suscripcion", { headers: { "x-admin-token": token } }).then(r => r.json()).then(setSuscriptores);
     } else {
       setErrorLogin("Token incorrecto");
     }
@@ -203,6 +205,25 @@ export default function PaginaAdmin() {
     else setNotas(prev => prev.filter(a => a.id !== id));
   }
 
+  async function eliminarSuscriptor(id) {
+    await fetch("/api/suscripcion", { method: "DELETE", headers: authHeaders(), body: JSON.stringify({ id }) });
+    setSuscriptores(prev => prev.filter(s => s.id !== id));
+  }
+
+  function exportarCSV() {
+    const encabezados = ["Nombre", "Email", "Empresa", "Teléfono", "Fecha"];
+    const filas = suscriptores.map(s => [s.nombre, s.email, s.empresa, s.telefono || "", s.fecha || ""]);
+    const escapar = v => `"${String(v ?? "").replace(/"/g, '""')}"`;
+    const csv = [encabezados, ...filas].map(fila => fila.map(escapar).join(",")).join("\r\n");
+    const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `suscriptores-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
   if (!autenticado) {
     return (
       <div className="max-w-sm mx-auto px-4 py-32 text-center">
@@ -256,34 +277,72 @@ const campos = pestaña === "indicadores" ? CAMPOS_INDICADORES : pestaña === "n
         >
           Notas ({notas.length}/6)
         </button>
+        <button
+          onClick={() => setPestaña("suscriptores")}
+          className={`px-6 py-2 rounded-full font-semibold text-sm ${pestaña === "suscriptores" ? "bg-[#ca3517] text-white" : "bg-gray-100 text-gray-700"}`}
+        >
+          Suscriptores ({suscriptores.length})
+        </button>
       </div>
 
-      <FormularioNuevo
-        key={pestaña}
-        campos={campos}
-        limite={12 - articulos.length}
-        onAgregar={datos => agregar(pestaña, datos)}
-        onSubir={subir}
-      />
-
-      <div className="space-y-3">
-        <h2 className="font-bold text-gray-900 mb-3">Artículos actuales</h2>
-        {articulos.map(a => (
-          <div key={a.id} className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-3 shadow-sm">
-            <div>
-              <p className="font-semibold text-gray-900 text-sm">{a.titulo}</p>
-              <p className="text-gray-400 text-xs">{a.fecha}</p>
-            </div>
+      {pestaña === "suscriptores" ? (
+        <div className="space-y-3">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="font-bold text-gray-900">Suscriptores ({suscriptores.length})</h2>
             <button
-              onClick={() => eliminar(pestaña, a.id)}
-              className="text-sm text-red-600 hover:text-red-800 font-semibold"
+              onClick={exportarCSV}
+              disabled={suscriptores.length === 0}
+              className="bg-[#ca3517] text-white px-5 py-2 rounded-full font-semibold text-sm hover:bg-[#a82d12] disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Eliminar
+              Exportar CSV
             </button>
           </div>
-        ))}
-        {articulos.length === 0 && <p className="text-gray-400 text-sm">No hay artículos.</p>}
-      </div>
+          {suscriptores.map(s => (
+            <div key={s.id} className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-3 shadow-sm">
+              <div>
+                <p className="font-semibold text-gray-900 text-sm">{s.nombre} <span className="text-gray-400 font-normal">· {s.empresa}</span></p>
+                <p className="text-gray-500 text-xs">{s.email}{s.telefono ? ` · ${s.telefono}` : ""}</p>
+              </div>
+              <button
+                onClick={() => eliminarSuscriptor(s.id)}
+                className="text-sm text-red-600 hover:text-red-800 font-semibold"
+              >
+                Eliminar
+              </button>
+            </div>
+          ))}
+          {suscriptores.length === 0 && <p className="text-gray-400 text-sm">No hay suscriptores todavía.</p>}
+        </div>
+      ) : (
+        <>
+          <FormularioNuevo
+            key={pestaña}
+            campos={campos}
+            limite={12 - articulos.length}
+            onAgregar={datos => agregar(pestaña, datos)}
+            onSubir={subir}
+          />
+
+          <div className="space-y-3">
+            <h2 className="font-bold text-gray-900 mb-3">Artículos actuales</h2>
+            {articulos.map(a => (
+              <div key={a.id} className="flex items-center justify-between bg-white border border-gray-200 rounded-lg px-4 py-3 shadow-sm">
+                <div>
+                  <p className="font-semibold text-gray-900 text-sm">{a.titulo}</p>
+                  <p className="text-gray-400 text-xs">{a.fecha}</p>
+                </div>
+                <button
+                  onClick={() => eliminar(pestaña, a.id)}
+                  className="text-sm text-red-600 hover:text-red-800 font-semibold"
+                >
+                  Eliminar
+                </button>
+              </div>
+            ))}
+            {articulos.length === 0 && <p className="text-gray-400 text-sm">No hay artículos.</p>}
+          </div>
+        </>
+      )}
     </div>
   );
 }
