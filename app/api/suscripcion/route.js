@@ -124,7 +124,7 @@ export async function POST(request) {
   // Aviso interno (crítico: si falla, 500 — el lead ya quedó guardado y el reintento es idempotente)
   try {
     await sendMail({
-      to: process.env.MAIL_TO || "perez@segingenieria.com",
+      to: process.env.MAIL_TO || "uruguay@segingenieria.com",
       subject: `[Suscripción] Indicadores energéticos — ${nombreLimpio}`,
       html: htmlAvisoInterno({ nombre: nombreLimpio, email: emailLimpio, empresa: empresaLimpio, telefono: telefonoLimpio }),
       replyTo: emailLimpio,
