@@ -24,7 +24,7 @@
 
 | Ruta | Archivo | Secciones | Estado |
 |---|---|---|---|
-| `/` | `app/page.js` | HeroSlider, Pilares, SobreYIndicadores, Novedades | ✅ |
+| `/` | `app/page.js` | VideoInstitucional, Pilares, SobreYIndicadores, Novedades | ✅ |
 | `/eficiencia-energetica` | `app/eficiencia-energetica/page.js` | PropuestaValor, AreasEstudio, Metodologia, ISO50001, GestionRemota | ✅ |
 | `/energias-renovables` | `app/energias-renovables/page.js` | Uruguay, Impacto, Eólica, Solar, Biomasa, PCH, MapaDesarrollos, ConoczaMas | ✅ |
 | `/movilidad-electrica` | `app/movilidad-electrica/page.js` | Reconocimientos, Especializacion, Infraestructura, MercadoB2B, Camara | ✅ |
@@ -81,7 +81,7 @@ Login con el token, luego pestañas para gestionar **indicadores**, **novedades*
 |---|---|---|
 | `components/Header.js` | Client (`"use client"`) | Sticky, menú desktop con dropdowns, menú mobile con accordion |
 | `components/Footer.js` | Server | 6 columnas: Unidades de Negocio, Institucional, Artículos, Contacto, Oficina UY, Oficina CL |
-| `components/HeroSlider.js` | Client | Slider animado del home |
+| `components/VideoInstitucional.js` | Server | Video hero full-bleed del home (`/videos/hero.mp4`) |
 | `components/Pilares.js` | Server | Sección pilares del home |
 | `components/SobreYIndicadores.js` | Server | Sección "Sobre SEG" + indicadores del home |
 | `components/Novedades.js` | Server | Sección novedades del home |
