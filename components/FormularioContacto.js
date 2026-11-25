@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useAntiSpam, CampoTrampa } from "@/components/AntiSpam";
 
 const claseInput =
   "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#ca3517] focus:ring-1 focus:ring-[#ca3517] transition-colors duration-200 bg-white disabled:opacity-50 disabled:cursor-not-allowed";
@@ -11,6 +12,7 @@ export default function FormularioContacto() {
   const [campos, setCampos] = useState(ESTADO_INICIAL);
   const [estado, setEstado] = useState("idle"); // idle | enviando | ok | error
   const [errorMsg, setErrorMsg] = useState("");
+  const { trampa, datosAntiSpam } = useAntiSpam();
 
   function handleChange(e) {
     setCampos((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -25,7 +27,7 @@ export default function FormularioContacto() {
       const res = await fetch("/api/contacto", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(campos),
+        body: JSON.stringify({ ...campos, ...datosAntiSpam() }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -67,6 +69,7 @@ export default function FormularioContacto() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+      <CampoTrampa inputRef={trampa} />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="nombre" className="block text-xs font-bold text-gray-700 uppercase tracking-wide mb-1.5">

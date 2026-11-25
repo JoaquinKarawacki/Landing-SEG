@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useAntiSpam, CampoTrampa } from "@/components/AntiSpam";
 
 const AREAS = [
   "Sistemas Eléctricos",
@@ -17,6 +18,7 @@ export default function FormularioConsulting() {
   const [form, setForm] = useState(vacio);
   const [estado, setEstado] = useState("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const { trampa, datosAntiSpam } = useAntiSpam();
 
   const claseInput =
     "w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#ca3517] transition-colors";
@@ -33,7 +35,7 @@ export default function FormularioConsulting() {
       const res = await fetch("/api/consulting", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, ...datosAntiSpam() }),
       });
       const json = await res.json();
       if (res.ok) {
@@ -65,6 +67,7 @@ export default function FormularioConsulting() {
 
   return (
     <form onSubmit={submit} className="space-y-4">
+      <CampoTrampa inputRef={trampa} />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-semibold text-gray-600 mb-1">Nombre y apellido *</label>

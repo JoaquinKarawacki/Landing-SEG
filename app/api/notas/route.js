@@ -1,62 +1,49 @@
-import { readFileSync, writeFileSync } from "fs";
-import { getDataFile } from "@/lib/storage";
+import { leerJSON, actualizarJSON } from "@/lib/jsonStore";
+import { validarToken, noAutorizado } from "@/lib/seguridad";
 
+const ARCHIVO = "notas.json";
+const MAXIMO = 6;
 
-function validarToken(request) {
-    const token = request.headers.get("x-admin-token");
-    return token === process.env.ADMIN_TOKEN;   
-}   
-
-function leer(){
-    return JSON.parse(readFileSync(getDataFile("notas.json"), "utf-8"));
+export function GET() {
+    return Response.json(leerJSON(ARCHIVO));
 }
-
-function guardar(notas) {
-    writeFileSync(getDataFile("notas.json"), JSON.stringify(notas), "utf-8");
-}
-
-export function GET(request) {
-    
-    return Response.json(leer());
-}
-
 
 export async function POST(request) {
+    if (!validarToken(request)) return noAutorizado();
 
-    if(!validarToken(request)) {
-        return Response.json({ error: "No autorizado" }, { status: 401 });
-    }   
     const nota = await request.json();
     if (typeof nota.temas === "string") {
         nota.temas = nota.temas.split(",").map(t => t.trim()).filter(Boolean);
     }
-    const notas = leer();
-    if(notas.length < 6) {
+
+    let lleno = false;
+    actualizarJSON(ARCHIVO, (notas) => {
+        if (notas.length >= MAXIMO) {
+            lleno = true;
+            return notas;
+        }
         nota.id = Date.now();
-        notas.unshift(nota);
-        guardar(notas);
-        return Response.json(nota, { status: 201 });
-    }else {
-        return Response.json({ error: "Máximo 6 artículos permitidos" }, { status: 400 });
-    }   
+        return [nota, ...notas];
+    });
+
+    if (lleno) {
+        return Response.json({ error: `Máximo ${MAXIMO} artículos permitidos` }, { status: 400 });
+    }
+    return Response.json(nota, { status: 201 });
 }
 
 export async function DELETE(request) {
-    
-    if(!validarToken(request)) {
-        return Response.json({ error: "No autorizado" }, { status: 401 });
-    }
+    if (!validarToken(request)) return noAutorizado();
 
-    const notas = leer();
+    const { id } = await request.json();
+    let existe = false;
+    actualizarJSON(ARCHIVO, (notas) => {
+        existe = notas.some(n => n.id === id);
+        return existe ? notas.filter(n => n.id !== id) : notas;
+    });
 
-    const { id }  = await request.json();
-    const existe = notas.find(n => n.id === id);
-
-    if(existe === undefined) {
+    if (!existe) {
         return Response.json({ error: "Nota no encontrada" }, { status: 404 });
-    }  
-    
-    const nuevoArray = notas.filter(nota => nota.id !== id);
-    guardar(nuevoArray);
+    }
     return Response.json({ ok: true });
 }

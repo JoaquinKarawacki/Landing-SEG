@@ -1,34 +1,20 @@
-import { readFileSync, writeFileSync } from "fs";
-import { getDataFile } from "@/lib/storage";
+import { leerJSON, actualizarJSON } from "@/lib/jsonStore";
 import { sendMail } from "@/lib/sendMail";
+import {
+  validarToken,
+  noAutorizado,
+  esEmailValido,
+  escapeHtml,
+  excedeLimite,
+  respuestaLimite,
+  detectarSpam,
+  campoDemasiadoLargo,
+  obtenerIP,
+} from "@/lib/seguridad";
 
+const ARCHIVO = "suscriptores.json";
 const CAMPOS_REQUERIDOS = ["nombre", "email", "empresa"];
-
-function esEmailValido(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function validarToken(request) {
-  const token = request.headers.get("x-admin-token");
-  return token === process.env.ADMIN_TOKEN;
-}
-
-function escapeHtml(valor) {
-  return String(valor ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-function leer() {
-  return JSON.parse(readFileSync(getDataFile("suscriptores.json"), "utf-8"));
-}
-
-function guardar(suscriptores) {
-  writeFileSync(getDataFile("suscriptores.json"), JSON.stringify(suscriptores), "utf-8");
-}
+const LIMITES = { nombre: 200, email: 200, empresa: 200, telefono: 50 };
 
 function htmlAvisoInterno({ nombre, email, empresa, telefono }) {
   return `
@@ -83,49 +69,67 @@ export async function POST(request) {
     return Response.json({ error: "Solicitud inválida." }, { status: 400 });
   }
 
-  const { nombre, email, empresa, telefono } = body;
+  if (excedeLimite(request, "suscripcion", { max: 3, ventanaMs: 10 * 60 * 1000 })) {
+    return respuestaLimite();
+  }
 
   for (const campo of CAMPOS_REQUERIDOS) {
-    if (!body[campo]?.trim()) {
+    if (typeof body[campo] !== "string" || !body[campo].trim()) {
       return Response.json({ error: `El campo "${campo}" es requerido.` }, { status: 400 });
     }
   }
 
-  if (!esEmailValido(email)) {
+  if (campoDemasiadoLargo(body, LIMITES)) {
+    return Response.json({ error: "Alguno de los campos es demasiado largo." }, { status: 400 });
+  }
+
+  if (!esEmailValido(body.email)) {
     return Response.json({ error: "El correo electrónico no es válido." }, { status: 400 });
   }
 
-  const nombreLimpio = nombre.trim();
-  const emailLimpio = email.trim();
-  const empresaLimpio = empresa.trim();
-  const telefonoLimpio = telefono?.trim() || "";
+  // Si parece bot: OK silencioso, sin guardar ni mandar mails (evita usar nuestra
+  // cuenta de Microsoft 365 para enviar "bienvenidas" a direcciones de terceros)
+  const motivoSpam = detectarSpam(body, ["nombre", "empresa"]);
+  if (motivoSpam) {
+    console.warn(`[suscripcion] envío descartado como spam (${motivoSpam}) ip=${obtenerIP(request)}`);
+    return Response.json({ ok: true });
+  }
+
+  const nombreLimpio = body.nombre.trim();
+  const emailLimpio = body.email.trim();
+  const empresaLimpio = body.empresa.trim();
+  const telefonoLimpio = typeof body.telefono === "string" ? body.telefono.trim() : "";
 
   // Persistir (dedupe por email) ANTES de enviar mails, para no perder el lead
-  const suscriptores = leer();
-  const yaExiste = suscriptores.some(
-    (s) => s.email?.trim().toLowerCase() === emailLimpio.toLowerCase()
-  );
+  let yaExiste = false;
+  actualizarJSON(ARCHIVO, (suscriptores) => {
+    yaExiste = suscriptores.some(
+      (s) => s.email?.trim().toLowerCase() === emailLimpio.toLowerCase()
+    );
+    if (yaExiste) return suscriptores;
+    return [
+      {
+        id: Date.now(),
+        nombre: nombreLimpio,
+        email: emailLimpio,
+        empresa: empresaLimpio,
+        telefono: telefonoLimpio,
+        fecha: new Date().toISOString(),
+      },
+      ...suscriptores,
+    ];
+  });
 
   if (yaExiste) {
     // Idempotente: no duplicar ni reenviar mails en reintentos
     return Response.json({ ok: true, yaSuscripto: true });
   }
 
-  suscriptores.unshift({
-    id: Date.now(),
-    nombre: nombreLimpio,
-    email: emailLimpio,
-    empresa: empresaLimpio,
-    telefono: telefonoLimpio,
-    fecha: new Date().toISOString(),
-  });
-  guardar(suscriptores);
-
   // Aviso interno (crítico: si falla, 500 — el lead ya quedó guardado y el reintento es idempotente)
   try {
     await sendMail({
       to: process.env.MAIL_SUSCRIPCION || "perez@segingenieria.com",
-      subject: `[Suscripción] Indicadores energéticos — ${nombreLimpio}`,
+      subject: `[Suscripción] Indicadores energéticos — ${nombreLimpio}`.replace(/[\r\n]+/g, " "),
       html: htmlAvisoInterno({ nombre: nombreLimpio, email: emailLimpio, empresa: empresaLimpio, telefono: telefonoLimpio }),
       replyTo: emailLimpio,
     });
@@ -149,22 +153,20 @@ export async function POST(request) {
 }
 
 export function GET(request) {
-  if (!validarToken(request)) {
-    return Response.json({ error: "No autorizado" }, { status: 401 });
-  }
-  return Response.json(leer());
+  if (!validarToken(request)) return noAutorizado();
+  return Response.json(leerJSON(ARCHIVO));
 }
 
 export async function DELETE(request) {
-  if (!validarToken(request)) {
-    return Response.json({ error: "No autorizado" }, { status: 401 });
-  }
+  if (!validarToken(request)) return noAutorizado();
   const { id } = await request.json();
-  const suscriptores = leer();
-  const existe = suscriptores.find((s) => s.id === id);
-  if (existe === undefined) {
+  let existe = false;
+  actualizarJSON(ARCHIVO, (suscriptores) => {
+    existe = suscriptores.some((s) => s.id === id);
+    return existe ? suscriptores.filter((s) => s.id !== id) : suscriptores;
+  });
+  if (!existe) {
     return Response.json({ error: "Suscriptor no encontrado" }, { status: 404 });
   }
-  guardar(suscriptores.filter((s) => s.id !== id));
   return Response.json({ ok: true });
 }

@@ -1,7 +1,12 @@
+import { validarToken, noAutorizado, excedeLimite, respuestaLimite } from "@/lib/seguridad";
+
 export function GET(request) {
-  const token = request.headers.get("x-admin-token");
-  if (token === process.env.ADMIN_TOKEN) {
+  // Frena intentos de adivinar el token por fuerza bruta
+  if (excedeLimite(request, "auth", { max: 10, ventanaMs: 15 * 60 * 1000 })) {
+    return respuestaLimite();
+  }
+  if (validarToken(request)) {
     return Response.json({ ok: true });
   }
-  return Response.json({ error: "No autorizado" }, { status: 401 });
+  return noAutorizado();
 }

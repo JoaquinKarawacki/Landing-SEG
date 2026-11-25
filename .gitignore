@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# storage local (uploads y JSON de datos en desarrollo)
+/local-storage/

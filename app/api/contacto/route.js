@@ -1,10 +1,16 @@
 import { sendMail } from "@/lib/sendMail";
+import {
+  esEmailValido,
+  escapeHtml,
+  excedeLimite,
+  respuestaLimite,
+  detectarSpam,
+  campoDemasiadoLargo,
+  obtenerIP,
+} from "@/lib/seguridad";
 
 const CAMPOS_REQUERIDOS = ["nombre", "email", "asunto", "mensaje"];
-
-function esEmailValido(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
+const LIMITES = { nombre: 200, email: 200, empresa: 200, telefono: 50, asunto: 200, mensaje: 5000 };
 
 export async function POST(request) {
   let body;
@@ -14,17 +20,37 @@ export async function POST(request) {
     return Response.json({ error: "Solicitud inválida." }, { status: 400 });
   }
 
-  const { nombre, email, empresa, telefono, asunto, mensaje } = body;
+  if (excedeLimite(request, "contacto", { max: 5, ventanaMs: 10 * 60 * 1000 })) {
+    return respuestaLimite();
+  }
 
   for (const campo of CAMPOS_REQUERIDOS) {
-    if (!body[campo]?.trim()) {
+    if (typeof body[campo] !== "string" || !body[campo].trim()) {
       return Response.json({ error: `El campo "${campo}" es requerido.` }, { status: 400 });
     }
   }
 
-  if (!esEmailValido(email)) {
+  if (campoDemasiadoLargo(body, LIMITES)) {
+    return Response.json({ error: "Alguno de los campos es demasiado largo." }, { status: 400 });
+  }
+
+  if (!esEmailValido(body.email)) {
     return Response.json({ error: "El correo electrónico no es válido." }, { status: 400 });
   }
+
+  // Si parece bot, respondemos OK sin enviar nada (para no darle pistas)
+  const motivoSpam = detectarSpam(body, ["nombre", "empresa", "asunto", "mensaje"]);
+  if (motivoSpam) {
+    console.warn(`[contacto] envío descartado como spam (${motivoSpam}) ip=${obtenerIP(request)}`);
+    return Response.json({ ok: true });
+  }
+
+  const nombre = escapeHtml(body.nombre.trim());
+  const email = escapeHtml(body.email.trim());
+  const empresa = escapeHtml(body.empresa?.trim?.() || "");
+  const telefono = escapeHtml(body.telefono?.trim?.() || "");
+  const asunto = escapeHtml(body.asunto.trim());
+  const mensaje = escapeHtml(body.mensaje.trim());
 
   const html = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -33,15 +59,15 @@ export async function POST(request) {
       </div>
       <div style="padding: 32px; background: #f9f9f9; border: 1px solid #e5e5e5;">
         <table style="width: 100%; border-collapse: collapse;">
-          <tr><td style="padding: 8px 0; color: #666; width: 140px; vertical-align: top;"><strong>Nombre:</strong></td><td style="padding: 8px 0;">${nombre.trim()}</td></tr>
-          <tr><td style="padding: 8px 0; color: #666; vertical-align: top;"><strong>Email:</strong></td><td style="padding: 8px 0;"><a href="mailto:${email.trim()}">${email.trim()}</a></td></tr>
-          ${empresa?.trim() ? `<tr><td style="padding: 8px 0; color: #666; vertical-align: top;"><strong>Empresa:</strong></td><td style="padding: 8px 0;">${empresa.trim()}</td></tr>` : ""}
-          ${telefono?.trim() ? `<tr><td style="padding: 8px 0; color: #666; vertical-align: top;"><strong>Teléfono:</strong></td><td style="padding: 8px 0;">${telefono.trim()}</td></tr>` : ""}
-          <tr><td style="padding: 8px 0; color: #666; vertical-align: top;"><strong>Asunto:</strong></td><td style="padding: 8px 0;">${asunto.trim()}</td></tr>
+          <tr><td style="padding: 8px 0; color: #666; width: 140px; vertical-align: top;"><strong>Nombre:</strong></td><td style="padding: 8px 0;">${nombre}</td></tr>
+          <tr><td style="padding: 8px 0; color: #666; vertical-align: top;"><strong>Email:</strong></td><td style="padding: 8px 0;"><a href="mailto:${email}">${email}</a></td></tr>
+          ${empresa ? `<tr><td style="padding: 8px 0; color: #666; vertical-align: top;"><strong>Empresa:</strong></td><td style="padding: 8px 0;">${empresa}</td></tr>` : ""}
+          ${telefono ? `<tr><td style="padding: 8px 0; color: #666; vertical-align: top;"><strong>Teléfono:</strong></td><td style="padding: 8px 0;">${telefono}</td></tr>` : ""}
+          <tr><td style="padding: 8px 0; color: #666; vertical-align: top;"><strong>Asunto:</strong></td><td style="padding: 8px 0;">${asunto}</td></tr>
         </table>
         <hr style="border: none; border-top: 1px solid #e5e5e5; margin: 16px 0;" />
         <p style="color: #666; margin: 0 0 8px;"><strong>Mensaje:</strong></p>
-        <p style="white-space: pre-wrap; color: #333; margin: 0;">${mensaje.trim()}</p>
+        <p style="white-space: pre-wrap; color: #333; margin: 0;">${mensaje}</p>
       </div>
       <div style="padding: 16px 32px; background: #f0f0f0; text-align: center;">
         <p style="margin: 0; color: #999; font-size: 12px;">Enviado desde el formulario de contacto de segingenieria.com</p>
@@ -52,9 +78,10 @@ export async function POST(request) {
   try {
     await sendMail({
       to: process.env.MAIL_CONTACTO || "uruguay@segingenieria.com",
-      subject: `[Contacto Web] ${asunto.trim()}`,
+      // El asunto del mail va sin escapar HTML pero sin saltos de línea
+      subject: `[Contacto Web] ${body.asunto.trim().replace(/[\r\n]+/g, " ")}`,
       html,
-      replyTo: email.trim(),
+      replyTo: body.email.trim(),
     });
   } catch (err) {
     console.error("Error enviando email de contacto:", err);

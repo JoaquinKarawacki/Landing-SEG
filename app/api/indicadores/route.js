@@ -1,11 +1,9 @@
-import { readFileSync, writeFileSync } from "fs";
-import { getDataFile } from "@/lib/storage";
+import { leerJSON, actualizarJSON } from "@/lib/jsonStore";
 import { ordenarPorFecha } from "@/lib/indicadores";
+import { validarToken, noAutorizado } from "@/lib/seguridad";
 
-function validarToken(request) {
-    const token = request.headers.get("x-admin-token");
-    return token === process.env.ADMIN_TOKEN;
-}
+const ARCHIVO = "indicadores.json";
+const MAXIMO = 12;
 
 function generarSlug(mes) {
     return mes
@@ -16,58 +14,51 @@ function generarSlug(mes) {
         .replace(/\s+/g, "-");
 }
 
-function leer() {
-    return JSON.parse(readFileSync(getDataFile("indicadores.json"), "utf-8"));
-}
-
-function guardar(articulos) {
-    writeFileSync(getDataFile("indicadores.json"), JSON.stringify(articulos), "utf-8");
-}
-
-export function GET(request) {
-    return Response.json(ordenarPorFecha(leer()));
+export function GET() {
+    return Response.json(ordenarPorFecha(leerJSON(ARCHIVO)));
 }
 
 export async function POST(request) {
-    if (!validarToken(request)) {
-        return Response.json({ error: "No autorizado" }, { status: 401 });
-    }
+    if (!validarToken(request)) return noAutorizado();
+
     const articulo = await request.json();
-    const articulos = leer();
-
-    if (articulos.length >= 12) {
-        return Response.json({ error: "Máximo 12 artículos permitidos" }, { status: 400 });
+    if (typeof articulo.mes !== "string" || !articulo.mes.trim()) {
+        return Response.json({ error: "El mes de edición es requerido." }, { status: 400 });
     }
-
     const slug = generarSlug(articulo.mes);
-    if (articulos.some(a => a.slug === slug)) {
-        return Response.json({ error: `Ya existe un indicador para "${articulo.mes}".` }, { status: 400 });
-    }
 
-    articulo.id = Date.now();
-    articulo.slug = slug;
-    articulo.href = `/indicadores/${slug}`;
-    articulos.unshift(articulo);
-    guardar(articulos);
+    let error = null;
+    actualizarJSON(ARCHIVO, (articulos) => {
+        if (articulos.length >= MAXIMO) {
+            error = `Máximo ${MAXIMO} artículos permitidos`;
+            return articulos;
+        }
+        if (articulos.some(a => a.slug === slug)) {
+            error = `Ya existe un indicador para "${articulo.mes}".`;
+            return articulos;
+        }
+        articulo.id = Date.now();
+        articulo.slug = slug;
+        articulo.href = `/indicadores/${slug}`;
+        return [articulo, ...articulos];
+    });
+
+    if (error) return Response.json({ error }, { status: 400 });
     return Response.json(articulo, { status: 201 });
 }
 
 export async function DELETE(request) {
-    
-    if(!validarToken(request)) {
-        return Response.json({ error: "No autorizado" }, { status: 401 });
-    }
+    if (!validarToken(request)) return noAutorizado();
 
-    const articulos = leer();
+    const { id } = await request.json();
+    let existe = false;
+    actualizarJSON(ARCHIVO, (articulos) => {
+        existe = articulos.some(a => a.id === id);
+        return existe ? articulos.filter(a => a.id !== id) : articulos;
+    });
 
-    const { id }  = await request.json();
-    const existe = articulos.find(a => a.id === id);
-
-    if(existe === undefined) {
+    if (!existe) {
         return Response.json({ error: "Artículo no encontrado" }, { status: 404 });
-    }  
-    
-    const nuevoArray = articulos.filter(articulo => articulo.id !== id);
-    guardar(nuevoArray);
+    }
     return Response.json({ ok: true });
 }
