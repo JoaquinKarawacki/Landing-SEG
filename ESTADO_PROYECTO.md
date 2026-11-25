@@ -1,7 +1,7 @@
 # Estado del Proyecto — SEG Ingeniería Landing
 
 > Archivo de memoria para retomar el desarrollo en cualquier momento.
-> Última actualización: septiembre 2026
+> Última actualización: noviembre 2026 (seguridad de la API y anti-spam en formularios)
 
 ---
 
@@ -37,41 +37,58 @@
 | `/prensa` | `app/prensa/page.js` | Materiales, SobreSEG, ContactoPrensa, CTA | ✅ |
 | `/notas` | `app/notas/page.js` | Listado de notas (contenido editable desde admin) | ✅ |
 | `/indicadores/[slug]` | `app/indicadores/[slug]/page.js` | Página individual por reporte de indicador energético | ✅ |
-| `/admin` | `app/admin/page.js` | Panel de administración (protegido) | ✅ |
+| `/admin` | `app/admin/page.js` + `app/admin/layout.js` | Panel de administración (protegido, `noindex`) | ✅ |
 
 ---
 
 ## Backend y panel de administración
 
-El proyecto **sí tiene backend** (esto no estaba reflejado en versiones previas de este documento). Es un backend minimalista sin base de datos real, pensado para un host con disco persistente (no serverless puro tipo Vercel Functions).
+El proyecto **sí tiene backend**. Es un backend minimalista sin base de datos real, pensado para un host con disco persistente (no serverless puro tipo Vercel Functions).
+
+### Librerías del backend (`lib/`)
+| Archivo | Qué contiene |
+|---|---|
+| `lib/storage.js` | Rutas del storage persistente (`getStorageRoot`, `getUploadDir`, `getDataFile`) |
+| `lib/jsonStore.js` | `leerJSON`, `guardarJSON` (escritura atómica: temporal + rename) y `actualizarJSON` (leer-modificar-guardar sin `await` en el medio, para que dos requests no se pisen) |
+| `lib/seguridad.js` | `validarToken` (comparación en tiempo constante), `escapeHtml`, `esEmailValido`, rate limit por IP en memoria (`excedeLimite`), anti-spam (`detectarSpam`) y topes de largo (`campoDemasiadoLargo`) |
+| `lib/sendMail.js` | Envío de mails vía Microsoft Graph API |
+| `lib/indicadores.js` | `ordenarPorFecha` (fechas `dd/mm/aaaa`) |
+
+**Regla:** toda API route nueva que lea/escriba JSON debe usar `lib/jsonStore.js`, y toda la que requiera admin debe usar `validarToken` de `lib/seguridad.js`. Todo dato del usuario que vaya a un mail HTML pasa por `escapeHtml`.
 
 ### Auth admin
-Token estático (`ADMIN_TOKEN` en `.env.local`) comparado en `app/api/auth/route.js`, enviado como header `x-admin-token` desde `app/admin/page.js`. No hay sesiones ni usuarios — un solo secreto compartido para todo el equipo.
+Token estático (`ADMIN_TOKEN` en `.env.local`), enviado como header `x-admin-token` desde `app/admin/page.js` y validado con `validarToken()` (tiempo constante). `/api/auth` tiene límite de 10 intentos cada 15 min por IP. No hay sesiones ni usuarios — un solo secreto compartido para todo el equipo.
 
-### Panel `/admin` (`app/admin/page.js`, 289 líneas)
-Login con el token, luego pestañas para gestionar **indicadores**, **novedades** y **notas**: alta/edición/borrado y subida de archivos (imágenes/PDFs) para cada uno vía `fetch` a las API routes correspondientes.
+> Ojo: en `.env.local` la línea está como `ADMIN_TOKEN =...` (con espacio antes del `=`). Next la lee bien, pero un `grep '^ADMIN_TOKEN='` no la encuentra.
+
+### Panel `/admin` (`app/admin/page.js`, ~370 líneas)
+Login con el token, luego pestañas para gestionar **indicadores**, **novedades**, **notas** y **suscriptores** (listado, borrado y export CSV): alta/borrado y subida de archivos (imágenes/PDFs) vía `fetch` a las API routes. Si una subida es rechazada (formato, tamaño, red), el motivo se muestra en rojo debajo del campo.
+
+`app/admin/layout.js` define el título del panel y `robots: noindex, nofollow` (la página es `"use client"` y no puede exportar `metadata`). El footer mantiene un link a `/admin` a propósito.
 
 ### API routes (`app/api/`)
-| Ruta | Qué hace |
-|---|---|
-| `auth/route.js` | Valida el `x-admin-token` |
-| `indicadores/route.js` | CRUD de indicadores energéticos (JSON) |
-| `novedades/route.js` | CRUD de novedades (JSON) |
-| `notas/route.js` | CRUD de notas (JSON) |
-| `consulting/route.js` | Datos de SEG Consulting |
-| `upload/route.js` | Recibe archivos subidos desde el admin |
-| `archivos/[...path]/route.js` | Sirve los archivos subidos |
-| `contacto/route.js` | Envía el formulario de contacto por mail |
-| `suscripcion/route.js` | Alta de suscripción a indicadores por mail |
+| Ruta | Qué hace | Protección |
+|---|---|---|
+| `auth/route.js` | Valida el `x-admin-token` | Rate limit 10 / 15 min |
+| `indicadores/route.js` | GET público; POST/DELETE de indicadores (máx. 12) | Token en POST/DELETE |
+| `novedades/route.js` | GET público; POST/DELETE de novedades (máx. 12) | Token en POST/DELETE |
+| `notas/route.js` | GET público; POST/DELETE de notas (máx. 6) | Token en POST/DELETE |
+| `upload/route.js` | Recibe archivos del admin: solo `.pdf/.jpg/.jpeg/.png/.webp`, máx. 15 MB, nombre con prefijo timestamp (no pisa archivos) | Token |
+| `archivos/[...path]/route.js` | Sirve **solo** archivos de `uploads/` con extensión permitida; cualquier otra ruta (p. ej. `data/*.json`) o intento de `../` → 404 | Pública (solo uploads) |
+| `contacto/route.js` | Formulario de contacto → mail a `MAIL_CONTACTO` | Anti-spam + rate limit 5 / 10 min |
+| `consulting/route.js` | Formulario de SEG Consulting → mail a `MAIL_TO_CONSULTING` | Anti-spam + rate limit 5 / 10 min |
+| `suscripcion/route.js` | POST: guarda suscriptor (dedupe por email) + aviso interno + bienvenida. GET/DELETE: listado para el admin | POST: anti-spam + rate limit 3 / 10 min. GET/DELETE: token |
 
 ### "Base de datos": JSON planos
-`data/indicadores.json`, `data/notas.json`, `data/novedades.json`. En el primer uso se copian al storage persistente vía `lib/storage.js::getDataFile()`. Las API routes leen/escriben esos archivos directamente — no hay ORM ni DB real. Cualquier feature nueva de "contenido editable" debería seguir el mismo patrón salvo que se decida migrar a una DB real.
+`data/indicadores.json`, `data/notas.json`, `data/novedades.json`, `data/suscriptores.json`. En el primer uso se copian al storage persistente vía `lib/storage.js::getDataFile()` y se leen/escriben con `lib/jsonStore.js` — no hay ORM ni DB real. Cualquier feature nueva de "contenido editable" debería seguir el mismo patrón salvo que se decida migrar a una DB real.
+
+⚠️ `suscriptores.json` tiene datos personales (nombre, email, empresa, teléfono). Vive en `<storage>/data/` y **no** debe ser accesible por ninguna ruta pública.
 
 ### Storage de archivos subidos
-`lib/storage.js::getUploadDir()` — usa `RAILWAY_VOLUME_MOUNT_PATH` / `VOLUME_MOUNT_PATH` si están seteados (volumen persistente), si no cae a `./local-storage/uploads`. Se sirve de vuelta vía `app/api/archivos/[...path]/route.js`.
+`lib/storage.js::getUploadDir()` — usa `RAILWAY_VOLUME_MOUNT_PATH` / `VOLUME_MOUNT_PATH` si están seteados (volumen persistente), si no cae a `./local-storage/uploads`. Se sirve de vuelta vía `app/api/archivos/uploads/<archivo>`. `local-storage/` está en `.gitignore`.
 
 ### Email
-`lib/sendMail.js` usa Microsoft Graph API (OAuth2 client_credentials contra un tenant Azure) en vez de un proveedor tipo Resend/Sendgrid. Variables en `.env.local`: `AZURE_TENANT_ID`, `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `MAIL_FROM`, `MAIL_TO`. Se usa para el formulario de contacto (`/api/contacto`) y la suscripción a indicadores (`/api/suscripcion`).
+`lib/sendMail.js` usa Microsoft Graph API (OAuth2 client_credentials contra un tenant Azure) en vez de un proveedor tipo Resend/Sendgrid. Variables: `AZURE_TENANT_ID`, `AZURE_CLIENT_ID`, `AZURE_CLIENT_SECRET`, `MAIL_FROM`, y destinatarios por formulario: `MAIL_CONTACTO` (default `uruguay@segingenieria.com`), `MAIL_TO_CONSULTING` (default `consulting@segingenieria.com`), `MAIL_SUSCRIPCION` (default `perez@segingenieria.com`).
 
 ---
 
@@ -170,7 +187,29 @@ const { idioma } = useIdioma();
 
 ## Formularios
 
-Los formularios en `/contacto` (contacto + suscripción indicadores) **ya tienen backend real**: pegan a `app/api/contacto/route.js` y `app/api/suscripcion/route.js`, que envían mail vía Microsoft Graph API (`lib/sendMail.js`). Ver sección "Backend y panel de administración" arriba.
+Hay tres formularios públicos, todos con backend real (mail vía Microsoft Graph):
+
+| Formulario | Componente | API |
+|---|---|---|
+| Contacto (`/contacto`) | `components/FormularioContacto.js` | `/api/contacto` |
+| Suscripción a indicadores (`/contacto#indicadores`) | `components/FormularioSuscripcion.js` | `/api/suscripcion` |
+| SEG Consulting (`/seg-consulting`) | `app/seg-consulting/FormularioConsulting.js` | `/api/consulting` |
+
+### Anti-spam (noviembre 2026)
+Se agregó porque llegaban mails de bots con texto aleatorio (ej. nombre `bWzQRdGXPPZgMcQNeF`, gmails con puntos intercalados). Capas:
+
+1. **Campo trampa (honeypot)** — `components/AntiSpam.js` (`<CampoTrampa>` + hook `useAntiSpam`): input `referencia_extra` fuera de pantalla, `tabIndex=-1`. Se envía como `_hp`; si viene lleno → bot.
+2. **Tiempo de llenado** — el formulario envía `_ms` (ms desde que se montó). Si falta o es < 3 s → bot. Esto también frena a los bots que le pegan directo a la API sin pasar por la página.
+3. **Texto aleatorio** — palabras de 8+ letras con 3+ saltos minúscula→MAYÚSCULA (`esPalabraAleatoria` en `lib/seguridad.js`). Probado sin falsos positivos con nombres reales (McDonald's, LinkedIn, O'Neill, João, etc.).
+4. **Demasiados links** — más de 2 URLs en el texto → bot.
+5. **Rate limit por IP** — en memoria (una sola instancia en Railway; se resetea en cada deploy). Lee la IP de `x-forwarded-for`. Al superarlo responde 429 con mensaje para el usuario.
+6. **Topes de largo** — mensaje 5000 caracteres, resto 200 → 400.
+
+Cuando se detecta un bot la API **responde `{ ok: true }` sin mandar mail ni guardar nada** (para no darle pistas) y loguea `[contacto|consulting|suscripcion] envío descartado como spam (<motivo>) ip=...` — buscar esa línea en los logs de Railway para ver cuánto se frena.
+
+**Al agregar un formulario nuevo:** usar `useAntiSpam()` + `<CampoTrampa inputRef={trampa} />`, mandar `...datosAntiSpam()` en el body, y en la API aplicar `excedeLimite`, `campoDemasiadoLargo`, `detectarSpam` y `escapeHtml`.
+
+**Si el spam vuelve:** siguiente nivel sugerido = Cloudflare Turnstile (captcha gratuito casi invisible; requiere cuenta y 2 claves en Railway).
 
 ---
 
@@ -181,6 +220,12 @@ Los formularios en `/contacto` (contacto + suscripción indicadores) **ya tienen
 | Anclas quedaban tapadas por header + nav | Sin `scroll-margin-top` | `scroll-mt-[140px]` en todas las secciones con `id` |
 | Anclas desalineadas en móvil | Barra roja se partía en 2 líneas → header más alto | Texto corto en móvil: `<span class="sm:hidden">` |
 | `movilidad-electrica/page.js` vacío | Error ENOSPC (disco lleno) al editar | Archivo reescrito completo desde cero |
+| **Fuga de datos:** `/api/archivos/data/suscriptores.json` devolvía la lista de suscriptores sin auth (y se podía salir del storage con `../`) | `archivos/[...path]` hacía `join(storageRoot, ...segments)` sin restringir carpeta | Solo sirve `uploads/` + chequeo `resolve`/`startsWith` + whitelist de extensiones (nov 2026) |
+| Mails de spam de bots en contacto | Sin honeypot, rate limit ni validación de contenido | Anti-spam en las 3 APIs de formularios (ver "Formularios") (nov 2026) |
+| HTML inyectable en mails de contacto/consulting | Datos del usuario interpolados sin escapar | `escapeHtml` en todos los campos (nov 2026) |
+| Upload aceptaba cualquier archivo como `octet-stream`, sin límite de tamaño, y pisaba archivos con el mismo nombre | Validación débil en `upload/route.js` | Whitelist de extensiones, máx. 15 MB, prefijo timestamp (nov 2026) |
+| El admin no mostraba nada si una subida fallaba | `subir()` devolvía `null` sin el error | Muestra el motivo debajo del campo (nov 2026) |
+| `/admin` con el título del home e indexable | Client component sin `metadata` | `app/admin/layout.js` con título + `noindex` (nov 2026) |
 
 ---
 
@@ -190,7 +235,10 @@ Los formularios en `/contacto` (contacto + suscripción indicadores) **ya tienen
 - [ ] **Prensa con contenido real** — `/prensa` tiene datos placeholder; indicadores y novedades ya se gestionan desde `/admin`
 - [ ] **Imágenes reales** — revisar placeholders de imagen (`bg-gray-200`) pendientes y reemplazarlos con fotos reales del cliente
 - [ ] **SEO** — revisar `metadata` en cada `page.js` y agregar `og:image` para compartir en redes
-- [ ] **Auth admin más robusta** — hoy es un único token compartido sin sesiones ni usuarios; evaluar si alcanza a mediano plazo
+- [ ] **Auth admin más robusta** — hoy es un único token compartido sin sesiones ni usuarios (ya tiene comparación en tiempo constante y rate limit); evaluar si alcanza a mediano plazo. No hay forma de cambiar el token sin redeploy.
+- [ ] **Limpieza** — `components/HeroSlider.js` (473 líneas) ya no se usa desde que el home pasó al video; `seg_slider_home_5_3 (1).html` en la raíz parece un mockup suelto (sin trackear en git)
+- [ ] **Campo `Imagen` vs `imagen`** — novedades guarda la imagen como `Imagen` (mayúscula) e indicadores como `imagen`; `NovedadesGrid` contempla ambos pero `Novedades.js` solo `Imagen`. Unificar
+- [ ] **Monitorear spam** — revisar en los logs de Railway las líneas `envío descartado como spam`; si sigue entrando, pasar a Cloudflare Turnstile
 
 ---
 
