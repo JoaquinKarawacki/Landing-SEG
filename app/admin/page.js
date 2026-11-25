@@ -38,14 +38,22 @@ function FormularioNuevo({ campos, onAgregar, onSubir, limite }) {
   const [form, setForm] = useState(vacio);
   const [error, setError] = useState("");
   const [subiendo, setSubiendo] = useState({});
+  const [erroresArchivo, setErroresArchivo] = useState({});
 
-  async function subirArchivo(campo, tipo, archivo) {
+  async function subirArchivo(campo, tipo, input) {
+    const archivo = input.files[0];
     setSubiendo(p => ({ ...p, [campo]: true }));
+    setErroresArchivo(p => ({ ...p, [campo]: "" }));
     const fd = new FormData();
     fd.append("archivo", archivo);
     fd.append("tipo", tipo);
-    const ruta = await onSubir(fd);
-    if (ruta) setForm(p => ({ ...p, [campo]: ruta }));
+    const { ruta, error } = await onSubir(fd);
+    if (ruta) {
+      setForm(p => ({ ...p, [campo]: ruta }));
+    } else {
+      setErroresArchivo(p => ({ ...p, [campo]: error }));
+      input.value = ""; // permite volver a elegir el mismo archivo después de corregirlo
+    }
     setSubiendo(p => ({ ...p, [campo]: false }));
   }
 
@@ -78,15 +86,18 @@ function FormularioNuevo({ campos, onAgregar, onSubir, limite }) {
               required
             />
           ) : c.type === "file" ? (
-            <div className="flex items-center gap-2">
-              <input
-                type="file"
-                accept={c.accept}
-                onChange={e => e.target.files[0] && subirArchivo(c.name, c.fileType, e.target.files[0])}
-                className="text-sm text-gray-600"
-              />
-              {subiendo[c.name] && <span className="text-xs text-gray-400">Subiendo...</span>}
-              {form[c.name] && <span className="text-xs text-green-600 truncate max-w-xs">{form[c.name]}</span>}
+            <div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="file"
+                  accept={c.accept}
+                  onChange={e => e.target.files[0] && subirArchivo(c.name, c.fileType, e.target)}
+                  className="text-sm text-gray-600"
+                />
+                {subiendo[c.name] && <span className="text-xs text-gray-400">Subiendo...</span>}
+                {form[c.name] && <span className="text-xs text-green-600 truncate max-w-xs">{form[c.name]}</span>}
+              </div>
+              {erroresArchivo[c.name] && <p className="text-xs text-red-500 mt-1">{erroresArchivo[c.name]}</p>}
             </div>
           ) : c.type === "select" ? (
             <select
@@ -178,13 +189,21 @@ export default function PaginaAdmin() {
   }
 
   async function subir(formData) {
-    const res = await fetch("/api/upload", {
-      method: "POST",
-      headers: { "x-admin-token": token },
-      body: formData,
-    });
-    const json = await res.json();
-    return json.ruta || null;
+    try {
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        headers: { "x-admin-token": token },
+        body: formData,
+      });
+      // Si un proxy corta el pedido (p. ej. archivo enorme) la respuesta puede no ser JSON
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json.ruta) {
+        return { error: json.error || `No se pudo subir el archivo (error ${res.status}).` };
+      }
+      return { ruta: json.ruta };
+    } catch {
+      return { error: "No se pudo subir el archivo. Verificá tu conexión e intentá nuevamente." };
+    }
   }
 
   async function eliminar(seccion, id) {
